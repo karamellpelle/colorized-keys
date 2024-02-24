@@ -1,0 +1,19 @@
+
+$shellbox-color$
+
+$if(shellbox-map)$ 
+
+\fvset
+\begin{Verbatim}[commandchars=\\\{\}]
+a (black)
+\textcolor{red}{b} (I want this letter to be red)
+
+$_body$
+
+\end{Verbatim}
+
+$shellbox.id$
+$shellbox.inline$   
+$shellbox.color$
+
+$body$

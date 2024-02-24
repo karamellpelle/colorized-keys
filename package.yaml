@@ -1,0 +1,114 @@
+name:                colorized-keys
+version:             0.0
+github:              karamellpelle/colorized-keys
+license:             GPL-3
+license-file:        COPYING
+author:              karamellpelle@hotmail.com
+maintainer:          karamellpelle@hotmail.com
+copyright:           karamellpelle@hotmail.com
+
+# FIXME: Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on Github at <https://github.com/karamellpelle/colorized-keys#readme>
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+data-dir:            data-dir
+#data-files:
+#- text/**/*
+#- graphics/**/*
+
+
+dependencies:
+- base
+- relude
+- data-default
+- microlens-platform
+#- mtl
+#- attoparsec
+#- HsYAML
+#- libssh2
+#- hashable
+#- random
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+- -Wprepositive-qualified-module
+- -Wno-name-shadowing
+
+default-extensions:
+ - NoImplicitPrelude
+ - OverloadedStrings
+ - ImportQualifiedPost
+ - TypeApplications
+ - RankNTypes
+ - ScopedTypeVariables
+ - FlexibleInstances
+ - GeneralizedNewtypeDeriving
+ - StandaloneDeriving
+# - TODO: GHC2021, https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/control.html#extension-GHC2021
+
+# private libraries (https://github.com/sol/hpack#library-fields)
+#library:
+#    source-dirs: source-lib
+#    # https://github.com/sol/hpack#handling-of-paths_-modules 
+#    when:
+#    - condition: false
+#      other-modules: Paths_colorized-keys 
+
+## private libraries (https://github.com/sol/hpack#library-fields)
+#internal-libraries:
+#  colorized-keys-internal:
+#      source-dirs: source-lib
+#      # https://github.com/sol/hpack#handling-of-paths_-modules 
+#      when:
+#      - condition: false
+#        other-modules: Paths_colorized-keys 
+#
+executables:
+  colorize-keys:
+    main:                Main.hs
+    source-dirs:         source
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    #- colorized-keys-internal
+    #- colorized-keys
+    - directory
+    - filepath
+    - gitrev
+  #codeblock-templates:
+
+#tests:
+#  colorized-keys-test:
+#    main:                Spec.hs
+#    source-dirs:         test/colorized-keys-test
+#    # other-modules: <pull indidual files from project root>
+#    dependencies:
+#    #- colorized-keys-internal
+#    - colorized-keys
+#    - tasty
+#    - tasty-hunit
+#    - tasty-smallcheck
+#    - smallcheck
+#    - pretty-simple
+#    ghc-options:
+#      - -threaded
+#      - -rtsopts
+#      - -with-rtsopts=-N
