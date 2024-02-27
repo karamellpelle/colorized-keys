@@ -22,8 +22,6 @@ import Pandoc
 import Text.Pandoc.Readers.Markdown
 import Text.Pandoc.Writers.LaTeX
 import Text.Pandoc.PDF
-import System.Directory
-import System.FilePath
 
 
 
@@ -40,16 +38,13 @@ main = do
     -- setup application environment in IO
     appopts <- executingStateT def $ do
 
-        appoptTemplatesDir <~ getData "templates/"
+        appoptTemplatesDir <~ getTemplateCodeBlock "" 
         appoptLatex .= "xelatex"
-        appoptInputFile .= file
-        appoptOutputFile .= file -<.> "pdf"
+        appoptInputFile .= unsafeEncodeUtf file
+        appoptOutputFile .= unsafeEncodeUtf file) -<.> "pdf"
         appoppOutputFormat .= FileFormatPDF
-
-        --appoptOutputFile <~ getUserDir 
         --appoptMaybeValue ?= 3044 -- Just 3044
        
-
     -- run our custom PandocMonad
     usingReaderT appopts $ do --res <- runIOorExplode $ do
         file <- use appoptInputFile
@@ -59,16 +54,21 @@ main = do
 
         -- reconfigure WriterOptions:
         --   * compile our custom output Template 
-        --   * populate variables
+        --   * populate Context (variables)
         wopts <- zoom appoptWriterOptions $ do
             -- TODO: write variables: meta + command arguments
 
             -- TODO: read custom template
-            writerTemplateL <~ compileTemplate
-            res <- compileTemplate "" str :: Template Text
-            renderTemplate (Template Text) (Context Text) :: Doc Text
-            case compileTemplate "" str :: 
+            tres <- fmap decodeUtf8 readFileBS $ compileTemplate "" 
+            case tres of 
+                Left err        -> throwError err
+                Right template  -> writerTemplateL .= template
 
+        -- TODO: lift values into PandocMonad:
+        --    - setResourcePath
+        --    - setOutputFile
+        --    - setDataFile??
+        --
         -- filter pandoc document (this is where the magic happens)
         pandoc' <- walkM walkCodeBlocks pandoc 
 
@@ -78,14 +78,21 @@ main = do
             FileFormatPDF   -> do
                 latex <- use apptoptLatex
                 latexopts <- use apptoptLatexOpts
-                --wopts <- use appoptWriterOptions -- Done above with new settings!
                 makePDF latex latexopts writeLatex wopts pandoc' 
             _               -> die "Output FileFormat not implemented"
 
 
 
+-- | TODO: ignore "shellbox", look for templates in folder instead!
 walkCodeBlocks :: (Block -> PandocApp Block) -> Pandoc -> PandocApp Pandoc
 walkCodeBlocks block(CodeBlock atts@(id, cs, kvs) text) =
+    --pathTemplatesCodeBlock >>= \ps -> 
+    --    -- TODO list filenames
+    --    case cs of 
+    --        -- codeblock has a name, lets see if we have a template for it
+    --        (c:cs)  -> 
+    --        _       -> pure block
+
     case cs of 
         ("shellbox":cs) -> writeShellbox (id, cs, kvs) text
         _               -> pure block
@@ -108,22 +115,21 @@ writeCustomCodeBlocks =
 
 writeShellbox :: Atts -> Text -> PandocApp Block
 writeShellbox (id, classes, keymap) = \text ->
+
     --readFileStrict :: FilePath -> PandocIO ByteString
     getDataFileName :: FilePath -> PandocIO m FilePath
     --lookupEnv "CODEBLOCKTEMPLATES_DIR"
-    getUserDataDir
-    getResourcePath
-    lookupEnv
-    lookupMedia / MediaBag
-    extractMedia 
+    --getUserDataDir
+    --getResourcePath
 
     -- 0. read template file
     readFileFromDirs :: [FilePath] -> FilePath ->  (Maybe Text)
     -- 1. populate YAML variables using 'classes' and 'keymap'
     --    - either programatically after reading, or merge into Pandoc state
-    template readFileText 
     -- 2. return new Block (RawBlock) based on this
+    template readFileText 
+    text' <- render Nothing $ renderTemplate (Template Text) (Context Text) 
 
-    return $ RawBlock (Format "shellbox") text
+    return $ RawBlock (Format "shellbox") text'
 
 

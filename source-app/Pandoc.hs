@@ -28,9 +28,12 @@ module Pandoc
 import Relude
 import My
 
+import Text.DocTemplates.Internal
 import Text.Pandoc
+import Text.Pandoc.Templates
 import Lens.Micro
 import Lens.Micro.TH
+import Relude.Extra.Map
 
 
 writerTemplateL :: Lens' WriterOptions (Maybe (Template Text))
@@ -44,8 +47,8 @@ writerVariablesL = lens writerVariables (\o a -> o { writerVariables = a  })
 --  CodeBlock helpers
 
 lookupKey :: Attr -> Text -> Maybe Text
-lookupKey (_id, _classes, keymap) key =
-    lookupKey k = lookup (fromList keymap)
+lookupKey (_id, _classes, keymap) = \key ->
+    (fromList @(Map Text Text) keymap) !? key
 
 inClass :: Attr -> Text -> Bool
 inClass (_id, classes, _keymap) c = 

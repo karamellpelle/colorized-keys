@@ -9,4 +9,5 @@ gmon.out
 leaks-*.txt
 session.vim
 tmp
-subject.cabal
+*.cabal
+stack.yaml.lock

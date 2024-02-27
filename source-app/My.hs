@@ -15,13 +15,24 @@
 -- You should have received a copy of the GNU General Public License
 -- along with 'colorized-keys'.  If not, see <http://www.gnu.org/licenses/>.
 --
-module My (
-  module Lens.Micro, 
+module My 
+(
+    module Lens.Micro, 
+    module Lens.Micro.Mtl, 
+    module Data.Default,
+
+    UInt,
+    io,
 
 ) where
 
 import Relude
 import Lens.Micro
+import Lens.Micro.Mtl
+import Data.Default
 --import Control.Monad.Except (MonadError, throwError, catchError)
 
 type UInt = Word
+
+io :: MonadIO m => IO a -> m a
+io = liftIO

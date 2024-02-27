@@ -19,7 +19,7 @@
 
 module AppOpts (
     --AppOptions (..),
-    AppOptions,
+    AppOpts,
     appoptTemplatesDir,
     appoptInputFile,
     appoptOutputFile,
@@ -27,22 +27,41 @@ module AppOpts (
     appoptLatexOpts,
     appoptWriterOptions,
 
-    PandocApp (..),
+    PandocApp,
     FileFormat,
 
-    readerOpts,
-    writerOpts,
 ) where 
 
 import Relude
 import My
 
 import Lens.Micro.TH
+import System.OsPath
+import Text.Pandoc
+
+
+--------------------------------------------------------------------------------
+--  our default read/write settings
+
+readerOpts :: ReaderOptions
+readerOpts = def { 
+        readerExtensions = pandocExtensions <> mempty
+    }
+
+writerOpts :: WriterOptions
+writerOpts = def {
+        writerExtensions = pandocExtensions <> mempty
+}
+
+
+
+--------------------------------------------------------------------------------
+--  AppOpts
 
 data AppOpts = AppOpts {
-      _appoptTemplatesDir :: FilePath
-    , _appoptInputFile :: FilePath
-    , _appoptOutputFile :: FilePath
+      _appoptTemplatesDir :: OsPath
+    , _appoptInputFile :: OsPath
+    , _appoptOutputFile :: OsPath
     , _appoptOutputFormat :: FileFormat
     , _appoptLatex :: String
     , _appoptLatexOpts :: [String]
@@ -53,15 +72,25 @@ data AppOpts = AppOpts {
 
 
 instance Default AppOpts where
-    def = AppOptions {
-      _appoptTemplatesDir  = "."
-    , _appoptInputFile     = ""
-    , _appoptOutputFile    = ""
+    def = AppOpts {
+      _appoptTemplatesDir  = mkOsPath "."
+    , _appoptInputFile     = mkOsPath ""
+    , _appoptOutputFile    = mkOsPath ""
     , _appoptLatex         = "xelatex"
     , _appoptOutputFormat  = FileFormatEmpty
     , _appoptLatexOpts     = []
-    , _appoptWriterOptions = def
+    , _appoptReaderOptions = readerOpts
+    , _appoptWriterOptions = writerOpts
     }
+
+
+mkOsPath :: String -> OsPath
+mkOsPath str = System.OsPath.pack $ map unsafeFromChar str
+-- ^ TODO: use unsafeEncodeUtf when newer filepath version is available in stack snapshot
+
+
+--------------------------------------------------------------------------------
+--  
 
 data FileFormat =
     FileFormatEmpty    |
@@ -77,19 +106,5 @@ makeLenses ''AppOpts
 
 -- | our application environment
 type PandocApp = ReaderT AppOpts PandocIO
-
-
---------------------------------------------------------------------------------
---  our default read/write settings
-
-readerOpts :: ReaderOptions
-readerOpts = def { 
-        readerExtensions = pandocExtensions <> mempty
-    }
-
-writerOpts :: WriterOptions
-writerOpts = def {
-        writerExtensions = pandocExtensions <> mempty
-}
 
 

@@ -19,18 +19,24 @@ description:         Please see the README on Github at <https://github.com/kara
 extra-source-files:
 - README.md
 - CHANGELOG.md
-data-dir:            data-dir
-#data-files:
-#- text/**/*
-#- graphics/**/*
-
+data-dir:            .
+data-files:
+  - data-dir/colorized-keys/**/*
+  - text/**/*
+  - graphics/**/*
 
 dependencies:
 - base
 - relude
 - data-default
-- microlens-platform
-#- mtl
+- microlens
+- microlens-th
+- microlens-mtl
+- pandoc
+- doctemplates
+- file-io
+- directory
+#- os-string
 #- attoparsec
 #- HsYAML
 #- libssh2
@@ -49,18 +55,20 @@ ghc-options:
 - -Wredundant-constraints
 - -Wprepositive-qualified-module
 - -Wno-name-shadowing
+- -Wno-unused-top-binds
 
 default-extensions:
  - NoImplicitPrelude
  - OverloadedStrings
- - ImportQualifiedPost
- - TypeApplications
- - RankNTypes
- - ScopedTypeVariables
- - FlexibleInstances
- - GeneralizedNewtypeDeriving
- - StandaloneDeriving
-# - TODO: GHC2021, https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/control.html#extension-GHC2021
+ - GHC2021
+#   - ImportQualifiedPost
+#   - TypeApplications
+#   - RankNTypes
+#   - ScopedTypeVariables
+#   - FlexibleInstances
+#   - GeneralizedNewtypeDeriving
+#   - StandaloneDeriving
+
 
 # private libraries (https://github.com/sol/hpack#library-fields)
 #library:
@@ -82,7 +90,10 @@ default-extensions:
 executables:
   colorize-keys:
     main:                Main.hs
-    source-dirs:         source
+    source-dirs:         source-app
+    generated-other-modules: 
+        - Paths_colorized_keys
+        - PackageInfo_colorized_keys
     ghc-options:
     - -threaded
     - -rtsopts
@@ -90,7 +101,6 @@ executables:
     dependencies:
     #- colorized-keys-internal
     #- colorized-keys
-    - directory
     - filepath
     - gitrev
   #codeblock-templates:
