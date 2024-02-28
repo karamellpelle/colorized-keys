@@ -40,6 +40,7 @@
 \usepackage[font=footnotesize]{caption}
 \usepackage[hyphens]{url}
 \usepackage{hyperref} % put this last!
+\usepackage{fancyvrb}
 
 \renewcommand{\thefootnote}{\roman{footnote}}
 %\setlength{\skip\footins}{0.5cm}  % space between text and footnote

@@ -22,7 +22,11 @@ import Pandoc
 import Text.Pandoc.Readers.Markdown
 import Text.Pandoc.Writers.LaTeX
 import Text.Pandoc.PDF
-
+import Text.Pandoc.Walk
+import System.OsPath as OsPath
+import System.File.OsPath as OsPath
+import AppOpts
+import Data
 
 
 
@@ -30,27 +34,32 @@ import Text.Pandoc.PDF
 
 main :: IO ()
 main = do
-    args <- getArgs
-    file <- case args of 
-        (p:ps)  -> pure p
-        _       -> exitFailure
 
-    -- setup application environment in IO
+    -- setup our application environment inside IO
     appopts <- executingStateT def $ do
 
-        appoptTemplatesDir <~ getTemplateCodeBlock "" 
-        appoptLatex .= "xelatex"
-        appoptInputFile .= unsafeEncodeUtf file
-        appoptOutputFile .= unsafeEncodeUtf file) -<.> "pdf"
-        appoppOutputFormat .= FileFormatPDF
+        -- retrieve first program argument as input OsPath
+        args <- getArgs
+        ospath <- case args of 
+            (p:ps)  -> encodeUtf p
+            _       -> exitFailure
+
+
+        appoptTemplatesDir <~ pathTemplateCodeBlock ""
+        appoptLatex        .= "xelatex"
+        appoptInputFile    .= ospath
+        appoptOutputFile   .= ospath -<.> mkOsPath "pdf"
+        appoptOutputFormat .= FileFormatPDF
         --appoptMaybeValue ?= 3044 -- Just 3044
-       
+      
+
     -- run our custom PandocMonad
-    usingReaderT appopts $ do --res <- runIOorExplode $ do
-        file <- use appoptInputFile
-        ropts <- use appoptReaderOptions
-        pandoc <- readMarkdown ropts =<< fmap decodeUtf8 $ readFileBS file
-        meta <- yamlToMeta ropts (Just file) =<< readFileBS file
+    -- FIXME: run PandocApp
+    usingReaderT @AppOpts @PandocApp appopts $ do --res <- runIOorExplode $ do
+        ospath <- use appoptInputFile
+        ropts  <- use appoptReaderOptions
+        pandoc <- readMarkdown ropts =<< (io $ OsPath.readFile' ospath)
+        meta   <- yamlToMeta ropts Nothing =<< (io $ OsPath.readFile' ospath)
 
         -- reconfigure WriterOptions:
         --   * compile our custom output Template 
@@ -59,10 +68,11 @@ main = do
             -- TODO: write variables: meta + command arguments
 
             -- TODO: read custom template
-            tres <- fmap decodeUtf8 readFileBS $ compileTemplate "" 
+            tres <- io $ compileTemplate ""  =<< fmap (decodeUtf8 @Text @ByteString) (OsPath.readFile' ospath) -- ^ FIXME: partials file?
             case tres of 
-                Left err        -> throwError err
-                Right template  -> writerTemplateL .= template
+                Left err        -> die err
+                Right template  -> writerTemplateL ?= template
+
 
         -- TODO: lift values into PandocMonad:
         --    - setResourcePath
@@ -76,16 +86,27 @@ main = do
         use appoptOutputFormat >>= \fmt -> case fmt of
             FileFormatEmpty -> pass
             FileFormatPDF   -> do
-                latex <- use apptoptLatex
-                latexopts <- use apptoptLatexOpts
-                makePDF latex latexopts writeLatex wopts pandoc' 
-            _               -> die "Output FileFormat not implemented"
+                latex <- use appoptLatex
+                latexopts <- use appoptLatexOpts
+                makePDF latex latexopts writeLaTeX wopts pandoc' >>= \case
+                    Left log  -> do
 
+                        writeFileLBS "error.log" log
+                        die "Error encountered - see error.log"
+
+                    Right pdf -> do 
+                        view appoptOutputFile >>= \ospath -> do
+                            io $ OsPath.writeFile ospath pdf
+                            decodeUtf ospath >>= \path -> putTextLn $ "PDF written to :" <> toText path
+
+            _                 -> die "Output FileFormat not implemented"
+
+        pass
 
 
 -- | TODO: ignore "shellbox", look for templates in folder instead!
-walkCodeBlocks :: (Block -> PandocApp Block) -> Pandoc -> PandocApp Pandoc
-walkCodeBlocks block(CodeBlock atts@(id, cs, kvs) text) =
+walkCodeBlocks :: Block -> PandocApp Block 
+walkCodeBlocks block@(CodeBlock atts@(id, cs, kvs) text) = do
     --pathTemplatesCodeBlock >>= \ps -> 
     --    -- TODO list filenames
     --    case cs of 
@@ -94,10 +115,10 @@ walkCodeBlocks block(CodeBlock atts@(id, cs, kvs) text) =
     --        _       -> pure block
 
     case cs of 
-        ("shellbox":cs) -> writeShellbox (id, cs, kvs) text
+        ("shellbox":cs) -> writeCustomCodeBlocks block
         _               -> pure block
-walkCodeBlocks =
-    pure 
+walkCodeBlocks block =
+    pure block
 
 
 
@@ -105,31 +126,29 @@ walkCodeBlocks =
 
 -- use the codeblock syntax for custom latex (environments, typically)
 writeCustomCodeBlocks :: Block -> PandocApp Block
-writeCustomCodeBlocks block(CodeBlock atts@(id, cs, kvs) text) =
+writeCustomCodeBlocks block@(CodeBlock atts@(id, cs, kvs) text) =
     case cs of 
-        ("shellbox":cs) -> writeShellbox (id, cs, kvs) text
+        ("shellbox":cs) -> do 
+{-
+            --readFileStrict :: FilePath -> PandocIO ByteString
+            getDataFileName :: FilePath -> PandocIO m FilePath
+            --lookupEnv "CODEBLOCKTEMPLATES_DIR"
+            --getUserDataDir
+            --getResourcePath
+
+            -- 0. read template file
+            readFileFromDirs :: [FilePath] -> FilePath ->  (Maybe Text)
+            -- 1. populate YAML variables using 'classes' and 'keymap'
+            --    - either programatically after reading, or merge into Pandoc state
+            -- 2. return new Block (RawBlock) based on this
+            template readFileText 
+            text' <- render Nothing $ renderTemplate (Template Text) (Context Text) 
+-}
+            text' <- pure text
+            return $ RawBlock (Format "shellbox") text'
+
+
         _               -> pure block
-writeCustomCodeBlocks =
-    pure 
 
-
-writeShellbox :: Atts -> Text -> PandocApp Block
-writeShellbox (id, classes, keymap) = \text ->
-
-    --readFileStrict :: FilePath -> PandocIO ByteString
-    getDataFileName :: FilePath -> PandocIO m FilePath
-    --lookupEnv "CODEBLOCKTEMPLATES_DIR"
-    --getUserDataDir
-    --getResourcePath
-
-    -- 0. read template file
-    readFileFromDirs :: [FilePath] -> FilePath ->  (Maybe Text)
-    -- 1. populate YAML variables using 'classes' and 'keymap'
-    --    - either programatically after reading, or merge into Pandoc state
-    -- 2. return new Block (RawBlock) based on this
-    template readFileText 
-    text' <- render Nothing $ renderTemplate (Template Text) (Context Text) 
-
-    return $ RawBlock (Format "shellbox") text'
-
-
+writeCustomCodeBlocks block =
+    pure block

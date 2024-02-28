@@ -23,13 +23,16 @@ module AppOpts (
     appoptTemplatesDir,
     appoptInputFile,
     appoptOutputFile,
+    appoptOutputFormat,
     appoptLatex,
     appoptLatexOpts,
     appoptWriterOptions,
+    appoptReaderOptions,
 
     PandocApp,
-    FileFormat,
+    FileFormat (..),
 
+    mkOsPath,
 ) where 
 
 import Relude
@@ -86,6 +89,7 @@ instance Default AppOpts where
 
 mkOsPath :: String -> OsPath
 mkOsPath str = System.OsPath.pack $ map unsafeFromChar str
+-- ^ TODO: use Except Monad for pure conversion
 -- ^ TODO: use unsafeEncodeUtf when newer filepath version is available in stack snapshot
 
 

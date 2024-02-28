@@ -20,6 +20,10 @@ module My
     module Lens.Micro, 
     module Lens.Micro.Mtl, 
     module Data.Default,
+    MonadError,
+    throwError,
+    catchError,
+    handleError,
 
     UInt,
     io,
@@ -30,9 +34,11 @@ import Relude
 import Lens.Micro
 import Lens.Micro.Mtl
 import Data.Default
+import Control.Monad.Except (MonadError, throwError, catchError, handleError)
 --import Control.Monad.Except (MonadError, throwError, catchError)
 
 type UInt = Word
 
 io :: MonadIO m => IO a -> m a
 io = liftIO
+{-# INLINE io #-}

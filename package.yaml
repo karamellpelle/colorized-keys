@@ -16,6 +16,8 @@ copyright:           karamellpelle@hotmail.com
 # common to point users to the README.md file.
 description:         Please see the README on Github at <https://github.com/karamellpelle/colorized-keys#readme>
 
+language: GHC2021
+
 extra-source-files:
 - README.md
 - CHANGELOG.md
@@ -33,9 +35,11 @@ dependencies:
 - microlens-th
 - microlens-mtl
 - pandoc
+- pandoc-types
 - doctemplates
 - file-io
 - directory
+- mtl
 #- os-string
 #- attoparsec
 #- HsYAML
@@ -61,6 +65,7 @@ default-extensions:
  - NoImplicitPrelude
  - OverloadedStrings
  - GHC2021
+ - LambdaCase
 #   - ImportQualifiedPost
 #   - TypeApplications
 #   - RankNTypes
