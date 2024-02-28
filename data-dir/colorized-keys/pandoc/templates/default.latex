@@ -1,9 +1,8 @@
-\documentclass[a4paper,10pt]{report}
+\documentclass[a4paper,8pt]{report}
 \usepackage[utf8]{inputenc}
-%\usepackage[a4paper,top=2.0cm,bottom=1.0cm,left=3.5cm,right=3.5cm$if(letter.debug)$,showframe$endif$]{geometry}
-\usepackage[a4paper,textwidth=365p,testheight$if(letter.debug)$,showframe$endif$]{geometry}
+\usepackage[a4paper,landscape,left=5.cm,right=5.cm,bottom=1.8cm,top=1.8cm,footskip=0.4cm]{geometry}
 \usepackage{quotmark}
-\usepackage[$lang$]{babel}
+%\usepackage[$lang$]{babel}
 \usepackage{nopageno}
 \usepackage{verbatim}
 \usepackage{enumitem}
@@ -11,18 +10,16 @@
 \usepackage[pdftex]{graphicx}
 \usepackage{ulem}
 \usepackage{sidecap}
-%\usepackage[a4paper]{geometry}
-%\usepackage[landscape]{geometry}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsthm}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
 \usepackage{color}
 \usepackage{fancyhdr}
 \usepackage{setspace}
 \usepackage{parskip}
 \usepackage{subcaption}
 %\usepackage{mdframed}
-\usepackage{pdfpages}
+%\usepackage{pdfpages}
 \usepackage{titlesec}
 %\usepackage{intopdf}
 %\usepackage{attachfile}
@@ -31,14 +28,14 @@
 \usepackage[dvipsnames]{xcolor} % must be before tikz
 %\usepackage{tikzsymbols}
 %\usepackage{tikz}
-%\usepackage[pages=some]{background}
-%\usepackage{hyperxmp} % for metadata
-%\usepackage{changepage}
+\usepackage[pages=some]{background}
+\usepackage{hyperxmp} % for metadata
+\usepackage{changepage}
 \usepackage{tabularx}
+\usepackage{listings}
 \usepackage[norule,bottom,hang]{footmisc}
-%\usepackage{lipsum}
-%\usepackage{tablefootnote}
-%\usepackage{draftwatermark}
+\usepackage{lipsum}
+\usepackage{tablefootnote}
 \usepackage[textsize=tiny]{todonotes}
 \usepackage[font=footnotesize]{caption}
 \usepackage[hyphens]{url}
@@ -48,7 +45,6 @@
 %\setlength{\skip\footins}{0.5cm}  % space between text and footnote
 \setlength{\footnotesep}{0.5cm}    % space between footnote items
 
-% use sans-serif font
 \hypersetup{breaklinks=true,
             bookmarks=true,
             %pdfauthor={karamellpelle@hotmail.com},
@@ -63,20 +59,23 @@
             %urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
             %linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
             pdfborder={0 0 0}}
+
 \setcounter{secnumdepth}{0} % NO NUMBERS FOR SECTIONS
 
 % search for images 
 \graphicspath{{./}{./graphics/}}
 
-%\setlength{\footnotesep}{0.5cm}
-%\setlength{\footnotemargin}{3cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-\titleformat*{\section}{\centering\Huge\bfseries}
-\titleformat*{\subsection}{\Large\bfseries}
-\titleformat*{\subsubsection}{\large\bfseries}
+\lstset{backgroundcolor=\color{yellow}}
+\lstset{basicstyle=\footnotesize\ttfamily}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\emphUsage}[1]{\fcolorbox{green}{white}{#1}}
-
+%\titleformat*{\section}{\centering\Huge\bfseries}
+%\titleformat*{\subsection}{\Large\bfseries}
+%\titleformat*{\subsubsection}{\large\bfseries}
 %\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
 %%\titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\it}
 
@@ -84,25 +83,9 @@
 
 \renewcommand{\familydefault}{\sfdefault}
 
-%\name{$letter.name$}
-%\address{$for(letter.address)$$it$ \\ $endfor$}
-%\signature{$letter.signature$}
 
 \begin{document}
 
-%\begin{letter}{}
-
-%\opening{$letter.opening$}
-hehehhe
-
 $body$
-
-\vspace*{$if(letter.closing-space)$$letter.closing-space$$else$2cm$endif$}
-%\closing{$letter.closing$}
-
-%\vspace*{$if(post-scriptum-space)$$post-scriptum-space$$else$3cm$endif$}
-%\textbf{PS: } $post-scriptum$
-%
-\end{letter}
 
 \end{document}
