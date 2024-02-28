@@ -1,4 +1,4 @@
-\documentclass[a4paper,8pt]{report}
+\documentclass[a4paper,10pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper,landscape,left=5.cm,right=5.cm,bottom=1.8cm,top=1.8cm,footskip=0.4cm]{geometry}
 \usepackage{quotmark}

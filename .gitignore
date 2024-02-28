@@ -11,3 +11,5 @@ session.vim
 tmp
 *.cabal
 stack.yaml.lock
+output/*
+!output/colorized-keys.pdf

@@ -1,6 +1,6 @@
 #!/bin/sh
 DATA_DIR="./data-dir/colorized-keys/pandoc"
-INPUT_FILE=${1:-text/main.md}
+INPUT_FILE=${1:-text/colorized-keys.md}
 OUTPUT_FILE=$(basename "$INPUT_FILE" )
 
 #OUTPUT_FORMAT=${OUTPUT_FILE#*.}
