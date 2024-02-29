@@ -32,7 +32,6 @@
 \usepackage{hyperxmp} % for metadata
 \usepackage{changepage}
 \usepackage{tabularx}
-\usepackage{listings}
 \usepackage[norule,bottom,hang]{footmisc}
 \usepackage{lipsum}
 \usepackage{tablefootnote}
@@ -41,6 +40,11 @@
 \usepackage[hyphens]{url}
 \usepackage{hyperref} % put this last!
 \usepackage{fancyvrb}
+
+%\usepackage{listings}
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
 
 \renewcommand{\thefootnote}{\roman{footnote}}
 %\setlength{\skip\footins}{0.5cm}  % space between text and footnote
@@ -70,8 +74,8 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-\lstset{backgroundcolor=\color{yellow}}
-\lstset{basicstyle=\footnotesize\ttfamily}
+%\lstset{backgroundcolor=\color{yellow}}
+%\lstset{basicstyle=\footnotesize\ttfamily}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\titleformat*{\section}{\centering\Huge\bfseries}

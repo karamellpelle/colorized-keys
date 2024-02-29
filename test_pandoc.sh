@@ -14,7 +14,8 @@ OUTPUT_FILE="output/${OUTPUT_FILE%.*}.${OUTPUT_FORMAT}"
 PDF_ENGINE=xelatex
 #PDF_ENGINE=pdflatex
 
-OTHER_OPTS="--listings $3"
+OTHER_OPTS="$3"
+#OTHER_OPTS="--listings $3"
 echo "INPUT_FILE:   $INPUT_FILE"
 echo "OUTPUT_FILE:  $OUTPUT_FILE"
 echo "INPUT_FORMAT: $INPUT_FORMAT"

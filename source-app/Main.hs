@@ -31,27 +31,24 @@ import Data
 
 
 
---main = toJSONFilter writeCustomCodeBlocks
 
 main :: IO ()
 main = do
 
-    -- setup our application environment inside IO
+    -- setup our application configuration: AppOpts
     appopts <- executingStateT def $ do
 
-        -- retrieve first program argument as input OsPath
+        -- use first first program argument as input path
         args <- getArgs
         ospath <- case args of 
             (p:ps)  -> encodeUtf p
-            _       -> exitFailure
-
+            _       -> die "Missing input file"
 
         appoptTemplatesDir <~ pathTemplateCodeBlock ""
         appoptLatex        .= "xelatex"
         appoptInputFile    .= ospath
         appoptOutputFile   .= ospath -<.> mkOsPath "pdf"
         appoptOutputFormat .= FileFormatPDF
-        --appoptMaybeValue ?= 3044 -- Just 3044
       
 
     -- run our custom PandocApp (ReaderT AppOpts PandocIO)
@@ -59,33 +56,32 @@ main = do
 
         ospath <- view appoptInputFile
         ropts  <- view appoptReaderOptions
-        pandoc <- readMarkdown ropts =<< fmap (decodeUtf8 @Text @LByteString) (io $ OsPath.readFile ospath)
-        meta   <- yamlToMeta ropts Nothing =<< (io $ OsPath.readFile' ospath)
+        pandoc <- readMarkdown ropts =<< readFileOsPathText ospath 
+        meta   <- yamlToMeta ropts Nothing =<< readFileOsPathByteString ospath 
 
-        -- reconfigure WriterOptions:
-        --   * compile our custom output Template 
-        --   * populate Context (variables)
-        --wopts' <- (view appoptWriterOptions >>= executingStateT) $ do -- FIXME: why doesn't this work?
+        -- reconfigure WriterOptions
         wopts  <- view appoptWriterOptions 
         wopts' <- executingStateT wopts $ do
+        --wopts' <- (view appoptWriterOptions >>= executingStateT) $ do -- FIXME: why doesn't this work?
 
-            -- TODO: write variables: meta + command arguments
-            --pass :: StateT WriterOptions PandocApp ()
-            -- TODO: read custom template
-            tres <- io $ compileTemplate ""  =<< fmap (decodeUtf8 @Text @ByteString) (OsPath.readFile' ospath) -- ^ FIXME: partials file?
+            -- add our custom document template
+            tres <- io $ compileTemplate ""  =<< readFileOsPathText ospath 
             case tres of 
                 Left err        -> die err
                 Right template  -> writerTemplateL ?= template
 
-        -- TODO: lift values into PandocMonad:
+
+        -- TODO: lift values into our PandocMonad:
         --    - setResourcePath
         --    - setOutputFile
         --    - setDataFile??
 
+
         -- filter pandoc document (this is where the magic happens)
         pandoc' <- walkM walkCodeBlocks pandoc 
 
-        -- write
+
+        -- write pandoc document to file
         view appoptOutputFormat >>= \fmt -> case fmt of
             FileFormatEmpty -> pass
             FileFormatPDF   -> do
@@ -102,12 +98,12 @@ main = do
                             io $ OsPath.writeFile ospath pdf
                             decodeUtf ospath >>= \path -> putTextLn $ "PDF written to :" <> toText path
 
-            _                 -> die "Output FileFormat not implemented"
+            _ -> die "Output FileFormat not implemented"
 
         pass
 
 
--- | TODO: ignore "shellbox", look for templates in folder instead!
+-- | TODO: ignore "shellbox", look for templates with matching name in folder 
 walkCodeBlocks :: Block -> PandocApp Block 
 walkCodeBlocks block@(CodeBlock atts@(id, cs, kvs) text) = do
     --pathTemplatesCodeBlock >>= \ps -> 
@@ -118,38 +114,48 @@ walkCodeBlocks block@(CodeBlock atts@(id, cs, kvs) text) = do
     --        _       -> pure block
 
     case cs of 
-        ("shellbox":cs) -> writeCustomCodeBlocks block
+        ("shellbox":cs) -> writeCustomCodeBlocks "shellbox" block
         _               -> pure block
+
 walkCodeBlocks block =
     pure block
 
 
-
--- use the codeblock syntax for custom latex (environments, typically)
-writeCustomCodeBlocks :: Block -> PandocApp Block
-writeCustomCodeBlocks block@(CodeBlock atts@(id, cs, kvs) text) =
-    case cs of 
-        ("shellbox":cs) -> do 
+-- map Block to RawBlock
+writeCustomCodeBlocks :: Text -> Block -> PandocApp Block
+writeCustomCodeBlocks format block@(CodeBlock atts@(id, cs, kvs) text) = do
 {-
-            --readFileStrict :: FilePath -> PandocIO ByteString
-            getDataFileName :: FilePath -> PandocIO m FilePath
-            --lookupEnv "CODEBLOCKTEMPLATES_DIR"
-            --getUserDataDir
-            --getResourcePath
+      --readFileStrict :: FilePath -> PandocIO ByteString
+      getDataFileName :: FilePath -> PandocIO m FilePath
+      --lookupEnv "CODEBLOCKTEMPLATES_DIR"
+      --getUserDataDir
+      --getResourcePath
 
-            -- 0. read template file
-            readFileFromDirs :: [FilePath] -> FilePath ->  (Maybe Text)
-            -- 1. populate YAML variables using 'classes' and 'keymap'
-            --    - either programatically after reading, or merge into Pandoc state
-            -- 2. return new Block (RawBlock) based on this
-            template readFileText 
-            text' <- render Nothing $ renderTemplate (Template Text) (Context Text) 
+      -- 0. read template file
+      readFileFromDirs :: [FilePath] -> FilePath ->  (Maybe Text)
+      -- 1. populate YAML variables using 'classes' and 'keymap'
+      --    - either programatically after reading, or merge into Pandoc state
+      -- 2. return new Block (RawBlock) based on this
+      template readFileText 
+      text' <- render Nothing $ renderTemplate (Template Text) (Context Text) 
 -}
-            text' <- pure text
-            return $ RawBlock (Format "shellbox") text'
+      text' <- pure text
+      return $ RawBlock (Format format) text'
 
 
-        _               -> pure block
-
-writeCustomCodeBlocks block =
+writeCustomCodeBlocks format block =
     pure block
+
+
+
+--------------------------------------------------------------------------------
+--  reading files from OsPath
+
+readFileOsPathText :: MonadIO m => OsPath -> m Text
+readFileOsPathText = \ospath ->
+    io $ fmap (decodeUtf8 @Text @ByteString) (OsPath.readFile' ospath)
+        --pandoc <- readMarkdown ropts =<< readFileOsPathText ospath fmap (decodeUtf8 @Text @LByteString) (io $ OsPath.readFile ospath)
+
+readFileOsPathByteString :: MonadIO m => OsPath -> m ByteString
+readFileOsPathByteString = \ospath ->
+    io $ OsPath.readFile' ospath
