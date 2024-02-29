@@ -60,6 +60,7 @@ ghc-options:
 - -Wprepositive-qualified-module
 - -Wno-name-shadowing
 - -Wno-unused-top-binds
+- -Wno-unused-matches
 
 default-extensions:
  - NoImplicitPrelude

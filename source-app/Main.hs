@@ -15,6 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with 'colorized-keys'.  If not, see <http://www.gnu.org/licenses/>.
 --
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 import Relude
 import My
 
@@ -53,42 +54,44 @@ main = do
         --appoptMaybeValue ?= 3044 -- Just 3044
       
 
-    -- run our custom PandocMonad
-    -- FIXME: run PandocApp
-    usingReaderT @AppOpts @PandocApp appopts $ do --res <- runIOorExplode $ do
-        ospath <- use appoptInputFile
-        ropts  <- use appoptReaderOptions
-        pandoc <- readMarkdown ropts =<< (io $ OsPath.readFile' ospath)
+    -- run our custom PandocApp (ReaderT AppOpts PandocIO)
+    runIOorExplode $ usingReaderT appopts $ do --res <- runIOorExplode $ do
+
+        ospath <- view appoptInputFile
+        ropts  <- view appoptReaderOptions
+        pandoc <- readMarkdown ropts =<< fmap (decodeUtf8 @Text @LByteString) (io $ OsPath.readFile ospath)
         meta   <- yamlToMeta ropts Nothing =<< (io $ OsPath.readFile' ospath)
 
         -- reconfigure WriterOptions:
         --   * compile our custom output Template 
         --   * populate Context (variables)
-        wopts <- zoom appoptWriterOptions $ do
-            -- TODO: write variables: meta + command arguments
+        --wopts' <- (view appoptWriterOptions >>= executingStateT) $ do -- FIXME: why doesn't this work?
+        wopts  <- view appoptWriterOptions 
+        wopts' <- executingStateT wopts $ do
 
+            -- TODO: write variables: meta + command arguments
+            --pass :: StateT WriterOptions PandocApp ()
             -- TODO: read custom template
             tres <- io $ compileTemplate ""  =<< fmap (decodeUtf8 @Text @ByteString) (OsPath.readFile' ospath) -- ^ FIXME: partials file?
             case tres of 
                 Left err        -> die err
                 Right template  -> writerTemplateL ?= template
 
-
         -- TODO: lift values into PandocMonad:
         --    - setResourcePath
         --    - setOutputFile
         --    - setDataFile??
-        --
+
         -- filter pandoc document (this is where the magic happens)
         pandoc' <- walkM walkCodeBlocks pandoc 
 
         -- write
-        use appoptOutputFormat >>= \fmt -> case fmt of
+        view appoptOutputFormat >>= \fmt -> case fmt of
             FileFormatEmpty -> pass
             FileFormatPDF   -> do
-                latex <- use appoptLatex
-                latexopts <- use appoptLatexOpts
-                makePDF latex latexopts writeLaTeX wopts pandoc' >>= \case
+                latex     <- view appoptLatex
+                latexopts <- view appoptLatexOpts
+                makePDF latex latexopts writeLaTeX wopts' pandoc' >>= \case
                     Left log  -> do
 
                         writeFileLBS "error.log" log
@@ -121,8 +124,6 @@ walkCodeBlocks block =
     pure block
 
 
-
--- why not using RawBlock? because ```{=name} is not allowed more attributes
 
 -- use the codeblock syntax for custom latex (environments, typically)
 writeCustomCodeBlocks :: Block -> PandocApp Block
