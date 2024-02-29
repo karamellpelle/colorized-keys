@@ -7,7 +7,7 @@
 \usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage{array}
-\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
 \usepackage{ulem}
 \usepackage{sidecap}
 %\usepackage{amssymb}
@@ -46,20 +46,20 @@
 %\setlength{\skip\footins}{0.5cm}  % space between text and footnote
 \setlength{\footnotesep}{0.5cm}    % space between footnote items
 
-\hypersetup{breaklinks=true,
-            bookmarks=true,
-            %pdfauthor={karamellpelle@hotmail.com},
-            %pdftitle={Title},
-            %pdfcopyright={copy},
-            %pdfcontactaddress={Address},
-            %pdfcontactphone={0},
-            %pdfcontactemail={karamellpelle@hotmail.com,}
-            colorlinks=true,
-            linkcolor=black, % 
-            %citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
-            %urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
-            %linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
-            pdfborder={0 0 0}}
+%\hypersetup{breaklinks=true,
+%            bookmarks=true,
+%            %pdfauthor={karamellpelle@hotmail.com},
+%            %pdftitle={Title},
+%            %pdfcopyright={copy},
+%            %pdfcontactaddress={Address},
+%            %pdfcontactphone={0},
+%            %pdfcontactemail={karamellpelle@hotmail.com,}
+%            colorlinks=true,
+%            linkcolor=black, % 
+%            %citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+%            %urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+%            %linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+%            pdfborder={0 0 0}}
 
 \setcounter{secnumdepth}{0} % NO NUMBERS FOR SECTIONS
 

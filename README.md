@@ -1,4 +1,5 @@
-# colorized-keys
+# colorized-keys 🌈
+
 🤔
 
 ## shellbox
@@ -19,3 +20,6 @@
 * fancyvrb
 * xcolor
 
+
+## FAQ
+* _Why not write a [Pandoc filter](https://pandoc.org/filters.html) instead?_ Because I thought Pandoc filters don't have access to variables, only the Pandoc JSON AST. Which is true (?). But I later realized that metadata is included in the JSON AST, and any variables declared in the documents YAML header will be available in the JSON AST as metavalues.

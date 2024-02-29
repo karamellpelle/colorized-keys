@@ -11,8 +11,8 @@ INPUT_FORMAT=${INPUT_FORMAT/md/markdown}
 
 OUTPUT_FILE="output/${OUTPUT_FILE%.*}.${OUTPUT_FORMAT}"
 
-#PDF_ENGINE=xelatex
-PDF_ENGINE=pdflatex
+PDF_ENGINE=xelatex
+#PDF_ENGINE=pdflatex
 
 OTHER_OPTS="--listings $3"
 echo "INPUT_FILE:   $INPUT_FILE"
