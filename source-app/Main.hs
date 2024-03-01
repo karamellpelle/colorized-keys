@@ -154,7 +154,6 @@ writeCustomCodeBlocks format block =
 readFileOsPathText :: MonadIO m => OsPath -> m Text
 readFileOsPathText = \ospath ->
     io $ fmap (decodeUtf8 @Text @ByteString) (OsPath.readFile' ospath)
-        --pandoc <- readMarkdown ropts =<< readFileOsPathText ospath fmap (decodeUtf8 @Text @LByteString) (io $ OsPath.readFile ospath)
 
 readFileOsPathByteString :: MonadIO m => OsPath -> m ByteString
 readFileOsPathByteString = \ospath ->

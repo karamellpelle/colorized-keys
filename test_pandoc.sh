@@ -21,6 +21,8 @@ echo "OUTPUT_FILE:  $OUTPUT_FILE"
 echo "INPUT_FORMAT: $INPUT_FORMAT"
 echo "INPUT_FORMAT: $OUTPUT_FORMAT"
 
-pandoc --data-dir=$DATA_DIR --template=default.latex --pdf-engine=$PDF_ENGINE $OTHER_OPTS --from=$INPUT_FORMAT --to=$OUTPUT_FORMAT -o "$OUTPUT_FILE" "$INPUT_FILE" \
+SYNTAX_FILE=./data-dir/colorized-keys/pandoc/syntax/shellbox.xml
+
+pandoc --data-dir=$DATA_DIR --template=default.latex --pdf-engine=$PDF_ENGINE $OTHER_OPTS --syntax-definition="$SYNTAX_FILE" --from=$INPUT_FORMAT --to=$OUTPUT_FORMAT -o "$OUTPUT_FILE" "$INPUT_FILE" \
     && open "$OUTPUT_FILE"
 
