@@ -1,0 +1,18 @@
+\defaultfontfeatures{Ligatures=TeX}
+
+
+\setcounter{secnumdepth}{0} % NO NUMBERS FOR SECTIONS
+
+\titleformat*{\section}{\Huge \bfseries \titlefont}
+\titleformat*{\subsection}{\Large \bfseries \titlefont}
+\titleformat*{\subsubsection}{\large \bfseries \titlefont}
+
+\titlespacing*{\section}{0mm}{16mm}{4mm}
+\titlespacing*{\subsection}{0mm}{16mm}{4mm}
+\titlespacing*{\subsubsection}{0mm}{4mm}{2mm}
+
+
+\newcommand{\Hrule}{\rule{\linewidth}{0.5mm}}
+
+\renewcommand{\familydefault}{\sfdefault}
+

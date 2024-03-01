@@ -7,7 +7,7 @@ resource-path:
 #metadata-files:
 #    - ${.}/
 #
-highlight-style: espresso
+#highlight-style: espresso
 
 syntax-definitions:
     - ${.}/syntax/shellbox.xml

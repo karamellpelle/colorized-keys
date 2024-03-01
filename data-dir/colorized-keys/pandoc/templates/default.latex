@@ -1,8 +1,11 @@
+\PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
 \documentclass[a4paper,10pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper,landscape,left=5.cm,right=5.cm,bottom=1.8cm,top=1.8cm,footskip=0.4cm]{geometry}
-\usepackage{quotmark}
 %\usepackage[$lang$]{babel}
+\usepackage{quotmark}
+\usepackage{microtype}
 \usepackage{nopageno}
 \usepackage{verbatim}
 \usepackage{enumitem}
@@ -16,15 +19,14 @@
 \usepackage{setspace}
 \usepackage{parskip}
 \usepackage{subcaption}
-%\usepackage{mdframed}
-%\usepackage{pdfpages}
+\usepackage{mdframed}
+\usepackage{pdfpages}
 \usepackage{titlesec}
-%\usepackage{intopdf}
+%\usepackage{intopdf} %
 %\usepackage{attachfile}
-%\usepackage{marginnote}
-%\usepackage{sidenotes}
+%\usepackage{marginnote} %
+%\usepackage{sidenotes} %
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor} % must be before tikz
-%\usepackage[dvipsnames]{xcolor} % must be before tikz
 %\usepackage{tikzsymbols}
 %\usepackage{tikz}
 \usepackage[pages=some]{background}
@@ -33,102 +35,137 @@
 \usepackage{tabularx}
 \usepackage[norule,bottom,hang]{footmisc}
 \usepackage{lipsum}
-\usepackage{tablefootnote}
+%\usepackage{tablefootnote}
 \usepackage[textsize=tiny]{todonotes}
 \usepackage[font=footnotesize]{caption}
-\usepackage[hyphens]{url}
 \usepackage{hyperref} % put this last!
+\usepackage[hyphens]{url}
+\usepackage{nameref}
 
-\usepackage{fancyvrb}
-\usepackage{fontspec}
 
-% TODO: hyperref template macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% setup pdf metadata
+\hypersetup{
+$if(title-meta)$
+  pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+  pdfauthor={$author-meta$},
+$endif$
+$if(lang)$
+  pdflang={$lang$},
+$endif$
+$if(subject)$
+  pdfsubject={$subject$},
+$endif$
+$if(keywords)$
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+  colorlinks=true,
+  linkcolor={$if(linkcolor)$$linkcolor$$else$Maroon$endif$},
+  filecolor={$if(filecolor)$$filecolor$$else$Maroon$endif$},
+  citecolor={$if(citecolor)$$citecolor$$else$Blue$endif$},
+  urlcolor={$if(urlcolor)$$urlcolor$$else$Blue$endif$},
+$else$
+$if(boxlinks)$
+$else$
+  hidelinks,
+$endif$
+$endif$
+  pdfcreator={LaTeX via pandoc}}
+
+
+% add LaTeX macro for custom highlighting (Skylighting)
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 
-\typeout{data-dir is: $data-dir$}
-\typeout{data-dir-fonts is: $data-dir-fonts$}
+\fvset{fontsize=\footnotesize} % font size in fancyvrb environments
 
-\setmonofont{texgyrepagella.otf}[
-    Path = $data-dir-fonts$,
-    BoldFont = *-bold
-]
-
-
-\setsansfont{texgyrepagella}[
-    Extension = .otf ,
-    Path = $data-dir-fonts$,
-    Numbers= OldStyle,
-    BoldFont = *-bold,
-    ItalicFont=*-italic
-]
-\setmainfont{texgyrepagella}[
-    Extension = .otf ,
-    Path = $data-dir-fonts$,
-    Numbers= OldStyle,
-    BoldFont = *-bold,
-    ItalicFont=*-italic,
-    BoldItalicFont= *-bolditalic
-]
-\newfontfamily{\titlefont}{texgyrepagella}[
-    Extension = .otf ,
-    Path = $data-dir-fonts$,
-    Numbers= OldStyle,
-    BoldFont = *-bold,
-    ItalicFont=*-italic,
-    BoldItalicFont= *-bolditalic
-]
-
-\newfontfamily{\upperNumber}{texgyrepagella}[
-    Extension = .otf ,
-    Path = $data-dir-fonts$,
-    ItalicFont = *-italic ,
-    BoldItalicFont = *-bolditalic
-]
-
-% Font for chapter title
-\newfontfamily{\chapterfont}{texgyrepagella}[
-    Extension = .otf ,
-    Path = $data-dir-fonts$,
-    BoldFont = *-bold
-]
-
-
-%\input{$data-dir$/include.latex}
-
-%\renewcommand{\thefootnote}{\roman{footnote}}
-%\setlength{\skip\footins}{0.5cm}  % space between text and footnote
-%\setlength{\footnotesep}{0.5cm}    % space between footnote items
-
-\setcounter{secnumdepth}{0} % NO NUMBERS FOR SECTIONS
-
-% search for images 
-\graphicspath{{./}{./graphics/}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% needed by pandoc
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-%\lstset{backgroundcolor=\color{yellow}}
-%\lstset{basicstyle=\footnotesize\ttfamily}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\titleformat*{\section}{\centering\Huge\bfseries}
-%\titleformat*{\subsection}{\Large\bfseries}
-%\titleformat*{\subsubsection}{\large\bfseries}
-%\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
-%%\titleformat{\chapter}{\normalfont\huge}{\thechapter.}{20pt}{\huge\it}
 
-\newcommand{\Hrule}{\rule{\linewidth}{0.5mm}}
+\usepackage{fontspec}
 
-\renewcommand{\familydefault}{\sfdefault}
+\typeout{data-dir is: $data-dir$}
+\typeout{data-dir-fonts is: $data-dir-fonts$}
+\typeout{data-dir-templates is: $data-dir-templates$}
 
+
+%\setXfont{FontnameX}[
+%    Path            = $data-dir-fonts$
+%  , Extension       = .ttf/.otf
+%  , UprightFont     = *-Regular
+%  , BoldFont        = *-Bold
+%  , ItalicFont      = *-Italic
+%  , BoldItalicFont  = *-BoldItalic
+%
+%  , SlantedFont     = *-Slanted
+%  , BoldSlantedFont = *-BoldSlanted
+%  , SwashFont       = *-Swash
+%  , BoldSwashFont   = *-BoldSwash
+%  , SmallCapsFont   = *-SmallCaps
+%]
+
+
+\setmainfont{$colorized_keys.fonts.main.name$}[
+    Path           = $data-dir-fonts$,
+    Extension      = $colorized_keys.fonts.main.ext$,
+    Numbers        = OldStyle,
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+\setsansfont{$colorized_keys.fonts.sans.name$}[
+    Path           = $data-dir-fonts$,
+    Extension      = $colorized_keys.fonts.sans.ext$,
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+\setmonofont{$colorized_keys.fonts.mono.name$}[
+    Path           = $data-dir-fonts$,
+    Extension      = $colorized_keys.fonts.mono.ext$,
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold
+]
+
+\newfontfamily{\titlefont}{$colorized_keys.fonts.title.name$}[
+    Path           = $data-dir-fonts$,
+    Extension      = $colorized_keys.fonts.title.ext$,
+    Numbers        = OldStyle,
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% search for images 
+\graphicspath{{$data-dir$}{$data-dir$/graphics/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% read settings 
+\input{$data-dir-templates$/default/settings.latex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-	
-Data dir is: \textit{$data-dir$} \\
-Font dir is: \textit{$data-dir-fonts$}
+
 
 $body$
 
