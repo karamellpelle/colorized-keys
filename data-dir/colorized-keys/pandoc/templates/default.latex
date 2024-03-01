@@ -10,9 +10,7 @@
 \usepackage{graphicx}
 \usepackage{ulem}
 \usepackage{sidecap}
-%\usepackage{amssymb}
-%\usepackage{amsmath}
-%\usepackage{amsthm}
+%\usepackage{amssymb,amsmath,amsthm}
 \usepackage{color}
 \usepackage{fancyhdr}
 \usepackage{setspace}
@@ -25,7 +23,8 @@
 %\usepackage{attachfile}
 %\usepackage{marginnote}
 %\usepackage{sidenotes}
-\usepackage[dvipsnames]{xcolor} % must be before tikz
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor} % must be before tikz
+%\usepackage[dvipsnames]{xcolor} % must be before tikz
 %\usepackage{tikzsymbols}
 %\usepackage{tikz}
 \usepackage[pages=some]{background}
@@ -39,35 +38,68 @@
 \usepackage[font=footnotesize]{caption}
 \usepackage[hyphens]{url}
 \usepackage{hyperref} % put this last!
+
 \usepackage{fancyvrb}
 \usepackage{fontspec}
-%\setmainfont[SmallCapsFont={* Caps}]{Latin Modern Roman}
-%\setsansfont{Latin Modern Sans}
-%\setmonofont[SmallCapsFont={Latin Modern Mono Caps}]{Latin Modern Mono Light}
-\DeclareFontShape{OT1}{cmtt}{bx}{n}{<5><6><7><8><9><10><10.95><12><14.4><17.28><20.74><24.88>cmttb10}{}
-%\usepackage{listings}
+
+% TODO: hyperref template macros
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 
-\renewcommand{\thefootnote}{\roman{footnote}}
-%\setlength{\skip\footins}{0.5cm}  % space between text and footnote
-\setlength{\footnotesep}{0.5cm}    % space between footnote items
+\typeout{data-dir is: $data-dir$}
+\typeout{data-dir-fonts is: $data-dir-fonts$}
 
-%\hypersetup{breaklinks=true,
-%            bookmarks=true,
-%            %pdfauthor={karamellpelle@hotmail.com},
-%            %pdftitle={Title},
-%            %pdfcopyright={copy},
-%            %pdfcontactaddress={Address},
-%            %pdfcontactphone={0},
-%            %pdfcontactemail={karamellpelle@hotmail.com,}
-%            colorlinks=true,
-%            linkcolor=black, % 
-%            %citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
-%            %urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
-%            %linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
-%            pdfborder={0 0 0}}
+\setmonofont{texgyrepagella.otf}[
+    Path = $data-dir-fonts$,
+    BoldFont = *-bold
+]
+
+
+\setsansfont{texgyrepagella}[
+    Extension = .otf ,
+    Path = $data-dir-fonts$,
+    Numbers= OldStyle,
+    BoldFont = *-bold,
+    ItalicFont=*-italic
+]
+\setmainfont{texgyrepagella}[
+    Extension = .otf ,
+    Path = $data-dir-fonts$,
+    Numbers= OldStyle,
+    BoldFont = *-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont= *-bolditalic
+]
+\newfontfamily{\titlefont}{texgyrepagella}[
+    Extension = .otf ,
+    Path = $data-dir-fonts$,
+    Numbers= OldStyle,
+    BoldFont = *-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont= *-bolditalic
+]
+
+\newfontfamily{\upperNumber}{texgyrepagella}[
+    Extension = .otf ,
+    Path = $data-dir-fonts$,
+    ItalicFont = *-italic ,
+    BoldItalicFont = *-bolditalic
+]
+
+% Font for chapter title
+\newfontfamily{\chapterfont}{texgyrepagella}[
+    Extension = .otf ,
+    Path = $data-dir-fonts$,
+    BoldFont = *-bold
+]
+
+
+%\input{$data-dir$/include.latex}
+
+%\renewcommand{\thefootnote}{\roman{footnote}}
+%\setlength{\skip\footins}{0.5cm}  % space between text and footnote
+%\setlength{\footnotesep}{0.5cm}    % space between footnote items
 
 \setcounter{secnumdepth}{0} % NO NUMBERS FOR SECTIONS
 
@@ -94,6 +126,9 @@ $endif$
 
 
 \begin{document}
+	
+Data dir is: \textit{$data-dir$} \\
+Font dir is: \textit{$data-dir-fonts$}
 
 $body$
 

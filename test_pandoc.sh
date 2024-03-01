@@ -1,5 +1,5 @@
 #!/bin/sh
-DATA_DIR="./data-dir/colorized-keys/pandoc"
+DATA_DIR="$(pwd)/data-dir/colorized-keys/pandoc"
 INPUT_FILE=${1:-text/colorized-keys.md}
 OUTPUT_FILE=$(basename "$INPUT_FILE" )
 
@@ -21,8 +21,9 @@ echo "OUTPUT_FILE:  $OUTPUT_FILE"
 echo "INPUT_FORMAT: $INPUT_FORMAT"
 echo "INPUT_FORMAT: $OUTPUT_FORMAT"
 
-SYNTAX_FILE=./data-dir/colorized-keys/pandoc/syntax/shellbox.xml
+DEFAULTS_FILE="$DATA_DIR/defaults.yaml"
+DATA_DIR_FONTS="$DATA_DIR/fonts/"
 
-pandoc --data-dir=$DATA_DIR --template=default.latex --pdf-engine=$PDF_ENGINE $OTHER_OPTS --syntax-definition="$SYNTAX_FILE" --from=$INPUT_FORMAT --to=$OUTPUT_FORMAT -o "$OUTPUT_FILE" "$INPUT_FILE" \
+pandoc --data-dir=$DATA_DIR --variable data-dir=$DATA_DIR --variable data-dir-fonts=$DATA_DIR_FONTS --template=default.latex --defaults=$DEFAULTS_FILE --pdf-engine=$PDF_ENGINE $OTHER_OPTS --from=$INPUT_FORMAT --to=$OUTPUT_FORMAT -o "$OUTPUT_FILE" "$INPUT_FILE" \
     && open "$OUTPUT_FILE"
 
