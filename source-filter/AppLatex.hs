@@ -60,9 +60,8 @@ main :: Block -> AppLatex Block
 main = \block -> case block of
     (CodeBlock atts@(id, cs, kvs) text) -> case cs of
         (language:cs)  -> do
-        
-            text' <- pure $ text <> "\n !bananaboy!"
-            return $ RawBlock (Format language) text'
+            --return $ RawBlock (Format language) text'
+            pure $ CodeBlock atts $ text <> "\n\n^^^ " <> show atts
 
         _ -> pure block
     _ -> pure block

@@ -1,4 +1,7 @@
 ---
+title: Colorized Keys
+author: karamellpelle@hotmail.com
+
 colorized_keys:
   fonts:
       main:

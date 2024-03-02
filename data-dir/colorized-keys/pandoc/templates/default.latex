@@ -80,9 +80,10 @@ $endif$
 % add LaTeX macro for custom highlighting (Skylighting)
 $if(highlighting-macros)$
 $highlighting-macros$
-$endif$
 
 \fvset{fontsize=\footnotesize} % font size in fancyvrb environments
+$endif$
+
 
 % needed by pandoc
 \providecommand{\tightlist}{%
