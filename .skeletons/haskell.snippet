@@ -15,6 +15,10 @@
 -- You should have received a copy of the GNU General Public License
 -- along with 'colorized-keys'.  If not, see <http://www.gnu.org/licenses/>.
 --
+module ${1:`substitute(substitute(substitute(fnamemodify(expand('%:r'),":~:."),"\\([a-z-_]\\+/\\)*","",""),'[/\\]','.','g'),'^\%(\l*\.\)\?','','')`}
+(
+) where
+
 import Relude
 import My
 
