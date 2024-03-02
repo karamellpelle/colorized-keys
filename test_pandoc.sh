@@ -25,7 +25,7 @@ DATA_DIR_FONTS="$DATA_DIR/fonts/"
 DATA_DIR_TEMPLATES="$DATA_DIR/templates/"
 
 FILTER_EXE=${FILTER_EXE:-"$(stack path --local-install-root 2> /dev/null)/bin/colorized-keys-filter"}
-echo "using filter executable $FILTER_EXE"
+echo "using filter $FILTER_EXE"
 OTHER_OPTS="$OTHER_OPTS --filter $FILTER_EXE"
 
 pandoc --data-dir=$DATA_DIR \

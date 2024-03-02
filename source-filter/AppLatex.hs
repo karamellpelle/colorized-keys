@@ -31,7 +31,7 @@ import My
 import Lens.Micro.TH
 import System.OsPath
 import Text.Pandoc
-import Text.Pandoc.Walk()
+import Text.Pandoc.Walk
 import App
 
 
@@ -56,14 +56,18 @@ type AppLatex = AppM AppDataLatex
 --------------------------------------------------------------------------------
 --  
 
-main :: Block -> AppLatex Block
-main = \block -> case block of
-    (CodeBlock atts@(id, cs, kvs) text) -> case cs of
-        (language:cs)  -> do
-            --return $ RawBlock (Format language) text'
-            pure $ CodeBlock atts $ text <> "\n\n^^^ " <> show atts
+main :: Pandoc -> AppLatex Pandoc
+main = do
 
+    -- TODO: setup environment
+
+    walkM $ \block -> case block of
+        (CodeBlock atts@(id, cs, kvs) text) -> case cs of
+            (language:cs)  -> do
+                --pure $ RawBlock (Format "latex") "\\LaTeX"
+                pure $ CodeBlock atts $ text <> "\n\n^^^ " <> show atts
+
+            _ -> pure block
         _ -> pure block
-    _ -> pure block
     
 

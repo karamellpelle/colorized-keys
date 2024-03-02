@@ -41,7 +41,7 @@ main = do
 
 
 --------------------------------------------------------------------------------
---  
+--  TODO: don't putTextLn because the output is fed into the JSON pipe
 
 
 --info msg = \a -> pure a <* putTextLn $ (toText PackageInfo.name) <> ": " <> msg
