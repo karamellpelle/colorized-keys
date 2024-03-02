@@ -41,6 +41,7 @@ import My
 import Lens.Micro.TH
 import System.OsPath
 import Text.Pandoc
+import Format
 
 
 --------------------------------------------------------------------------------
@@ -73,6 +74,10 @@ data AppOpts = AppOpts {
     
     }
 
+makeLenses ''AppOpts
+
+--------------------------------------------------------------------------------
+--  
 
 instance Default AppOpts where
     def = AppOpts {
@@ -93,17 +98,7 @@ mkOsPath str = System.OsPath.pack $ map unsafeFromChar str
 -- ^ TODO: use unsafeEncodeUtf when newer filepath version is available in stack snapshot
 
 
---------------------------------------------------------------------------------
---  
 
-data FileFormat =
-    FileFormatEmpty    |
-    FileFormatMarkdown |
-    FileFormatLaTeX    |
-    FileFormatPDF      |
-    FileFormatHTML
-
-makeLenses ''AppOpts
 
 --------------------------------------------------------------------------------
 --  PandocApp

@@ -30,9 +30,7 @@ import My
 
 import Text.DocTemplates.Internal
 import Text.Pandoc
-import Text.Pandoc.Templates
 import Lens.Micro
-import Lens.Micro.TH
 import Relude.Extra.Map
 
 
