@@ -3,19 +3,27 @@ title: Colorized Keys
 author: karamellpelle@hotmail.com
 
 colorized_keys:
-  fonts:
-      main:
-          name: SourceSans3Light
-          ext: .ttf
-      sans: 
-          name: SourceSans3Light
-          ext: .ttf
-      title:
-          name: SourceSans3Light
-          ext: .ttf
-      mono:
-          name: MesloLGSDZNerdFontPropo
-          ext: .ttf
+    fonts:
+        main:
+            name: SourceSans3Light
+            ext: .ttf
+        sans: 
+            name: SourceSans3Light
+            ext: .ttf
+        title:
+            name: SourceSans3Light
+            ext: .ttf
+        mono:
+            name: MesloLGSDZNerdFontPropo
+            ext: .ttf
+
+    replace:
+      shellbox:
+            🔑: "ColorizeKeyPrivate"
+            🔒: "ColorizeKeyPublic"
+            🔐: "ColorizeKeyPair"
+            ❗: "ColorizeIdentifier"
+
 ---
 
 
@@ -23,13 +31,20 @@ colorized_keys:
 # section
 \lipsum[1]
 
+
 ```shellbox
 $ # set hostname
 $ HOSTNAME=my.domain.net 
 $ # see https://github.com/karamellpelle/ 
-$ ssh-keygen -h -s ca_key -I "$CERTIFICATE_ID" -n "$HOSTNAME" -V $CERTIFICATE_VALID -z $CERTIFICATE_SERIAL ssh_host_xxx_key.pub
-$ openssl pkey -in 9x_private.pem -pubout -out 9x_public.pem
-$ ykman piv keys import --pin-policy DEFAULT --touch-policy DEFAULT [--password <password>] 9X 9x_private.pem
+$ ssh-keygen -h -s 🔑ca_key -I "$CERTIFICATE_ID" -n "$HOSTNAME" -V $CERTIFICATE_VALID -z $CERTIFICATE_SERIAL 🔒ssh_host_xxx_key.pub
+$ openssl pkey -in 🔑9x_private.pem -pubout -out 🔒9x_public.pem
+$ ykman piv keys import --pin-policy DEFAULT --touch-policy DEFAULT [--password <password>] ❗9X 🔑9x_private.pem
+$ ls ❗[this is secret] 🔑[9x is also private]
+$
+$ # testing
+$ 🔑my-long-name
+$ 🔑[my spaced name]
+$ 🔑[] <- empty name
 ```
 
 

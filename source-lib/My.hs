@@ -20,6 +20,7 @@ module My
     module Lens.Micro, 
     module Lens.Micro.Mtl, 
     module Data.Default,
+    module Relude.Extra.Map,
     MonadError,
     throwError,
     catchError,
@@ -31,6 +32,7 @@ module My
 ) where
 
 import Relude
+import Relude.Extra.Map
 import Lens.Micro
 import Lens.Micro.Mtl
 import Data.Default

@@ -40,8 +40,10 @@ dependencies:
 - file-io
 - directory
 - mtl
+#- aeson
+- yaml
+- attoparsec
 #- os-string
-#- attoparsec
 #- HsYAML
 #- libssh2
 #- hashable

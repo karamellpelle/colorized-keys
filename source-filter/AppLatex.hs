@@ -32,7 +32,10 @@ import Lens.Micro.TH
 import System.OsPath
 import Text.Pandoc
 import Text.Pandoc.Walk
+import Data.Attoparsec.Text
+import Data.Char (isSpace)
 import App
+import Replace
 
 
 
@@ -53,6 +56,7 @@ instance Default AppDataLatex where
 type AppLatex = AppM AppDataLatex
 
 
+
 --------------------------------------------------------------------------------
 --  
 
@@ -62,12 +66,69 @@ main = do
     -- TODO: setup environment
 
     walkM $ \block -> case block of
+      
         (CodeBlock atts@(id, cs, kvs) text) -> case cs of
-            (language:cs)  -> do
-                --pure $ RawBlock (Format "latex") "\\LaTeX"
-                pure $ CodeBlock atts $ text <> "\n\n^^^ " <> show atts
 
-            _ -> pure block
+            (language:cs) -> do
+
+                case replace !? language of
+                    Nothing   -> pure $ CodeBlock atts $ text <> "\n\n (not a colorize language) " <> show atts
+                    Just map  -> do
+
+                        --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
+                        pure $ CodeBlock atts $ replaceLatex map $ text
+
+            []            -> pure block
+
         _ -> pure block
+   
+ 
+--------------------------------------------------------------------------------
+--  
+
+(<<>>) :: (Applicative f, Monoid a) => f a -> f a -> f a
+(<<>>) fa0 fa1 =
+    pure (<>) <*> fa0 <*> fa1 
+
+
+replaceLatex :: ReplaceLanguage -> Text -> Text
+replaceLatex replacers = \text ->
+    case parseOnly (pReplaceLatex replacers) text of -- <* endOfInput?
+        Left err    -> wrapLatexError $ toText err
+        Right text' -> text'
+
+
+pReplaceLatex :: ReplaceLanguage -> Parser Text
+pReplaceLatex replacers = do
+    t <- takeTill (`member` replacers)
+    peekChar >>= \case 
+        Nothing   -> pure t
+        _         -> pure t <<>> do
+
+            key <- anyChar -- <=> satisfy (`member` replacers)
+            peekChar >>= \case 
+                Just '['  -> do
+                    str <- (char '[' *> takeTill (== ']') <* char ']') <?> "Missing enclosing ]"
+                    pure (wrapLatex (replacers !? key ?: "\\") str) <<>> pReplaceLatex replacers
+
+                _         -> do
+                    str <- takeTill isSpace -- takeWhile1 (not . isSpace) forces at least 1
+                    pure (wrapLatex (replacers !? key ?: "\\") str) <<>> pReplaceLatex replacers
+
+
+
+--------------------------------------------------------------------------------
+--  
+
+wrapLatex :: Text -> Text -> Text
+wrapLatex tok str =
+    "\\" <> tok <> "{" <> str <> "}"
+
+
+-- | some wrapping to indicate error
+wrapLatexError :: Text -> Text
+wrapLatexError str = 
+    "\\textsc{ colorized-keys: " <> str <> "}"
     
+
 
