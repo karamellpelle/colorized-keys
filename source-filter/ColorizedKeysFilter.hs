@@ -24,6 +24,7 @@ module ColorizedKeysFilter
     colorizedVersion, 
     colorizedPandoc, 
     colorizedReplace, 
+    colorizedDataDir,
 
 ) where
 
@@ -31,16 +32,18 @@ import Relude
 import My
 
 import Lens.Micro.TH
-import System.OsPath
+import System.FilePath
 import Text.Pandoc
 import Replace
 import Data.Yaml
 import GHC.Generics hiding (UInt, Meta)
 
+
 data ColorizedKeysFilter = ColorizedKeysFilter {
       _colorizedVersion :: UInt
     , _colorizedPandoc  :: Pandoc
     , _colorizedReplace :: Replace
+    , _colorizedDataDir :: FilePath
 
     } deriving (Generic)
 
@@ -50,6 +53,7 @@ instance Default ColorizedKeysFilter where
           _colorizedVersion = 0
         , _colorizedPandoc = Pandoc nullMeta def
         , _colorizedReplace = def
+        , _colorizedDataDir = def
 
         }
 

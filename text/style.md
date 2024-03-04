@@ -2,6 +2,8 @@
 title: Colorized Keys
 author: karamellpelle@hotmail.com
 
+data-dir: ./data-dir/colorized-keys/
+
 colorized_keys:
     fonts:
         main:
@@ -19,7 +21,7 @@ colorized_keys:
 
     languages:
       shellbox:
-        syntax-xml: file.xml
+        syntax-xml: shellbox.xml
         replace:
             🔑: "ColorizeKeyPrivate"
             🔒: "ColorizeKeyPublic"
@@ -34,7 +36,7 @@ colorized_keys:
 \lipsum[1]
 
 
-```default
+```shellbox
 $ # set hostname
 $ HOSTNAME=my.domain.net 
 $ # see https://github.com/karamellpelle/ 

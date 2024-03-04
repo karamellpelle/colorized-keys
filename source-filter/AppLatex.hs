@@ -27,7 +27,7 @@ import Relude
 import My
 
 import Lens.Micro.TH
-import System.OsPath
+import System.FilePath
 import Text.Pandoc
 import Text.Pandoc.Walk
 import Text.Pandoc.Highlighting
@@ -36,7 +36,9 @@ import Data.Attoparsec.Text
 import Data.Char (isSpace)
 import Relude.Extra.Newtype
 import ColorizedKeysFilter
+import Skylighting.Parser
 import Replace
+import System.Directory
 
 
 
@@ -65,17 +67,21 @@ main pandoc = do
                       Nothing   -> pure $ CodeBlock atts $ text <> "\n\n (not a colorize language) " <> show atts
                       Just map  -> do
 
+                          --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
+                          --pure $ CodeBlock atts $ replaceLatex map $ text
+                          --
                           -- TODO: use values
                           --meta <- view appMeta
                           --case meta
-                          -- <- io parseSyntaxDefinition syntaxxml 
+                          path <- syntaxPath language =<< view colorizedDataDir
+                          synmap <- io $ whenMA (doesFileExist path) defaultSyntaxMap $ parseSyntaxDefinition path >>= \case 
+                              Left err     -> pure $ defaultSyntaxMap
+                              Right syntax -> pure $ fromList $ one (language, syntax)
 
-                          case highlight defaultSyntaxMap formatLaTeXBlock atts text of
+                          case highlight synmap formatLaTeXBlock atts text of
                               Left err    -> pure $ latexError language err 
-                              Right text' -> pure $ RawBlock (Format "latex") $ replaceLatex map $ text'
-                              
-                          --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
-                          --pure $ CodeBlock atts $ replaceLatex map $ text
+                              Right text' -> pure $ RawBlock (Format "latex") $ replaceLatex map $ text' 
+
 
               []            -> pure block
 
@@ -84,7 +90,7 @@ main pandoc = do
       latexError lang err = case err of
           ""  -> Para [Strong [Str $ "colorized-key: syntax map not found: " <> lang ]]
           _   -> Para [Strong [Str $ "colorized-key: highlighting error: " <> err]]
-
+      syntaxPath language dir = pure $ dir </> "pandoc/syntax" </> toString language <.> ".xml"
 
 
 pickMap :: MetaValue -> Text -> Maybe MetaValue

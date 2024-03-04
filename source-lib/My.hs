@@ -28,6 +28,7 @@ module My
 
     UInt,
     io,
+    whenMA,
 
 ) where
 
@@ -44,3 +45,10 @@ type UInt = Word
 io :: MonadIO m => IO a -> m a
 io = liftIO
 {-# INLINE io #-}
+
+whenMA :: Monad m => m Bool -> a -> m a -> m a
+whenMA = \mb a ma ->
+    mb >>= \case
+        False -> pure $ a
+        True  -> ma
+{-# INLINE whenMA #-}

@@ -55,6 +55,7 @@ walkPandoc format pandoc = do
         colorizedVersion .= 0
         colorizedPandoc  .= pandoc
         colorizedReplace .= replace -- TODO: read meta
+        colorizedDataDir .= "./data-dir/colorized-keys/"
        
     usingReaderT colorized $ case format of
         FileFormatLatex  -> Latex.main pandoc
