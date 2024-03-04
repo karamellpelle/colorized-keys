@@ -25,30 +25,54 @@ import Relude
 import My
 
 import Text.Pandoc.JSON
+import Text.Pandoc
+import Text.Pandoc.Walk
+import Data.Aeson (fromJSON, toJSON)
 import PackageInfo_colorized_keys qualified as PackageInfo
-import App
 import AppLatex qualified as Latex
+import Format
+import Replace
+import ColorizedKeysFilter
 
 
 main :: IO ()
 main = do
     toJSONFilter $ \case 
-        Just (Format "latex")  -> runApp $ Latex.main
-        Just (Format "pdf")    -> runApp $ Latex.main
-        Just (Format "html")   -> info $ "HTML not implemented yet"
-        Just (Format format)   -> infoError $ "File format not known: " <> format
-        Nothing                -> infoError $ "No file format"
+        Just (Format "latex")  -> walkPandoc FileFormatLatex
+        Just (Format "pdf")    -> walkPandoc FileFormatLatex
+        Just (Format "html")   -> walkPandoc FileFormatHTML
+        Just (Format format)   -> infoError ("File format not known: " <> format)
+        Nothing                -> infoError "No file format"
+
+
+walkPandoc :: FileFormat -> Pandoc -> IO Pandoc
+walkPandoc format pandoc = do
+
+    let Pandoc meta blocks = pandoc
+
+    colorized <- executingStateT def $ do
+
+        colorizedVersion .= 0
+        colorizedPandoc  .= pandoc
+        colorizedReplace .= replace -- TODO: read meta
+       
+    usingReaderT colorized $ case format of
+        FileFormatLatex  -> Latex.main pandoc
+        FileFormatHTML   -> errorPandoc pandoc "HTML not implemeted (yet)"
+        _                -> errorPandoc pandoc "FileFormatNotImplemented"
+   
+    where
+      errorPandoc (Pandoc meta blocks) str = 
+          pure $ Pandoc meta ((Header 1 ("error", [], []) [Str str]) : blocks)
+      
 
 
 --------------------------------------------------------------------------------
 --  TODO: don't putTextLn because the output is fed into the JSON pipe
 
+--info msg = \a -> pure a <* putTextLn $ (toText PackageInfo.name) <> ": " <> msginfoError :: (MonadIO m) => Text -> a -> m a
 
---info msg = \a -> pure a <* putTextLn $ (toText PackageInfo.name) <> ": " <> msg
-info :: Text -> a -> IO a
-info msg = \a -> 
-    pure a <* (putTextLn $ toText PackageInfo.name <> ": " <> msg)
-
-infoError :: Text -> a -> IO a
-infoError msg = \a -> do
-    pure a <* (putTextLn $ toText PackageInfo.name <> ": " <> msg)
+infoError :: MonadIO m => Text -> a -> m a
+infoError msg = \a ->
+    --pure a <* (putTextLn $ toText PackageInfo.name <> ": " <> msg)
+    pure a -- ^ FIXME: msg to stderr

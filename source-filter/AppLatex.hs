@@ -19,8 +19,6 @@
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 module AppLatex
 (
-    AppDataLatex,
-    AppLatex,
     main,
 
 ) where
@@ -32,57 +30,84 @@ import Lens.Micro.TH
 import System.OsPath
 import Text.Pandoc
 import Text.Pandoc.Walk
+import Text.Pandoc.Highlighting
+import Skylighting.Syntax
 import Data.Attoparsec.Text
 import Data.Char (isSpace)
-import App
+import Relude.Extra.Newtype
+import ColorizedKeysFilter
 import Replace
 
 
 
-data AppDataLatex = AppDataLatex {
-      _appVersion :: UInt
-  
-  }
-
-makeLenses ''AppDataLatex
-
-
-instance Default AppDataLatex where
-    def = AppDataLatex {
-        _appVersion = 0
-    }
-
-
-type AppLatex = AppM AppDataLatex
 
 
 
 --------------------------------------------------------------------------------
 --  
 
-main :: Pandoc -> AppLatex Pandoc
-main = do
+main :: Pandoc -> ColorizedApp Pandoc
+main pandoc = do
 
     -- TODO: setup environment
+    --
+    walkBlock pandoc
+    where
+      walkBlock = walkM $ \block -> case block of
+            
+          (CodeBlock atts@(id, cs, kvs) text) -> case cs of
 
-    walkM $ \block -> case block of
-      
-        (CodeBlock atts@(id, cs, kvs) text) -> case cs of
+              (language:cs) -> do
 
-            (language:cs) -> do
+                  replace <- view colorizedReplace
 
-                case replace !? language of
-                    Nothing   -> pure $ CodeBlock atts $ text <> "\n\n (not a colorize language) " <> show atts
-                    Just map  -> do
+                  case replace !? language of
+                      Nothing   -> pure $ CodeBlock atts $ text <> "\n\n (not a colorize language) " <> show atts
+                      Just map  -> do
 
-                        --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
-                        pure $ CodeBlock atts $ replaceLatex map $ text
+                          -- TODO: use values
+                          --meta <- view appMeta
+                          --case meta
+                          -- <- io parseSyntaxDefinition syntaxxml 
 
-            []            -> pure block
+                          case highlight defaultSyntaxMap formatLaTeXBlock atts text of
+                              Left err    -> pure $ latexError language err 
+                              Right text' -> pure $ RawBlock (Format "latex") $ replaceLatex map $ text'
+                              
+                          --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
+                          --pure $ CodeBlock atts $ replaceLatex map $ text
 
-        _ -> pure block
-   
- 
+              []            -> pure block
+
+          _ -> pure block
+
+      latexError lang err = case err of
+          ""  -> Para [Strong [Str $ "colorized-key: syntax map not found: " <> lang ]]
+          _   -> Para [Strong [Str $ "colorized-key: highlighting error: " <> err]]
+
+
+
+pickMap :: MetaValue -> Text -> Maybe MetaValue
+pickMap (MetaMap map) key = map !? key
+pickMap _ key = Nothing
+
+
+--lookupReplace :: Meta -> Maybe Replace
+--lookupReplace meta = do
+--    colkey <- pickMap (un meta) "colorized-keys"
+--    replace <- pickMap colkey "replace"
+--    case replace of 
+--        MetaMap map -> pure $ fromList $ makeReplaceLanguage $ toPairs map
+--
+--        _           -> Nothing
+--    where
+--      makeReplaceLanguage ((k, MetaString v):ls) =
+--          (k,v) : makeReplaceLanguage ls -- FIXME: take Char of k
+--      makeReplaceLanguage (_:ls) =
+--          makeReplaceLanguage ls
+--      makeReplaceLanguage [] =
+--          []
+    
 --------------------------------------------------------------------------------
 --  
 

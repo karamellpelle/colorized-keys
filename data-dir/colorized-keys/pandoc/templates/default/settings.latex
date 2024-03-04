@@ -16,3 +16,9 @@
 
 \renewcommand{\familydefault}{\sfdefault}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+\newcommand{\KeyPrivateTok}[1]{\textcolor{Red}{#1}}
+\newcommand{\KeyPublicTok}[1]{\textcolor{Green}{#1}}
+\newcommand{\KeyPairTok}[1]{\textcolor{Goldenrod}{#1}}
+\newcommand{\IdentifierTok}[1]{\textcolor{RoyalPurple}{#1}}

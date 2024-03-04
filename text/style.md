@@ -17,8 +17,10 @@ colorized_keys:
             name: MesloLGSDZNerdFontPropo
             ext: .ttf
 
-    replace:
+    languages:
       shellbox:
+        syntax-xml: file.xml
+        replace:
             🔑: "ColorizeKeyPrivate"
             🔒: "ColorizeKeyPublic"
             🔐: "ColorizeKeyPair"
@@ -32,7 +34,7 @@ colorized_keys:
 \lipsum[1]
 
 
-```shellbox
+```default
 $ # set hostname
 $ HOSTNAME=my.domain.net 
 $ # see https://github.com/karamellpelle/ 
@@ -40,7 +42,8 @@ $ ssh-keygen -h -s 🔑ca_key -I "$CERTIFICATE_ID" -n "$HOSTNAME" -V $CERTIFICAT
 $ openssl pkey -in 🔑9x_private.pem -pubout -out 🔒9x_public.pem
 $ ykman piv keys import --pin-policy DEFAULT --touch-policy DEFAULT [--password <password>] ❗9X 🔑9x_private.pem
 $ ls ❗[this is secret] 🔑[9x is also private]
-$
+$ # comment
+$ 🔐[can this] work?
 $ # testing
 $ 🔑my-long-name
 $ 🔑[my spaced name]
@@ -58,6 +61,13 @@ $ # see https://github.com/karamellpelle/
 $ ssh-keygen -h -s ca_key -I "$CERTIFICATE_ID" -n "$HOSTNAME" -V $CERTIFICATE_VALID -z $CERTIFICATE_SERIAL ssh_host_xxx_key.pub
 $ openssl pkey -in 9x_private.pem -pubout -out 9x_public.pem
 $ ykman piv keys import --pin-policy DEFAULT --touch-policy DEFAULT [--password <password>] 9X 9x_private.pem
+$ 😄 
+```
+
+```default
+😄 
+🤗
+😚
 ```
 
 

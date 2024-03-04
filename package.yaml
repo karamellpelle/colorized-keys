@@ -40,9 +40,10 @@ dependencies:
 - file-io
 - directory
 - mtl
-#- aeson
+- aeson
 - yaml
 - attoparsec
+- skylighting
 #- os-string
 #- HsYAML
 #- libssh2
@@ -63,6 +64,7 @@ ghc-options:
 - -Wno-name-shadowing
 - -Wno-unused-top-binds
 - -Wno-unused-matches
+- -Wno-unused-imports
 
 default-extensions:
  - NoImplicitPrelude

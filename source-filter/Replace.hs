@@ -29,34 +29,43 @@ import Relude
 import My
 
 import Relude.Extra.Map
+import Data.Yaml
 
 replace :: Replace
-replace = fromList [ ("shellbox", replaceShellbox) ]
+replace = fromList [ ("shellbox", replaceShellbox),
+                     ("sh", replaceShellbox),
+                     ("default", replaceShellbox) ]
 
 replaceShellbox :: ReplaceLanguage
 replaceShellbox =
     fromList [
-        ( '🔑', "texttt" )
-      , ( '🔒', "textsc" )
-      , ( '🔐', "textbf" )
-      , ( '❗', "textit" )
-      --  ( '🔑', "TokColorizeKeyPrivate" )
-      --, ( '🔒', "TokColorizeKeyPublic" )
-      --, ( '🔐', "TokColorizeKeyPair" )
-      --, ( '❗', "TokColorizeIdentifier" )
+        ( '🔑', "KeyPrivateTok" )
+      , ( '🔒', "KeyPublicTok" )
+      , ( '🔐', "KeyPairTok" )
+      , ( '❗', "IdentifierTok" )
     ]
-
 
 type Replace = Map Text ReplaceLanguage
 
 type ReplaceLanguage = Map Char Text
 
-lookupLanguage :: Replace -> Text -> Maybe ReplaceLanguage
-lookupLanguage = (!?)
 
---replace :: Replace -> Text -> Text -> Text
---replace replace language = \str -> 
---    --case replace !? language <&> lookup str of 
---    case (!? str) <$> (replace !? language) of 
---        Just str' -> str'
---        Nothing   -> str
+--instance FromJSON ReplaceLanguage where
+--    parseJSON = 
+
+--instance FromJSON ReplaceLanguage where
+--
+--
+--
+--instance FromJSON ReplaceLanguage where
+--    parseJSON = withObject "ReplaceLanguage" $ \v -> 
+--         
+--        fromList $ map (second parseJSON) $ toPairs v
+--        fromList $ map (second parseJSON) $ toPairs v 
+
+
+--
+--
+--instance FromJSON Replace where
+--    parseJSON = withObject "Replace" $ \v -> 
+--        fromList $ map (second parseJSON) $ toPairs v 

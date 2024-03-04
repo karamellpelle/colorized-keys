@@ -26,7 +26,7 @@ import My
 data FileFormat =
     FileFormatEmpty    |
     FileFormatMarkdown |
-    FileFormatLaTeX    |
+    FileFormatLatex    |
     FileFormatPDF      |
     FileFormatHTML     |
     FileFormatOther Text
