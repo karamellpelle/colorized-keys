@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 DATA_DIR="$(pwd)/data-dir/colorized-keys/pandoc"
 INPUT_FILE=${1:-text/colorized-keys.md}
 OUTPUT_FILE=$(basename "$INPUT_FILE" )
