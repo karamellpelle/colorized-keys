@@ -22,7 +22,7 @@ module Replace
 
     replace,
     replaceShellbox,
-
+    metaReplace,
 ) where
 
 import Relude
@@ -30,6 +30,30 @@ import My
 
 import Relude.Extra.Map
 import Data.Yaml
+import Text.Pandoc.Definition
+
+type Replace = Map Text ReplaceLanguage
+
+type ReplaceLanguage = Map Char Text
+
+
+
+metaReplace :: Meta -> Replace
+metaReplace meta =
+    replace
+    --helper $ toJSON meta
+    --case helper $ MetaValue $ unMeta meta of
+    --    Just replace  -> replace
+    --    _             -> def
+    --where
+    --  helper metav = do
+    --     colorized <- metaChild metav "colorized-keys"  
+    --     languages <- metaChild colorized "languages"
+         
+          
+
+--------------------------------------------------------------------------------
+--  tmp
 
 replace :: Replace
 replace = fromList [ ("shellbox", replaceShellbox),
@@ -45,27 +69,4 @@ replaceShellbox =
       , ( '❗', "IdentifierTok" )
     ]
 
-type Replace = Map Text ReplaceLanguage
 
-type ReplaceLanguage = Map Char Text
-
-
---instance FromJSON ReplaceLanguage where
---    parseJSON = 
-
---instance FromJSON ReplaceLanguage where
---
---
---
---instance FromJSON ReplaceLanguage where
---    parseJSON = withObject "ReplaceLanguage" $ \v -> 
---         
---        fromList $ map (second parseJSON) $ toPairs v
---        fromList $ map (second parseJSON) $ toPairs v 
-
-
---
---
---instance FromJSON Replace where
---    parseJSON = withObject "Replace" $ \v -> 
---        fromList $ map (second parseJSON) $ toPairs v 

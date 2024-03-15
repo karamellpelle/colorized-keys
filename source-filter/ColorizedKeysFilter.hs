@@ -36,11 +36,12 @@ import System.FilePath
 import Text.Pandoc
 import Replace
 import Data.Yaml
+import Data.Version
 import GHC.Generics hiding (UInt, Meta)
 
 
 data ColorizedKeysFilter = ColorizedKeysFilter {
-      _colorizedVersion :: UInt
+      _colorizedVersion :: Version
     , _colorizedPandoc  :: Pandoc
     , _colorizedReplace :: Replace
     , _colorizedDataDir :: FilePath
@@ -50,7 +51,7 @@ data ColorizedKeysFilter = ColorizedKeysFilter {
 
 instance Default ColorizedKeysFilter where
     def = ColorizedKeysFilter {
-          _colorizedVersion = 0
+          _colorizedVersion = makeVersion [0, 0]
         , _colorizedPandoc = Pandoc nullMeta def
         , _colorizedReplace = def
         , _colorizedDataDir = def

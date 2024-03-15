@@ -52,10 +52,11 @@ walkPandoc format pandoc = do
 
     colorized <- executingStateT def $ do
 
-        colorizedVersion .= 0
+        colorizedVersion .= PackageInfo.version
         colorizedPandoc  .= pandoc
-        colorizedReplace .= replace -- TODO: read meta
-        colorizedDataDir .= "./data-dir/colorized-keys/"
+        colorizedReplace .= metaReplace meta
+        colorizedDataDir .= "./data-dir/colorized-keys/" 
+        --colorizedDataDir <~ getDataFileName PackageInfo.name "./data-dir/colorized-keys/" -- TODO
        
     usingReaderT colorized $ case format of
         FileFormatLatex  -> Latex.main pandoc
@@ -66,7 +67,6 @@ walkPandoc format pandoc = do
       errorPandoc (Pandoc meta blocks) str = 
           pure $ Pandoc meta ((Header 1 ("error", [], []) [Str str]) : blocks)
       
-
 
 --------------------------------------------------------------------------------
 --  TODO: don't putTextLn because the output is fed into the JSON pipe
