@@ -4,22 +4,23 @@ author: karamellpelle@hotmail.com
 
 data-dir: ./data-dir/colorized-keys/
 
-colorized_keys:
-    fonts:
-        main:
-            name: SourceSans3Light
-            ext: .ttf
-        sans: 
-            name: SourceSans3Light
-            ext: .ttf
-        title:
-            name: SourceSans3Light
-            ext: .ttf
-        mono:
-            name: MesloLGSDZNerdFontPropo
-            ext: .ttf
+fonts:
+    data-dir: ./data-dir/colorized-keys/pandoc/fonts/
+    main:
+        name: SourceSans3Light
+        ext: .ttf
+    sans: 
+        name: SourceSans3Light
+        ext: .ttf
+    title:
+        name: SourceSans3Light
+        ext: .ttf
+    mono:
+        name: MesloLGSDZNerdFontPropo
+        ext: .ttf
 
-    languages:
+colorized_keys:
+    replace:
       shellbox:
         syntax-xml: shellbox.xml
         replace:

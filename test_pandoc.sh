@@ -31,7 +31,6 @@ OTHER_OPTS="$OTHER_OPTS --filter $FILTER_EXE"
 
 pandoc --data-dir=$DATA_DIR \
        --variable data-dir=$DATA_DIR \
-       --variable data-dir-fonts=$DATA_DIR_FONTS \
        --variable data-dir-templates=$DATA_DIR_TEMPLATES \
        --template=default.latex \
        --defaults=$DEFAULTS_FILE \

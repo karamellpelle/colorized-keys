@@ -116,9 +116,9 @@ $endif$
 %]
 
 
-\setmainfont{$colorized_keys.fonts.main.name$}[
-    Path           = $data-dir-fonts$,
-    Extension      = $colorized_keys.fonts.main.ext$,
+\setmainfont{$fonts.main.name$}[
+    Path           = $fonts.data-dir$,
+    Extension      = $fonts.main.ext$,
     Numbers        = OldStyle,
     UprightFont    = *-Regular,
     BoldFont       = *-Bold,
@@ -126,25 +126,25 @@ $endif$
     BoldItalicFont = *-BoldItalic
 ]
 
-\setsansfont{$colorized_keys.fonts.sans.name$}[
-    Path           = $data-dir-fonts$,
-    Extension      = $colorized_keys.fonts.sans.ext$,
+\setsansfont{$fonts.sans.name$}[
+    Path           = $fonts.data-dir$,
+    Extension      = $fonts.sans.ext$,
     UprightFont    = *-Regular,
     BoldFont       = *-Bold,
     ItalicFont     = *-Italic,
     BoldItalicFont = *-BoldItalic
 ]
 
-\setmonofont{$colorized_keys.fonts.mono.name$}[
-    Path           = $data-dir-fonts$,
-    Extension      = $colorized_keys.fonts.mono.ext$,
+\setmonofont{$fonts.mono.name$}[
+    Path           = $fonts.data-dir$,
+    Extension      = $fonts.mono.ext$,
     UprightFont    = *-Regular,
     BoldFont       = *-Bold
 ]
 
-\newfontfamily{\titlefont}{$colorized_keys.fonts.title.name$}[
-    Path           = $data-dir-fonts$,
-    Extension      = $colorized_keys.fonts.title.ext$,
+\newfontfamily{\titlefont}{$fonts.title.name$}[
+    Path           = $fonts.data-dir$,
+    Extension      = $fonts.title.ext$,
     Numbers        = OldStyle,
     UprightFont    = *-Regular,
     BoldFont       = *-Bold,
