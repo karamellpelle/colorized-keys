@@ -20,7 +20,7 @@ echo "OUTPUT_FILE:  $OUTPUT_FILE"
 echo "INPUT_FORMAT: $INPUT_FORMAT"
 echo "INPUT_FORMAT: $OUTPUT_FORMAT"
 
-DEFAULTS_FILE="$DATA_DIR/defaults.yaml"
+DEFAULTS_FILE=defaults.yaml
 DATA_DIR_FONTS="$DATA_DIR/fonts/"
 DATA_DIR_TEMPLATES="$DATA_DIR/templates/"
 
@@ -39,7 +39,7 @@ pandoc --data-dir=$DATA_DIR \
        --from=$INPUT_FORMAT \
        --to=$OUTPUT_FORMAT \
        -o "$OUTPUT_FILE" \
-       "$INPUT_FILE" \
+       "$INPUT_FILE" text/keys.md text/front.md \
        \
        && open "$OUTPUT_FILE"
 

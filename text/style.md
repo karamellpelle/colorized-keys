@@ -86,7 +86,7 @@ qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
 #### section section section section
 \lipsum[1]
 
-~~~~ {#mycode .haskell .numberLines startFrom="100"}
+~~~~ {#mycode1 .haskell .numberLines startFrom="100"}
 qsort []     = []
 qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
                qsort (filter (>= x) xs)
