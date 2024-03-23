@@ -1,7 +1,12 @@
 #!/bin/bash
-DATA_DIR="$(pwd)/data-dir/colorized-keys/pandoc"
+DATA_DIR="$(pwd)/data-dir/colorized-keys"
+DATA_DIR_FONTS="$DATA_DIR/fonts/"
+DATA_DIR_PANDOC="$DATA_DIR/pandoc"
+DATA_DIR_PANDOC_TEMPLATES="$DATA_DIR_PANDOC/templates/"
+
 INPUT_FILE=${1:-text/colorized-keys.md}
 OUTPUT_FILE=$(basename "$INPUT_FILE" )
+
 
 #OUTPUT_FORMAT=${OUTPUT_FILE#*.}
 INPUT_FORMAT=${INPUT_FILE#*.}
@@ -21,17 +26,15 @@ echo "OUTPUT_FILE:  $OUTPUT_FILE"
 echo "INPUT_FORMAT: $INPUT_FORMAT"
 echo "INPUT_FORMAT: $OUTPUT_FORMAT"
 
-DEFAULTS_FILE=defaults.yaml
-DATA_DIR_FONTS="$DATA_DIR/fonts/"
-DATA_DIR_TEMPLATES="$DATA_DIR/templates/"
+DEFAULTS_FILE="./defaults.yaml"
 
 FILTER_EXE=${FILTER_EXE:-"$(stack path --local-install-root 2> /dev/null)/bin/colorized-keys-filter"}
 echo "using filter $FILTER_EXE"
 OTHER_OPTS="$OTHER_OPTS --filter $FILTER_EXE"
 
-pandoc --data-dir=$DATA_DIR \
+pandoc --data-dir=$DATA_DIR_PANDOC \
        --variable data-dir=$DATA_DIR \
-       --variable data-dir-templates=$DATA_DIR_TEMPLATES \
+       --variable data-dir-pandoc-templates=$DATA_DIR_PANDOC_TEMPLATES \
        --template=default.latex \
        --defaults=$DEFAULTS_FILE \
        --pdf-engine=$PDF_ENGINE \

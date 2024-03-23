@@ -30,7 +30,6 @@
 %\usepackage{tikzsymbols}
 %\usepackage{tikz}
 \usepackage[pages=some]{background}
-\usepackage{hyperxmp} % for metadata
 \usepackage{changepage}
 \usepackage{tabularx}
 \usepackage[norule,bottom,hang]{footmisc}
@@ -39,6 +38,7 @@
 \usepackage[textsize=tiny]{todonotes}
 \usepackage[font=footnotesize]{caption}
 \usepackage{hyperref} % put this last!
+\usepackage{hyperxmp} % for metadata
 \usepackage[hyphens]{url}
 \usepackage{nameref}
 
@@ -96,12 +96,11 @@ $endif$
 \usepackage{fontspec}
 
 \typeout{data-dir is: $data-dir$}
-\typeout{data-dir-fonts is: $data-dir-fonts$}
-\typeout{data-dir-templates is: $data-dir-templates$}
+\typeout{data-dir-pandoc-templates is: $data-dir-pandoc-templates$}
 
 
 %\setXfont{FontnameX}[
-%    Path            = $data-dir-fonts$
+%    Path            = $fonts.data-dir$
 %  , Extension       = .ttf/.otf
 %  , UprightFont     = *-Regular
 %  , BoldFont        = *-Bold
@@ -160,7 +159,7 @@ $endif$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % read settings 
-\input{$data-dir-templates$/default/settings.latex}
+\input{$data-dir-pandoc-templates$/default/settings.latex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
