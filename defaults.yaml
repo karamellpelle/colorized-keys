@@ -1,6 +1,9 @@
+# Pandoc settings
+
 resource-path:
-    - ${.}
     - ./data-dir/colorized-keys/
+    - ${.}/pandoc
+    - ./graphics
     - .
 
 #verbosity: 
@@ -10,6 +13,6 @@ resource-path:
 #highlight-style: espresso
 
 syntax-definitions:
-    - ${.}/syntax/shellbox.xml
+    - ./data-dir/colorized-keys/pandoc/syntax/shellbox.xml
 #css:
 #    - css/body.css
