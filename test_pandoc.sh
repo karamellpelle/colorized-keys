@@ -11,6 +11,7 @@ INPUT_FORMAT=${INPUT_FORMAT/md/markdown}
 
 OUTPUT_FILE="output/${OUTPUT_FILE%.*}.${OUTPUT_FORMAT}"
 
+#PDF_ENGINE=lualatex
 PDF_ENGINE=xelatex
 
 OTHER_OPTS="$3 "
