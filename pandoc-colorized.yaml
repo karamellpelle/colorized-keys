@@ -1,0 +1,29 @@
+# pandoc command settings
+
+#verbosity: INFO
+
+data-dir: ${.}/data-dir/colorized-keys/pandoc/
+
+syntax-definitions:
+    - ./data-dir/colorized-keys/pandoc/syntax/shellbox.xml
+
+resource-path:
+    - ${.}/graphics/
+
+pdf-engine: xelatex
+#pdf-engine-opts: 
+
+#variables:
+# key:value
+
+
+################################################################################
+
+output-file:  ./colorized-keys.pdf
+template:     colorized.latex
+
+input-files:
+  - text/front.md
+  - text/keys.md
+  - text/style.md
+

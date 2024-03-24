@@ -2,8 +2,6 @@
 title: Colorized Keys
 author: karamellpelle@hotmail.com
 
-data-dir: ./data-dir/colorized-keys/
-
 fonts:
     data-dir: ./data-dir/colorized-keys/fonts/
     main:
