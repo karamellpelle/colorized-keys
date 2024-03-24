@@ -56,16 +56,15 @@ walkPandoc format pandoc = do
         colorizedPandoc  .= pandoc
         colorizedReplace .= metaReplace meta
         colorizedDataDir .= "./data-dir/colorized-keys/" 
-        --colorizedDataDir <~ getDataFileName PackageInfo.name "./data-dir/colorized-keys/" -- TODO
        
     usingReaderT colorized $ case format of
         FileFormatLatex  -> Latex.main pandoc
-        FileFormatHTML   -> errorPandoc pandoc "HTML not implemeted (yet)"
-        _                -> errorPandoc pandoc "FileFormatNotImplemented"
+        FileFormatHTML   -> errorPandoc pandoc "HTML not yet implemeted"
+        _                -> errorPandoc pandoc "File format not implemented"
    
     where
       errorPandoc (Pandoc meta blocks) str = 
-          pure $ Pandoc meta ((Header 1 ("error", [], []) [Str str]) : blocks)
+          pure $ Pandoc meta ((Header 1 ("ERROR", [], []) [Str str]) : blocks)
       
 
 --------------------------------------------------------------------------------
