@@ -19,8 +19,9 @@ $ 🔑[] <- empty name
 ```
 
 
-## section section
-\lipsum[1]
+## section section {#inject-ssh-ssl}
+\lipsum[1] 
+
 
 ```sh
 $ # set hostname
@@ -39,7 +40,7 @@ $ 😄
 ```
 
 
-### section section section
+### section section section {#inject-apple-dog}
 \lipsum[1]
 
 ~~~~ {#mycode .haskell .numberLines startFrom="100"}
@@ -49,7 +50,7 @@ qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#### section section section section
+#### section section section section 
 \lipsum[1]
 
 ~~~~ {#mycode1 .haskell .numberLines startFrom="100"}

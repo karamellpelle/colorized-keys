@@ -16,6 +16,7 @@
 
 \renewcommand{\familydefault}{\sfdefault}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\backgroundimage}[1]{
 \backgroundsetup{
@@ -27,15 +28,21 @@ contents={\includegraphics[height=\paperheight]{#1}}
   \BgThispage
 }
 
+\newcommand{\ftsize}[1]{\fontsize{#1}{#1}\selectfont}
 
 \newenvironment{fontsizing}[1]
 {
-  \fontsize{#1}{#1}\selectfont
+  \ftsize{#1}
 
 }
 {
 
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\inject}[1]{\hyperref[#1]{inject}}
+%\newcommand{\inject}[1]{\ftsize{12pt}\bf\hyperref[#1]{\textcolor{RoyalPurple}{inject}}}
+\newcommand{\inject}[2]{\hyperref[inject-#1-#2]{\bf inject}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 

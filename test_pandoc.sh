@@ -26,7 +26,7 @@ echo "OUTPUT_FILE:  $OUTPUT_FILE"
 echo "INPUT_FORMAT: $INPUT_FORMAT"
 echo "INPUT_FORMAT: $OUTPUT_FORMAT"
 
-DEFAULTS_FILE="./defaults.yaml"
+DEFAULTS_FILE="./pandoc-colorized.yaml"
 
 FILTER_EXE=${FILTER_EXE:-"$(stack path --local-install-root 2> /dev/null)/bin/colorized-keys-filter"}
 echo "using filter $FILTER_EXE"

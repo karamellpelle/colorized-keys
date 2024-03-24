@@ -55,13 +55,13 @@
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{latex.pdf}}%
     \put(0.48364121,0.55061569){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\texttt{no text box}\end{tabular}}}}%
-    \put(0.38213046,0.41869466){\color[rgb]{0,0,0}\rotatebox{-42.884872}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\texttt{no text box}\end{tabular}}}}}%
-    \put(0.5607032,0.6401977){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{box centered}\end{tabular}}}}%
-    \put(0.28417575,0.22171354){\color[rgb]{0,0,0}\rotatebox{-15.773304}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{box centered}\end{tabular}}}}}%
+    \put(0.39000262,0.39803564){\color[rgb]{0,0,0}\rotatebox{-44.458735}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\inject{ssh}{ssl}\end{tabular}}}}}%
+    \put(0.51392559,0.6401977){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{box centered}\end{tabular}}}}%
     \put(0.79480265,0.54463458){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}Box LEFT\end{tabular}}}}%
     \put(0.71198155,0.33385689){\color[rgb]{0,0,0}\rotatebox{44.574916}{\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}Box LEFT\end{tabular}}}}}%
     \put(0.50112274,0.61572306){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}\textsc{box right}\end{tabular}}}}%
     \put(0.24550651,0.64109762){\color[rgb]{0,0,0}\rotatebox{33.812561}{\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}\textsc{box right}\end{tabular}}}}}%
     \put(0.66253013,0.19409479){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}Rhytm of the night!!!\end{tabular}}}}%
+    \put(0.26638081,0.21744839){\color[rgb]{0,0,0}\rotatebox{-15}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\inject{apple}{dog}\end{tabular}}}}}%
   \end{picture}%
 \endgroup%
