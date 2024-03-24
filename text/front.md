@@ -31,7 +31,4 @@ colorized_keys:
 
 ---
 
-
-
-# Colorized Keys!
-\newpage
+\includepdf[pages={1}]{colorized-front.pdf}

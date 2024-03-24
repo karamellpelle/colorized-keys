@@ -1,8 +1,8 @@
 # Pandoc settings
 
 resource-path:
-    - ./data-dir/colorized-keys/
-    - ${.}/pandoc
+    - ./data-dir/colorized-keys
+    - ./data-dir/colorized-keys/pandoc
     - ./graphics
     - .
 

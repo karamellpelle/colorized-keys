@@ -92,12 +92,13 @@ $endif$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\usepackage{fontspec}
-
-\typeout{data-dir is: $data-dir$}
+\typeout{data-dir-graphics is: $data-dir-graphics$}
 \typeout{data-dir-pandoc-templates is: $data-dir-pandoc-templates$}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage{fontspec}
 
 %\setXfont{FontnameX}[
 %    Path            = $fonts.data-dir$
@@ -154,7 +155,7 @@ $endif$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % search for images 
-\graphicspath{{$data-dir$}{$data-dir$/graphics/}}
+\graphicspath{{$data-dir-graphics$}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

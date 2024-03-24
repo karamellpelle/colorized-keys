@@ -3,6 +3,7 @@ DATA_DIR="$(pwd)/data-dir/colorized-keys"
 DATA_DIR_FONTS="$DATA_DIR/fonts/"
 DATA_DIR_PANDOC="$DATA_DIR/pandoc"
 DATA_DIR_PANDOC_TEMPLATES="$DATA_DIR_PANDOC/templates/"
+DATA_DIR_GRAPHICS="$(pwd)/graphics/" # / at end is necessary!
 
 OUTPUT_FILE="./colorized-keys.pdf"
 OUTPUT_FORMAT="pdf"
@@ -19,7 +20,8 @@ echo "using filter $FILTER_EXE"
 
 
 pandoc --data-dir=$DATA_DIR_PANDOC \
-       --variable data-dir=$DATA_DIR_PANDOC \
+       --variable data-dir-graphics=$DATA_DIR_GRAPHICS \
+       --variable data-dir-pandoc=$DATA_DIR_PANDOC \
        --variable data-dir-pandoc-templates=$DATA_DIR_PANDOC_TEMPLATES \
        --template=colorized.latex \
        --pdf-engine=$PDF_ENGINE \
