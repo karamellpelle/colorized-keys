@@ -1,0 +1,67 @@
+%% Creator: Inkscape 1.3.2 (091e20e, 2023-11-25, custom), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'latex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{841.88976378bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.70707071)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{latex.pdf}}%
+    \put(0.48364121,0.55061569){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\texttt{no text box}\end{tabular}}}}%
+    \put(0.38213046,0.41869466){\color[rgb]{0,0,0}\rotatebox{-42.884872}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\texttt{no text box}\end{tabular}}}}}%
+    \put(0.5607032,0.6401977){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{box centered}\end{tabular}}}}%
+    \put(0.28417575,0.22171354){\color[rgb]{0,0,0}\rotatebox{-15.773304}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{box centered}\end{tabular}}}}}%
+    \put(0.79480265,0.54463458){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}Box LEFT\end{tabular}}}}%
+    \put(0.71198155,0.33385689){\color[rgb]{0,0,0}\rotatebox{44.574916}{\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}Box LEFT\end{tabular}}}}}%
+    \put(0.50112274,0.61572306){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}\textsc{box right}\end{tabular}}}}%
+    \put(0.24550651,0.64109762){\color[rgb]{0,0,0}\rotatebox{33.812561}{\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}\textsc{box right}\end{tabular}}}}}%
+    \put(0.66253013,0.19409479){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{0}\smash{\begin{tabular}[t]{r}Rhytm of the night!!!\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

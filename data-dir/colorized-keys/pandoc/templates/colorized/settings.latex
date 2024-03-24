@@ -16,6 +16,27 @@
 
 \renewcommand{\familydefault}{\sfdefault}
 
+
+\newcommand{\backgroundimage}[1]{
+\backgroundsetup{
+scale=1,
+opacity=1.0,
+angle=0,
+contents={\includegraphics[height=\paperheight]{#1}}
+}
+  \BgThispage
+}
+
+
+\newenvironment{fontsizing}[1]
+{
+  \fontsize{#1}{#1}\selectfont
+
+}
+{
+
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 \newcommand{\KeyPrivateTok}[1]{\textcolor{Red}{#1}}

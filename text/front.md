@@ -29,4 +29,5 @@ colorized_keys:
 
 ---
 
-\includepdf[pages={1}]{colorized-front.pdf}
+\backgroundimage{front.pdf}
+
