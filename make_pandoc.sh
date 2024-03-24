@@ -21,7 +21,7 @@ echo "using filter $FILTER_EXE"
 pandoc --data-dir=$DATA_DIR_PANDOC \
        --variable data-dir=$DATA_DIR_PANDOC \
        --variable data-dir-pandoc-templates=$DATA_DIR_PANDOC_TEMPLATES \
-       --template=default.latex \
+       --template=colorized.latex \
        --pdf-engine=$PDF_ENGINE \
        --defaults=$DEFAULTS_FILE \
        --filter $FILTER_EXE \

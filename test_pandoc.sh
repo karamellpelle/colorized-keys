@@ -35,7 +35,7 @@ OTHER_OPTS="$OTHER_OPTS --filter $FILTER_EXE"
 pandoc --data-dir=$DATA_DIR_PANDOC \
        --variable data-dir=$DATA_DIR \
        --variable data-dir-pandoc-templates=$DATA_DIR_PANDOC_TEMPLATES \
-       --template=default.latex \
+       --template=colorized.latex \
        --defaults=$DEFAULTS_FILE \
        --pdf-engine=$PDF_ENGINE \
        $OTHER_OPTS \
