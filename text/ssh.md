@@ -4,6 +4,9 @@
 ## create {#create-ssh}
 \kant[4]
 
+## sign {#sign-ssh-ssh}
+\kant[4]
+
 ```shellbox
 $ # set hostname
 $ HOSTNAME=my.domain.net 

@@ -9,3 +9,12 @@
 
 ## inject SSH {#inject-ssl-ssh}
 \kant[8]
+
+## sign PIV {#sign-ssl-piv}
+\kant[8]
+
+## sign SSL {#sign-ssl-ssl}
+\kant[8]
+
+## selfsign {#selfsign-ssl}
+\kant[8]

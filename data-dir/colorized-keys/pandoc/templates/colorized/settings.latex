@@ -44,6 +44,45 @@ contents={\includegraphics[height=\paperheight]{#1}}
 
 \newcommand{\create}[1]{\hyperref[create-#1]{ create}}
 
+\newcommand{\selfsign}[1]{\hyperref[selfsign-#1]{\ftsize{5pt} sign}}
+
+\newcommand{\sign}[2]{\hyperref[sign-#1-#2]{\ftsize{5pt} sign}}
+
+\newcommand{\certSSH}{\hyperref[cert-ssh]{\ftsize{3pt} \bf id\_key-cert.pub}}
+\newcommand{\certSSL}{\hyperref[cert-ssl]{\ftsize{3pt} \bf x509}}
+
+\newcommand{\headYubicoGPG}{\hyperref[yubico-gpg]{\ftsize{8pt} \bf GPG}}
+\newcommand{\headYubicoFIDO}[1]{\hyperref[yubico-fido#1]{\ftsize{8pt} \bf FIDO#1}}
+\newcommand{\headYubicoPIV}{\hyperref[yubico-piv]{\ftsize{8pt} \bf PIV}}
+\newcommand{\headGPG}{\hyperref[gpg]{\ftsize{8pt} \bf GPG}}
+\newcommand{\headPIV}{\hyperref[piv]{\ftsize{8pt} \bf PIV}}
+\newcommand{\headSSH}{\hyperref[ssh]{\ftsize{8pt} \bf SSH}}
+\newcommand{\headSSL}{\hyperref[ssl]{\ftsize{8pt} \bf SSL}}
+
+\newcommand{\type}[1]{\ftsize{8pt} #1:}
+
+\newcommand{\keyGPGPrivC}{\bf .C}
+\newcommand{\keyGPGPrivA}{\bf .A}
+\newcommand{\keyGPGPrivS}{\bf .S}
+\newcommand{\keyGPGPrivE}{\bf .E}
+\newcommand{\keyGPGPublC}{\bf .C}
+\newcommand{\keyGPGPublA}{\bf .A}
+\newcommand{\keyGPGPublS}{\bf .S}
+\newcommand{\keyGPGPublE}{\bf .E}
+
+\newcommand{\keyPIVPrivA}{\bf .9A}
+\newcommand{\keyPIVPrivC}{\bf .9C}
+\newcommand{\keyPIVPrivD}{\bf .9D}
+\newcommand{\keyPIVPublA}{\bf .9A}
+\newcommand{\keyPIVPublC}{\bf .9C}
+\newcommand{\keyPIVPublD}{\bf .9D}
+
+\newcommand{\keySSLPriv}{\bf private.pem}
+\newcommand{\keySSLPubl}{\bf public.pem}
+
+\newcommand{\keySSHPriv}{\bf id\_key}
+\newcommand{\keySSHPubl}{\bf id\_key.pub}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 \newcommand{\KeyPrivateTok}[1]{\textcolor{Red}{#1}}

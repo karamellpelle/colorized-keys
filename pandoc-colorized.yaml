@@ -31,4 +31,5 @@ input-files:
   - text/piv.md
   - text/ssl.md
   - text/fido2.md
+  - text/cert.md
 

@@ -1,4 +1,4 @@
-# FIDO2 {#fido2}
+# FIDO2 {#yubico-fido2}
 \kant[5]
 
 ## create {#create-fido2}
