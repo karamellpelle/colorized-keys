@@ -3,6 +3,7 @@ DATA_DIR="$(pwd)/data-dir/colorized-keys"
 DATA_DIR_FONTS="$DATA_DIR/fonts/"
 DATA_DIR_PANDOC="$DATA_DIR/pandoc"
 DATA_DIR_PANDOC_TEMPLATES="$DATA_DIR_PANDOC/templates/"
+DATA_DIR_GRAPHICS="$(pwd)/graphics/" # / at end is necessary!
 
 INPUT_FILE=${1:-text/colorized-keys.md}
 OUTPUT_FILE=$(basename "$INPUT_FILE" )
@@ -33,7 +34,7 @@ echo "using filter $FILTER_EXE"
 OTHER_OPTS="$OTHER_OPTS --filter $FILTER_EXE"
 
 pandoc --data-dir=$DATA_DIR_PANDOC \
-       --variable data-dir=$DATA_DIR \
+       --variable data-dir-graphics=$DATA_DIR_GRAPHICS \
        --variable data-dir-pandoc-templates=$DATA_DIR_PANDOC_TEMPLATES \
        --template=colorized.latex \
        --defaults=$DEFAULTS_FILE \

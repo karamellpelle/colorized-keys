@@ -4,8 +4,8 @@
 
 data-dir: ${.}/data-dir/colorized-keys/pandoc/
 
-syntax-definitions:
-    - ./data-dir/colorized-keys/pandoc/syntax/shellbox.xml
+#syntax-definitions:
+#    - ./data-dir/colorized-keys/pandoc/syntax/shellbox.xml
 
 resource-path:
     - ${.}/graphics/
@@ -19,11 +19,16 @@ pdf-engine: xelatex
 
 ################################################################################
 
+#output-file:  ./colorized-keys.latex
 output-file:  ./colorized-keys.pdf
 template:     colorized.latex
 
 input-files:
   - text/front.md
   - text/keys.md
-  - text/style.md
+  - text/gpg.md
+  - text/ssh.md
+  - text/piv.md
+  - text/ssl.md
+  - text/fido2.md
 

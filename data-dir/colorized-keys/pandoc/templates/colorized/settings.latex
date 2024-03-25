@@ -40,9 +40,9 @@ contents={\includegraphics[height=\paperheight]{#1}}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newcommand{\inject}[1]{\hyperref[#1]{inject}}
-%\newcommand{\inject}[1]{\ftsize{12pt}\bf\hyperref[#1]{\textcolor{RoyalPurple}{inject}}}
-\newcommand{\inject}[2]{\hyperref[inject-#1-#2]{\bf inject}}
+\newcommand{\inject}[2]{\hyperref[inject-#1-#2]{ inject}}
+
+\newcommand{\create}[1]{\hyperref[create-#1]{ create}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 

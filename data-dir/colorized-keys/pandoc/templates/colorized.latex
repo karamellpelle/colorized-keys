@@ -34,6 +34,7 @@
 \usepackage{tabularx}
 \usepackage[norule,bottom,hang]{footmisc}
 \usepackage{lipsum}
+\usepackage{kantlipsum}
 %\usepackage{tablefootnote}
 \usepackage[textsize=tiny]{todonotes}
 \usepackage[font=footnotesize]{caption}
