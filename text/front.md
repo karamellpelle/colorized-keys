@@ -17,7 +17,7 @@ fonts:
         name: MesloLGSDZNerdFontPropo
         ext: .ttf
 
-colorized_keys:
+colorized-keys:
     replace:
       shellbox:
         syntax-xml: shellbox.xml

@@ -15,42 +15,63 @@
 -- You should have received a copy of the GNU General Public License
 -- along with 'colorized-keys'.  If not, see <http://www.gnu.org/licenses/>.
 --
+{-# OPTIONS_GHC -Wno-orphans #-}
 module Replace
 (
     Replace,
     ReplaceLanguage,
+    metaReplace,
 
+    -- tmp
     replace,
     replaceShellbox,
-    metaReplace,
 ) where
 
 import Relude
 import My
 
 import Relude.Extra.Map
-import Data.Yaml
 import Text.Pandoc.Definition
+import Meta
+
+
+--------------------------------------------------------------------------------
+--  Replace data
 
 type Replace = Map Text ReplaceLanguage
 
 type ReplaceLanguage = Map Char Text
 
 
-
 metaReplace :: Meta -> Replace
-metaReplace meta =
-    replace
-    --helper $ toJSON meta
-    --case helper $ MetaValue $ unMeta meta of
-    --    Just replace  -> replace
-    --    _             -> def
-    --where
-    --  helper metav = do
-    --     colorized <- metaChild metav "colorized-keys"  
-    --     languages <- metaChild colorized "languages"
-         
-          
+metaReplace meta = pickMeta' meta $ ("colorized-keys" : "replace" : [])
+
+
+instance FromMetaValue Char where
+    fromMetaValue (MetaString str) =
+        case toString str of
+            [c] -> Just c
+            _   -> Nothing
+    fromMetaValue _ = Nothing
+
+instance FromMetaValue Text where
+    fromMetaValue (MetaInlines [Str str]) = Just str
+    fromMetaValue _ = Nothing
+
+instance FromMetaValue ReplaceLanguage where
+    fromMetaValue (MetaMap mmap) =
+        pure $ fromList $ mapMaybe (bitraverse maybeOneChar fromMetaValue) $ toPairs mmap
+        where 
+          maybeOneChar text = case toString text of
+            [a] -> Just a
+            _   -> Nothing
+    fromMetaValue _ = Nothing
+
+instance FromMetaValue Replace where
+    fromMetaValue (MetaMap mmap) =
+          pure $ fromList $ mapMaybe (bitraverse pure fromMetaValue) $ toPairs mmap
+    fromMetaValue _ = Nothing
+       
 
 --------------------------------------------------------------------------------
 --  tmp
