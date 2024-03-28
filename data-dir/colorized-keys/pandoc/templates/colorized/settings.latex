@@ -39,25 +39,45 @@ contents={\includegraphics[height=\paperheight]{#1}}
 
 }
 
+%\newcommand{\includepdftex}[2]
+%{
+%  {
+%  \newlength\A
+%  \newlength\B
+%  \newlength\C
+%  \setlength\A{#1}
+%  \setlength\B{\paperwidth}
+%  \setlength\C{\textwidth*\ratio{\A}{\B}}
+%
+%  \scalefont{\C}
+%  \def\svgwidth{\textwidth}
+%  \input{#2}
+%  %\newlength\currentFS
+%  %\makeatletter
+%  %\setlength\currentFS{\f@size pt}
+%  %\makeatother
+%  }
+%}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\inject}[2]{\hyperref[inject-#1-#2]{ inject}}
 
 \newcommand{\create}[1]{\hyperref[create-#1]{ create}}
 
-\newcommand{\selfsign}[1]{\hyperref[selfsign-#1]{\ftsize{5pt} sign}}
+\newcommand{\selfsign}[1]{\hyperref[selfsign-#1]{\scalefont{0.833333} sign}}
 
-\newcommand{\sign}[2]{\hyperref[sign-#1-#2]{\ftsize{5pt} sign}}
+\newcommand{\sign}[2]{\hyperref[sign-#1-#2]{\scalefont{0.833333} sign}}
 
-\newcommand{\certSSH}{\hyperref[cert-ssh]{\ftsize{3pt} \bf id\_key-cert.pub}}
-\newcommand{\certSSL}{\hyperref[cert-ssl]{\ftsize{3pt} \bf x509}}
+\newcommand{\certSSH}{\hyperref[cert-ssh]{\scalefont{0.5} \bf id\_key-cert.pub}}
+\newcommand{\certSSL}{\hyperref[cert-ssl]{\scalefont{0.5} \bf x509}}
 
-\newcommand{\headYubicoGPG}{\hyperref[yubico-gpg]{\ftsize{8pt} \bf GPG}}
-\newcommand{\headYubicoFIDO}[1]{\hyperref[yubico-fido#1]{\ftsize{8pt} \bf FIDO#1}}
-\newcommand{\headYubicoPIV}{\hyperref[yubico-piv]{\ftsize{8pt} \bf PIV}}
-\newcommand{\headGPG}{\hyperref[gpg]{\ftsize{8pt} \bf GPG}}
-\newcommand{\headPIV}{\hyperref[piv]{\ftsize{8pt} \bf PIV}}
-\newcommand{\headSSH}{\hyperref[ssh]{\ftsize{8pt} \bf SSH}}
-\newcommand{\headSSL}{\hyperref[ssl]{\ftsize{8pt} \bf SSL}}
+\newcommand{\headYubicoGPG}{\hyperref[yubico-gpg]{\scalefont{1.33333} \bf GPG}}
+\newcommand{\headYubicoFIDO}[1]{\hyperref[yubico-fido#1]{\scalefont{1.33333} \bf FIDO#1}}
+\newcommand{\headYubicoPIV}{\hyperref[yubico-piv]{\scalefont{1.33333} \bf PIV}}
+\newcommand{\headGPG}{\hyperref[gpg]{\scalefont{1.33333} \bf GPG}}
+\newcommand{\headPIV}{\hyperref[piv]{\scalefont{1.33333} \bf PIV}}
+\newcommand{\headSSH}{\hyperref[ssh]{\scalefont{1.33333} \bf SSH}}
+\newcommand{\headSSL}{\hyperref[ssl]{\scalefont{1.33333} \bf SSL}}
 
 \newcommand{\type}[1]{\ftsize{8pt} #1:}
 

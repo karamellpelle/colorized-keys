@@ -42,6 +42,8 @@
 \usepackage{hyperxmp} % for metadata
 \usepackage[hyphens]{url}
 \usepackage{nameref}
+\usepackage{scalefnt}
+\usepackage{calc}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
