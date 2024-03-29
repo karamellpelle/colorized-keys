@@ -36,17 +36,24 @@
 		<context name="cmd-arguments" attribute="Normal Text" lineEndContext="#pop">
 			<LineContinue />
 			<DetectSpaces />
-			<RegExpr attribute="Flag" String="&flag;" context="#stay" />
-			<RegExpr attribute="argument"  String="&argument;" context="#stay" />
                         <RegExpr attribute="Redirect" String="&redirect;" context="file" />
                         <DetectChar attribute="Pipe" char="|" context="#pop" />
 			<DetectChar attribute="Comment" char="#" context="comment" />
+			<RegExpr attribute="Flag" String="&flag;" context="#stay" />
+			<RegExpr attribute="Argument"  String="&argument;" lookAhead="true" context="argument" />
 		</context>
 
 		<context name="file" attribute="File" lineEndContext="#pop">
 			<LineContinue />
                         <DetectSpaces />
-                        <RegExpr attribute="argument" String="&argument;" context="#pop" />
+                        <RegExpr attribute="File" String="&argument;" context="#pop" />
+		</context>
+
+		<context name="argument" attribute="Argument" lineEndContext="#pop">
+			<LineContinue />
+                        <DetectSpaces />
+TODO: string literals, variable assignment
+                        <RegExpr attribute="Argument" String="&argument;" context="#pop" />
 		</context>
 
 		<context name="comment" attribute="Comment" lineEndContext="#pop">
@@ -65,7 +72,7 @@
 		<itemData name="Colorized Cmd" defStyleNum="dsKeyword" bold="true" />
 		<itemData name="Cmd" defStyleNum="dsFunction" />
 		<itemData name="Flag" defStyleNum="dsExtension" />
-		<itemData name="argument" defStyleNum="dsNormal" />
+		<itemData name="Argument" defStyleNum="dsAttribute" />
 		<itemData name="File" defStyleNum="dsNormal" />
 		<itemData name="Redirect" defStyleNum="dsOperator" />
 		<itemData name="Pipe" defStyleNum="dsOperator" />
