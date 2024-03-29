@@ -31,8 +31,8 @@ import Data.Aeson (fromJSON, toJSON)
 import PackageInfo_colorized_keys qualified as PackageInfo
 import AppLatex qualified as Latex
 import Format
-import Replace
-import ColorizedKeysFilter
+import Languages
+import ColorizedData
 
 
 main :: IO ()
@@ -52,10 +52,10 @@ walkPandoc format pandoc = do
 
     colorized <- executingStateT def $ do
 
-        colorizedVersion .= PackageInfo.version
-        colorizedPandoc  .= pandoc
-        colorizedReplace .= metaReplace meta
-        colorizedDataDir .= "./data-dir/colorized-keys/" 
+        colorizedVersion   .= PackageInfo.version
+        colorizedPandoc    .= pandoc
+        colorizedLanguages .= metaColorizedLanguages meta
+        colorizedDataDir   .= "./data-dir/colorized-keys/"
        
     usingReaderT colorized $ case format of
         FileFormatLatex  -> Latex.main pandoc

@@ -98,23 +98,23 @@ library:
 #        other-modules: Paths_colorized-keys 
 #
 executables:
-  colorize-keys:
-    main:                Main.hs
-    source-dirs:         source-app
-    generated-other-modules: 
-        - Paths_colorized_keys
-        - PackageInfo_colorized_keys
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    #- colorized-keys-internal
-    - colorized-keys
-    - filepath
-    - gitrev
+  #colorize-keys:
+  #  main:                Main.hs
+  #  source-dirs:         source-app
+  #  generated-other-modules: 
+  #      - Paths_colorized_keys
+  #      - PackageInfo_colorized_keys
+  #  ghc-options:
+  #  - -threaded
+  #  - -rtsopts
+  #  - -with-rtsopts=-N
+  #  dependencies:
+  #  #- colorized-keys-internal
+  #  - colorized-keys
+  #  - filepath
+  #  - gitrev
 
-  colorized-keys-filter:
+  colorized-filter:
     main: Main.hs
     source-dirs: source-filter
     generated-other-modules: 

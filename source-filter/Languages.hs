@@ -16,11 +16,12 @@
 -- along with 'colorized-keys'.  If not, see <http://www.gnu.org/licenses/>.
 --
 {-# OPTIONS_GHC -Wno-orphans #-}
-module Replace
+module Languages
 (
-    Replace,
-    ReplaceLanguage,
-    metaReplace,
+    Languages,
+    Language(..),
+    EmojiMap,
+    metaColorizedLanguages,
 
     -- tmp
     replace,
@@ -31,21 +32,29 @@ import Relude
 import My
 
 import Relude.Extra.Map
+import Relude.Extra.Tuple
 import Text.Pandoc.Definition
 import Meta
 
 
 --------------------------------------------------------------------------------
---  Replace data
+--  Languages data
 
-type Replace = Map Text ReplaceLanguage
+type Languages = Map Text Language
 
-type ReplaceLanguage = Map Char Text
+data Language = Language { 
+    languageSyntax   :: String
+  , languageEmojiMap :: EmojiMap
+  }
+
+type EmojiMap = Map Char Text
 
 
-metaReplace :: Meta -> Replace
-metaReplace meta = pickMeta' meta $ ("colorized-keys" : "replace" : [])
+--------------------------------------------------------------------------------
+--  
 
+metaColorizedLanguages :: Meta -> Languages
+metaColorizedLanguages meta = pickMeta' meta $ ("colorized-keys" : "languages" : [])
 
 instance FromMetaValue Char where
     fromMetaValue (MetaString str) =
@@ -54,11 +63,16 @@ instance FromMetaValue Char where
             _   -> Nothing
     fromMetaValue _ = Nothing
 
+--instance IsString a => FromMetaValue a where doenst work!!!
 instance FromMetaValue Text where
     fromMetaValue (MetaInlines [Str str]) = Just str
     fromMetaValue _ = Nothing
 
-instance FromMetaValue ReplaceLanguage where
+instance FromMetaValue String where
+    fromMetaValue (MetaInlines [Str str]) = Just $ toString str
+    fromMetaValue _ = Nothing
+
+instance FromMetaValue EmojiMap where
     fromMetaValue (MetaMap mmap) =
         pure $ fromList $ mapMaybe (bitraverse maybeOneChar fromMetaValue) $ toPairs mmap
         where 
@@ -67,21 +81,26 @@ instance FromMetaValue ReplaceLanguage where
             _   -> Nothing
     fromMetaValue _ = Nothing
 
-instance FromMetaValue Replace where
-    fromMetaValue (MetaMap mmap) =
-          pure $ fromList $ mapMaybe (bitraverse pure fromMetaValue) $ toPairs mmap
-    fromMetaValue _ = Nothing
-       
-
+instance FromMetaValue Language where
+    fromMetaValue mv = 
+        fmap (\(s, e) -> Language s e) $ bitraverse maybeSyntax maybeEmoji $ dup mv
+        where
+          maybeSyntax mv = pure mv .> "syntax" >>= fromMetaValue
+          maybeEmoji mv = pure mv .> "map" >>= fromMetaValue
 --------------------------------------------------------------------------------
 --  tmp
 
-replace :: Replace
-replace = fromList [ ("shellbox", replaceShellbox),
-                     ("sh", replaceShellbox),
-                     ("default", replaceShellbox) ]
+replace :: Languages
+replace = 
+    fromList $ fmap (second (Language syntaxfile)) [ 
+               ("shellbox", replaceShellbox)
+             , ("sh", replaceShellbox)
+             , ("default", replaceShellbox) 
+             ]
 
-replaceShellbox :: ReplaceLanguage
+    where syntaxfile = ""
+
+replaceShellbox :: EmojiMap
 replaceShellbox =
     fromList [
         ( '🔑', "KeyPrivateTok" )

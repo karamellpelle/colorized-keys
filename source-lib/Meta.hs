@@ -60,3 +60,8 @@ pickMetaValue meta texts = foldl' (.>) (pure (MetaMap (unMeta meta))) texts
 
 class FromMetaValue a where
     fromMetaValue :: MetaValue -> Maybe a
+
+instance FromMetaValue a => FromMetaValue (Map Text a) where
+    fromMetaValue (MetaMap mmap) = 
+        pure $ fromList $ mapMaybe (bitraverse pure fromMetaValue) $ toPairs mmap
+    fromMetaValue _ = Nothing

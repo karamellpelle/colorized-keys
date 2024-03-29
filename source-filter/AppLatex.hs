@@ -35,9 +35,9 @@ import Skylighting.Syntax
 import Data.Attoparsec.Text
 import Data.Char (isSpace)
 import Relude.Extra.Newtype
-import ColorizedKeysFilter
+import ColorizedData
 import Skylighting.Parser
-import Replace
+import Languages
 import System.Directory
 
 
@@ -61,11 +61,11 @@ main pandoc = do
 
               (language:cs) -> do
 
-                  replace <- view colorizedReplace
+                  languages <- view colorizedLanguages
 
-                  case replace !? language of
+                  case languages !? language of
                       Nothing   -> pure $ CodeBlock atts $ text <> "\n\n (not a colorize language) " <> show atts
-                      Just map  -> do
+                      Just (Language xml map) -> do
 
                           --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
                           --pure $ CodeBlock atts $ replaceLatex map $ text
@@ -88,8 +88,8 @@ main pandoc = do
           _ -> pure block
 
       latexError lang err = case err of
-          ""  -> Para [Strong [Str $ "colorized-key: syntax map not found: " <> lang ]]
-          _   -> Para [Strong [Str $ "colorized-key: highlighting error: " <> err]]
+          ""  -> Para [Strong [Str $ "colorized-filter: syntax map not found: " <> lang ]]
+          _   -> Para [Strong [Str $ "colorized-filter: highlighting error: " <> err]]
       syntaxPath language dir = pure $ dir </> "pandoc/syntax" </> toString language <.> ".xml"
 
 
@@ -98,22 +98,6 @@ pickMap (MetaMap map) key = map !? key
 pickMap _ key = Nothing
 
 
---lookupReplace :: Meta -> Maybe Replace
---lookupReplace meta = do
---    colkey <- pickMap (un meta) "colorized-keys"
---    replace <- pickMap colkey "replace"
---    case replace of 
---        MetaMap map -> pure $ fromList $ makeReplaceLanguage $ toPairs map
---
---        _           -> Nothing
---    where
---      makeReplaceLanguage ((k, MetaString v):ls) =
---          (k,v) : makeReplaceLanguage ls -- FIXME: take Char of k
---      makeReplaceLanguage (_:ls) =
---          makeReplaceLanguage ls
---      makeReplaceLanguage [] =
---          []
-    
 --------------------------------------------------------------------------------
 --  
 
@@ -122,14 +106,14 @@ pickMap _ key = Nothing
     pure (<>) <*> fa0 <*> fa1 
 
 
-replaceLatex :: ReplaceLanguage -> Text -> Text
+replaceLatex :: EmojiMap -> Text -> Text
 replaceLatex replacers = \text ->
     case parseOnly (pReplaceLatex replacers) text of -- <* endOfInput?
         Left err    -> wrapLatexError $ toText err
         Right text' -> text'
 
 
-pReplaceLatex :: ReplaceLanguage -> Parser Text
+pReplaceLatex :: EmojiMap -> Parser Text
 pReplaceLatex replacers = do
     t <- takeTill (`member` replacers)
     peekChar >>= \case 

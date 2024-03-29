@@ -17,13 +17,13 @@
 --
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE DeriveGeneric #-}
-module ColorizedKeysFilter
+module ColorizedData
 (
-    ColorizedKeysFilter,
+    ColorizedData,
     ColorizedApp,
     colorizedVersion, 
     colorizedPandoc, 
-    colorizedReplace, 
+    colorizedLanguages, 
     colorizedDataDir,
 
 ) where
@@ -34,35 +34,32 @@ import My
 import Lens.Micro.TH
 import System.FilePath
 import Text.Pandoc
-import Replace
+import Languages
 import Data.Yaml
 import Data.Version
 import GHC.Generics hiding (UInt, Meta)
 
 
-data ColorizedKeysFilter = ColorizedKeysFilter {
+data ColorizedData = ColorizedData {
       _colorizedVersion :: Version
     , _colorizedPandoc  :: Pandoc
-    , _colorizedReplace :: Replace
+    , _colorizedLanguages :: Languages
     , _colorizedDataDir :: FilePath
 
     } deriving (Generic)
 
 
-instance Default ColorizedKeysFilter where
-    def = ColorizedKeysFilter {
+instance Default ColorizedData where
+    def = ColorizedData {
           _colorizedVersion = makeVersion [0, 0]
         , _colorizedPandoc = Pandoc nullMeta def
-        , _colorizedReplace = def
+        , _colorizedLanguages = def
         , _colorizedDataDir = def
 
         }
 
 
-type ColorizedApp = ReaderT ColorizedKeysFilter IO
+type ColorizedApp = ReaderT ColorizedData IO
 
-instance ToJSON ColorizedKeysFilter
 
-instance FromJSON ColorizedKeysFilter
-
-makeLenses ''ColorizedKeysFilter
+makeLenses ''ColorizedData

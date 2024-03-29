@@ -18,10 +18,10 @@ fonts:
         ext: .ttf
 
 colorized-keys:
-    replace:
-      shellbox:
-        syntax-xml: shellbox.xml
-        replace:
+    languages:
+      colorized-sh:
+        syntax: colorized-sh
+        map:
             🔑: "ColorizeKeyPrivate"
             🔒: "ColorizeKeyPublic"
             🔐: "ColorizeKeyPair"
