@@ -5,7 +5,8 @@
 data-dir: ${.}/data-dir/colorized-keys/pandoc/
 
 #syntax-definitions:
-#    - ./data-dir/colorized-keys/pandoc/syntax/shellbox.xml
+    #- ./data-dir/colorized-keys/pandoc/syntax/colorized-sh.xml
+    #- ./data-dir/colorized-keys/pandoc/syntax/alert.xml
 
 resource-path:
     - ${.}/graphics/

@@ -7,7 +7,7 @@
     <!ENTITY redirect "(?:!?[0-9]*>|&lt;[0-9]*!?)">
 ]>
 
-<language name="Colorized Keys" section="Scripts" extensions="*.colorized" mimetype="" version="0" kateversion="5.0" author="karamellpelle@hotmail.com" license="MIT">
+<language name="colorized-sh" section="Scripts" extensions="*.colorized-sh" mimetype="text/x-shellscript" version="0" kateversion="5.53" author="karamellpelle@hotmail.com" license="MIT">
 
 <highlighting>
 	<list name="colorized-cmds">
@@ -58,7 +58,7 @@ TODO: string literals, variable assignment
 
 		<context name="comment" attribute="Comment" lineEndContext="#pop">
 			<DetectSpaces />
-			<IncludeRules context="##Alerts" />
+			<!--<IncludeRules context="##Alerts" />-->
 			<DetectIdentifier />
 		</context>
 	</contexts>

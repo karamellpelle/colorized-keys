@@ -21,6 +21,7 @@ colorized-keys:
     languages:
       colorized-sh:
         syntax: colorized-sh
+        style:  colorized-sh
         map:
             🔑: "ColorizeKeyPrivate"
             🔒: "ColorizeKeyPublic"
