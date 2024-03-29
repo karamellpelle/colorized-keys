@@ -64,15 +64,12 @@ main pandoc = do
                   languages <- view colorizedLanguages
 
                   case languages !? language of
-                      Nothing   -> pure $ CodeBlock atts $ text <> "\n\n (not a colorize language) " <> show atts
+                      Nothing                 -> pure block   -- not found in our languages, so keep it as is
                       Just (Language xml map) -> do
 
                           --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
                           --pure $ CodeBlock atts $ replaceLatex map $ text
-                          --
-                          -- TODO: use values
-                          --meta <- view appMeta
-                          --case meta
+
                           path <- syntaxPath language =<< view colorizedDataDir
                           synmap <- io $ whenMA (doesFileExist path) defaultSyntaxMap $ parseSyntaxDefinition path >>= \case 
                               Left err     -> pure $ defaultSyntaxMap

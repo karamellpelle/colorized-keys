@@ -47,7 +47,7 @@ import Text.Pandoc.Definition
 --  
 
 pickMeta :: FromMetaValue a => Meta -> [Text] -> Maybe a
-pickMeta meta texts = fromMetaValue =<< foldl' (.>) (pure (MetaMap (unMeta meta))) texts
+pickMeta meta texts = fromMetaValue =<< pickMetaValue meta texts
 
 pickMeta' :: (Default a, FromMetaValue a) => Meta -> [Text] -> a 
 pickMeta' meta texts = pickMeta meta texts ?: def

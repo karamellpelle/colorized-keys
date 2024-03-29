@@ -45,7 +45,7 @@ type Languages = Map Text Language
 data Language = Language { 
     languageSyntax   :: String
   , languageEmojiMap :: EmojiMap
-  }
+  } deriving (Show)
 
 type EmojiMap = Map Char Text
 

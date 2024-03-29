@@ -33,6 +33,7 @@ import AppLatex qualified as Latex
 import Format
 import Languages
 import ColorizedData
+import Prettyprinter
 
 
 main :: IO ()
@@ -56,8 +57,9 @@ walkPandoc format pandoc = do
         colorizedPandoc    .= pandoc
         colorizedLanguages .= metaColorizedLanguages meta
         colorizedDataDir   .= "./data-dir/colorized-keys/"
-       
+
     usingReaderT colorized $ case format of
+
         FileFormatLatex  -> Latex.main pandoc
         FileFormatHTML   -> errorPandoc pandoc "HTML not yet implemeted"
         _                -> errorPandoc pandoc "File format not implemented"

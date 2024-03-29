@@ -7,7 +7,7 @@
 ## sign {#sign-ssh-ssh}
 \kant[4]
 
-```shellbox
+```colorized-sh
 $ # set hostname
 $ HOSTNAME=my.domain.net 
 $ # see https://github.com/karamellpelle/ 
