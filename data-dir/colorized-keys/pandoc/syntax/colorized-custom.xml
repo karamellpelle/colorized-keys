@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd"
+[
+    <!ENTITY sq_string  "'[^']*+'">
+    <!ENTITY dq_string  "&quot;(?:[^&quot;\\`]*+|\\.)*+&quot;">
+    <!ENTITY strings0   "(?:';|&quot;)">
+    <!ENTITY strings    "(?:&sq_string;|&dq_string;)">
+
+    <!ENTITY cmd "[\./a-zA-Z_-]+[0-9]*">
+    <!ENTITY flag "--?[a-zA-Z0-9]+[a-zA-Z0-9-_]*">
+    <!--<!ENTITY argument "[][\./=a-zA-Z0-9_-]+">-->
+    <!ENTITY argument "([][\./a-zA-Z0-9_-]+|&strings;)">
+    <!ENTITY argument0 "(\$|\$\(|[][\./a-zA-Z0-9_-]|&quot;|')"> <!--$ $() varname=argument filename-->
+    <!ENTITY redirect "(?:!?[0-9]*>|&lt;[0-9]*!?)">
+    <!ENTITY varname  "[A-Za-z_][A-Za-z0-9_nn]*">
+    <!--<!ENTITY assign "[a-zA-Z_-][a-zA-Z0-9_-]+\s*=">-->
+<!ENTITY assign "&varname;(?=\+?=|\[(?:$|[^]]))">
+
+]>
+
+<language name="colorized" section="Scripts" 
+  extensions="*.colorized,*.colorized-sh" 
+  casesensitive="1"
+  mimetype="" version="0" kateversion="5.0" 
+  author="karamellpelle@hotmail.com" 
+  license="MIT">
+
+<highlighting>
+	<list name="colorized-cmds">
+		<item>gpg</item>
+		<item>opensc</item>
+		<item>openssl</item>
+		<item>ssh-keygen</item>
+		<item>ssh</item>
+		<item>ykman</item>
+	</list>
+
+	<contexts>
+		<context name="main" attribute="Normal Text" lineEndContext="#stay">
+                        <DetectChar char="$" attribute="Prompt" context="commandline" column="0" />
+                        <DetectChar char=">" attribute="Prompt" context="commandline" column="0" />
+		</context>
+
+		<context name="commandline" attribute="CommandLine" lineEndContext="#pop">
+			<DetectSpaces attribute="Normal Text" />
+			<DetectChar attribute="Comment" char="#" context="#pop!comment" />
+
+                        <!-- TODO: &> and &>> redirection -->
+        <!-- handle branche conditions -->
+        <!--<Detect2Chars attribute="Control" context="#stay" char="&#38;amp;" char1="&#38;amp;"/>-->
+        <!--<Detect2Chars attribute="Control" context="#stay" char="|" char1="|"/>-->
+
+        <!-- handle &, |, ; -->
+        <!--<AnyChar attribute="Control" context="#stay" String="&#38;amp;|;"/>-->
+
+			<RegExpr attribute="Variable" String="&assign;" context="assignvar" /> 
+                        <IncludeRules context="command" />
+			<LineContinue char="\" context="#stay"/>
+		</context>
+
+                <context attribute="Normal Text" lineEndContext="#pop" name="assignvar" fallthroughContext="#pop">
+                  <DetectChar attribute="Operator" context="#pop!assign" char="="/>
+                  <Detect2Chars attribute="Operator" context="#pop!assign" char="+" char1="="/>
+                </context>
+                <context name="assigning" attribute="Assigning" lineEndContext="#pop">
+                        <DetectSpaces attribute="Normal Text" />
+			<!--<IncludeRules context="##Alerts" />-->
+                        <RegExpr attribute="Assigning" String="&argument;" context="#stay" />
+			<DetectIdentifier />
+		</context>
+
+                <context name="command" attribute="Cmd" lineEndContext="#pop" fallthroughContext="#pop" >
+		    <DetectSpaces attribute="Normal Text" />
+                    <keyword attribute="ColorizedCmd" String="colorized-cmds" context="#pop!commandargs" />
+		    <RegExpr attribute="Cmd" String="&cmd;" context="#pop!commandargs" /> 
+		</context>
+		<context name="commandargs" attribute="Normal Text" fallthroughContext="#pop" lineEndContext="#pop">
+			<DetectSpaces attribute="Normal Text" />
+			<DetectChar attribute="Comment" char="#" context="#pop!comment" />
+                        <DetectChar attribute="Pipe" char="|" context="#pop!commandline" />
+                        <RegExpr attribute="Redirect" String="&redirect;" context="#pop!argument" /> 
+			<RegExpr attribute="Flag" String="&flag;" context="#stay" />
+			<RegExpr attribute="Argument"  String="&argument0;" lookAhead="true" context="argument" />
+                        <!--^ TODO: use value!-->
+			<LineContinue />
+		</context>
+
+		<context name="argument" attribute="Argument" lineEndContext="#pop" fallthroughContext="#stay"> <!--FIXME: fallthroughContext="#stay"?-->
+                        <DetectSpaces attribute="Normal Text" />
+			<DetectChar attribute="Comment" char="#" context="#pop!comment" />
+                        <DetectChar attribute="DollarCmd" char=")" context="#pop" />
+                        <Detect2Chars attribute="DollarCmd" char="$" char1="(" context="command" />
+                        <DetectChar attribute="Dollar" char="$" context="#pop!variable" />
+                        
+                        <RegExpr attribute="Assign" String="&argument;=&argument;" context="#pop!argument" /> <!--key=value-->
+                        <RegExpr attribute="Argument" String="&argument;" context="#pop" />         <!--values/files/strings-->
+                        
+<!--TODO: string literals, variable assignment-->
+			<LineContinue />
+		</context>
+
+		<context name="value" attribute="Value" fallthroughContext="pop#pop" lineEndContext="#pop">
+			<DetectSpaces attribute="Normal Text" />
+                        <!--FIXME: end )-->
+                        <!--TODO: $()-->
+                        <!--TODO: use argument and file-->
+		</context>
+
+
+		<context name="file" attribute="File" lineEndContext="#pop">
+			<LineContinue />
+                        <DetectSpaces attribute="Normal Text" />
+                        <RegExpr attribute="File" String="&argument;" context="#pop" />
+		</context>
+
+
+		<context name="comment" attribute="Comment" lineEndContext="#pop">
+                        <DetectSpaces attribute="Normal Text" />
+			<!--<IncludeRules context="##Alerts" />-->
+			<DetectIdentifier />
+                </context> 
+
+	</contexts>
+
+
+	<itemDatas>
+		<itemData name="Normal Text" defStyleNum="dsNormal" />
+		<itemData name="Comment" defStyleNum="dsComment" />
+		<itemData name="Prompt" defStyleNum="dsPreprocessor" />
+		<itemData name="CommandLine" defStyleNum="dsNormal" />
+		<itemData name="ColorizedCmd" defStyleNum="dsKeyword" bold="true" />
+		<itemData name="Cmd" defStyleNum="dsFunction" />
+		<itemData name="Flag" defStyleNum="dsExtension" />
+		<itemData name="Argument" defStyleNum="dsAttribute" italic="true"/>
+		<itemData name="File" defStyleNum="dsNormal" />
+		<itemData name="Value" defStyleNum="dsNormal" />
+		<itemData name="Redirect" defStyleNum="dsOperator" bold="true" />
+		<itemData name="Pipe" defStyleNum="dsOperator"  bold="true"/>
+		<itemData name="Dollar" defStyleNum="dsOperator" />
+		<itemData name="DollarCmd" defStyleNum="dsOperator" />
+		<itemData name="VarAssign" defStyleNum="dsOperator" />
+	</itemDatas>
+</highlighting>
+
+
+<general>
+	<comments>
+		<comment name="singleLine" start="#" />
+	</comments>
+        <keywords casesensitive="true" weakDeliminator=".-_" />
+
+</general>
+
+</language>
+
