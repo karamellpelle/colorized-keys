@@ -2,19 +2,21 @@
 
 #verbosity: INFO
 
+# where pandoc finds stuff, like templates
 data-dir: ${.}/data-dir/colorized-keys/pandoc/
 
-#syntax-definitions:
-    #- ./data-dir/colorized-keys/pandoc/syntax/colorized-sh.xml
-    #- ./data-dir/colorized-keys/pandoc/syntax/alert.xml
+# default highlight style. TODO: use setting from colorized-keys.languages.<lang>.style 
+highlight-style: ./data-dir/colorized-keys/pandoc/themes/colorized-sh.theme
 
+# places where pandoc finds stuff. https://pandoc.org/MANUAL.html#option--resource-path
 resource-path:
     - ${.}/graphics/
 
+# we want xelatex (or lualatex) for custom fonts
 pdf-engine: xelatex
 #pdf-engine-opts: 
 
-#variables:
+#variables: # NOTE: these can't be accessed by pandoc filters :(
 # key:value
 
 

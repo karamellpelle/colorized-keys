@@ -21,7 +21,10 @@ colorized-keys:
     languages:
       colorized-sh:
         syntax: colorized-sh
-        style:  colorized-sh
+        style:  colorized-sh-doesnotworkyet
+        # ^ FIXME: this can be added as appedix/prefix to tokens, after creating macros using styleToLaTeX/HTML.
+        #          for example: KeywordTok -> KeywordTok#colorized-sh
+        #          currently set in pandoc-defaults.yaml
         map:
             🔑: "ColorizeKeyPrivate"
             🔒: "ColorizeKeyPublic"

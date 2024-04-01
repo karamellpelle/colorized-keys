@@ -1,6 +1,9 @@
 {
-    "custom-styles": {
-    },
+    "background-color": "#000000",
+    "text-color": "#b2b2b2",
+    "line-number-color": "#005d7a",
+    "line-number-background-color": "#000000",
+
     "editor-colors": {
         "BackgroundColor": "#000000",
         "BracketMatching": "#4400aa",
@@ -32,13 +35,14 @@
         "WordWrapMarker": "#262626"
     },
     "metadata": {
-        "name": "Colorized",
+        "name": "colorized-sh",
         "revision": 1
     },
     "text-styles": {
         "Alert": {
             "background-color": "#3f0000",
             "bold": true,
+
             "selected-text-color": "#bf0303",
             "text-color": "#ff0000"
         },
@@ -98,6 +102,7 @@
             "underline": true
         },
         "Extension": {
+            "bold": true,
             "selected-text-color": "#0095ff",
             "text-color": "#0095ff"
         },
@@ -106,6 +111,7 @@
             "text-color": "#ff8b8b"
         },
         "Function": {
+            "bold": true,
             "selected-text-color": "#cd00cd",
             "text-color": "#cd00cd"
         },

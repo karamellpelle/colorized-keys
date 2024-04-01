@@ -23,9 +23,9 @@ module Languages
     EmojiMap,
     metaColorizedLanguages,
 
-    -- tmp
-    replace,
-    replaceShellbox,
+    ---- tmp
+    --replace,
+    --replaceShellbox,
 ) where
 
 import Relude
@@ -44,6 +44,7 @@ type Languages = Map Text Language
 
 data Language = Language { 
     languageSyntax   :: String
+  , languageStyle    :: String
   , languageEmojiMap :: EmojiMap
   } deriving (Show)
 
@@ -82,23 +83,27 @@ instance FromMetaValue EmojiMap where
     fromMetaValue _ = Nothing
 
 instance FromMetaValue Language where
-    fromMetaValue mv = 
-        fmap (\(s, e) -> Language s e) $ bitraverse maybeSyntax maybeEmoji $ dup mv
-        where
-          maybeSyntax mv = pure mv .> "syntax" >>= fromMetaValue
-          maybeEmoji mv = pure mv .> "map" >>= fromMetaValue
+    fromMetaValue mv = do
+        style <- maybeStyle mv 
+        syntax <- maybeSyntax mv 
+        emoji <- maybeEmoji mv
+        pure $ Language style syntax emoji
+      where
+        maybeStyle mv = pure mv .> "style" >>= fromMetaValue
+        maybeSyntax mv = pure mv .> "syntax" >>= fromMetaValue
+        maybeEmoji mv = pure mv .> "map" >>= fromMetaValue
+
 --------------------------------------------------------------------------------
 --  tmp
-
+{-
 replace :: Languages
 replace = 
-    fromList $ fmap (second (Language syntaxfile)) [ 
+    fromList $ fmap (second (Language "" "")) [ 
                ("shellbox", replaceShellbox)
              , ("sh", replaceShellbox)
              , ("default", replaceShellbox) 
              ]
 
-    where syntaxfile = ""
 
 replaceShellbox :: EmojiMap
 replaceShellbox =
@@ -108,5 +113,5 @@ replaceShellbox =
       , ( '🔐', "KeyPairTok" )
       , ( '❗', "IdentifierTok" )
     ]
-
+-}
 

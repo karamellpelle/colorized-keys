@@ -65,10 +65,10 @@ main pandoc = do
 
                   case languages !? language of
                       Nothing                 -> pure block   -- not found in our languages, so keep it as is
-                      Just (Language xml map) -> do
+                      Just (Language style syntax emoji) -> do
 
-                          --pure $ RawBlock (Format "latex") $ replaceLatex map $ text
-                          --pure $ CodeBlock atts $ replaceLatex map $ text
+                          --pure $ RawBlock (Format "latex") $ replaceLatex emoji $ text
+                          --pure $ CodeBlock atts $ replaceLatex emoji $ text
 
                           path <- syntaxPath language =<< view colorizedDataDir
                           synmap <- io $ whenMA (doesFileExist path) defaultSyntaxMap $ parseSyntaxDefinition path >>= \case 
@@ -77,7 +77,7 @@ main pandoc = do
 
                           case highlight synmap formatLaTeXBlock atts text of
                               Left err    -> pure $ latexError language err 
-                              Right text' -> pure $ RawBlock (Format "latex") $ replaceLatex map $ text' 
+                              Right text' -> pure $ RawBlock (Format "latex") $ replaceLatex emoji $ text' 
 
 
               []            -> pure block
