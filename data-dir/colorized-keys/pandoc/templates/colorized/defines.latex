@@ -1,0 +1,41 @@
+\newcommand{\backgroundimage}[1]{
+\backgroundsetup{
+scale=1,
+opacity=1.0,
+angle=0,
+contents={\includegraphics[height=\paperheight]{#1}}
+}
+  \BgThispage
+}
+
+\newcommand{\ftsize}[1]{\fontsize{#1}{#1}\selectfont}
+
+\newenvironment{fontsizing}[1]
+{
+  \ftsize{#1}
+
+}
+{
+
+}
+
+%\newcommand{\includepdftex}[2]
+%{
+%  {
+%  \newlength\A
+%  \newlength\B
+%  \newlength\C
+%  \setlength\A{#1}
+%  \setlength\B{\paperwidth}
+%  \setlength\C{\textwidth*\ratio{\A}{\B}}
+%
+%  \scalefont{\C}
+%  \def\svgwidth{\textwidth}
+%  \input{#2}
+%  %\newlength\currentFS
+%  %\makeatletter
+%  %\setlength\currentFS{\f@size pt}
+%  %\makeatother
+%  }
+%}
+

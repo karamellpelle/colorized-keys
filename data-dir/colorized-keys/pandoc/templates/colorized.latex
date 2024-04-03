@@ -163,8 +163,16 @@ $endif$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+% custom macros etc
+\input{$data-dir-pandoc-templates$/colorized/defines.latex}
+
+% style settings
+\input{$data-dir-pandoc-templates$/colorized/style.latex}
+
 % read settings 
 \input{$data-dir-pandoc-templates$/colorized/settings.latex}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\inject}[2]{\hyperref[inject-#1-#2]{ inject}}
+
+\newcommand{\create}[1]{\hyperref[create-#1]{ create}}
+
+\newcommand{\selfsign}[1]{\hyperref[selfsign-#1]{\scalefont{0.833333} sign}}
+
+\newcommand{\sign}[2]{\hyperref[sign-#1-#2]{\scalefont{0.833333} sign}}
+
+\newcommand{\certSSH}{\hyperref[cert-ssh]{\scalefont{0.5} \bf id\_key-cert.pub}}
+\newcommand{\certSSL}{\hyperref[cert-ssl]{\scalefont{0.5} \bf x509}}
+
+\newcommand{\headYubicoGPG}{\hyperref[yubico-gpg]{\scalefont{1.33333} \bf GPG}}
+\newcommand{\headYubicoFIDO}[1]{\hyperref[yubico-fido#1]{\scalefont{1.33333} \bf FIDO#1}}
+\newcommand{\headYubicoPIV}{\hyperref[yubico-piv]{\scalefont{1.33333} \bf PIV}}
+\newcommand{\headGPG}{\hyperref[gpg]{\scalefont{1.33333} \bf GPG}}
+\newcommand{\headPIV}{\hyperref[piv]{\scalefont{1.33333} \bf PIV}}
+\newcommand{\headSSH}{\hyperref[ssh]{\scalefont{1.33333} \bf SSH}}
+\newcommand{\headSSL}{\hyperref[ssl]{\scalefont{1.33333} \bf SSL}}
+
+\newcommand{\type}[1]{\ftsize{8pt} #1:}
+
+\newcommand{\keyGPGPrivC}{\bf .C}
+\newcommand{\keyGPGPrivA}{\bf .A}
+\newcommand{\keyGPGPrivS}{\bf .S}
+\newcommand{\keyGPGPrivE}{\bf .E}
+\newcommand{\keyGPGPublC}{\bf .C}
+\newcommand{\keyGPGPublA}{\bf .A}
+\newcommand{\keyGPGPublS}{\bf .S}
+\newcommand{\keyGPGPublE}{\bf .E}
+
+\newcommand{\keyPIVPrivA}{\bf .9A}
+\newcommand{\keyPIVPrivC}{\bf .9C}
+\newcommand{\keyPIVPrivD}{\bf .9D}
+\newcommand{\keyPIVPublA}{\bf .9A}
+\newcommand{\keyPIVPublC}{\bf .9C}
+\newcommand{\keyPIVPublD}{\bf .9D}
+
+\newcommand{\keySSLPriv}{\bf private.pem}
+\newcommand{\keySSLPubl}{\bf public.pem}
+
+\newcommand{\keySSHPriv}{\bf id\_key}
+\newcommand{\keySSHPubl}{\bf id\_key.pub}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+\newcommand{\ColorizeKeyPrivate}[1]{\textcolor{Red}{#1}}
+\newcommand{\ColorizeKeyPublic}[1]{\textcolor{Green}{#1}}
+\newcommand{\ColorizeKeyPair}[1]{\textcolor{Goldenrod}{#1}}
+\newcommand{\ColorizeIdentifier}[1]{\textcolor{RoyalPurple}{#1}}
+
+
