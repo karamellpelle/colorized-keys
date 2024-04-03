@@ -15,12 +15,6 @@ $ ssh-keygen -h -s 🔑ca_key -I "$CERTIFICATE_ID" -n "$HOSTNAME" -V $CERTIFICAT
 $ openssl pkey -in 🔑9x_private.pem -pubout -out 🔒9x_public.pem
 $ ykman piv keys import --pin-policy DEFAULT --touch-policy DEFAULT [--password <password>] ❗9X 🔑9x_private.pem
 $ ls ❗[this is secret] 🔑[9x is also private]
-$ # comment
-$ 🔐[can this] work?
-$ # testing
-$ 🔑my-long-name
-$ 🔑[my spaced name]
-$ 🔑[] <- empty name
 ```
 
 FIXME: force hightlighting macros when only shellbox

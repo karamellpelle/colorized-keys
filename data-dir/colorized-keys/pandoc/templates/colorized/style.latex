@@ -16,5 +16,6 @@
 \renewcommand{\familydefault}{\sfdefault}
 
 
-
+% codeblock font size
+\fvset{fontsize=\fontsize{7pt}{8pt}\selectfont} % font size in fancyvrb environments
 

@@ -84,8 +84,8 @@ $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
 
-\fvset{fontsize=\footnotesize} % font size in fancyvrb environments
 $endif$
+
 
 
 % needed by pandoc
@@ -97,6 +97,7 @@ $endif$
 
 \typeout{data-dir-graphics is: $data-dir-graphics$}
 \typeout{data-dir-pandoc-templates is: $data-dir-pandoc-templates$}
+\typeout{data-dir-settings is: $data-dir-settings$}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -171,7 +172,7 @@ $endif$
 \input{$data-dir-pandoc-templates$/colorized/style.latex}
 
 % read settings 
-\input{$data-dir-pandoc-templates$/colorized/settings.latex}
+\input{$data-dir-settings$/settings.latex}
 
 
 
