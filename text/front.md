@@ -30,6 +30,7 @@ colorized-keys:
             🔒: "ColorizeKeyPublic"
             🔐: "ColorizeKeyPair"
             ❗: "ColorizeIdentifier"
+            ✅: "ColorizeCertificate"
 
 ---
 

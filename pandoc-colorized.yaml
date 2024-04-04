@@ -31,8 +31,10 @@ input-files:
   - text/keys.md
   - text/gpg.md
   - text/ssh.md
+  - text/ssh0.md
   - text/piv.md
   - text/ssl.md
+  - text/fido.md
   - text/fido2.md
   - text/cert.md
 

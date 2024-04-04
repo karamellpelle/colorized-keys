@@ -1,4 +1,11 @@
 # SSH {#ssh}
+
+#### Show key
+
+~~~colorized-sh
+> ssh-keygen -l -f ❗keyname 
+~~~
+
 \kant[3]
 
 ## create {#create-ssh}

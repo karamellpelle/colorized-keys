@@ -1,4 +1,4 @@
-%% Creator: Inkscape 1.3.2 (091e20e, 2023-11-25, custom), www.inkscape.org
+%% Creator: Inkscape 1.3.2 (091e20e, 2023-11-25), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'keys.pdf' (pdf, eps, ps)
 %%
@@ -75,15 +75,15 @@
     \put(0.57752256,0.12780004){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{ssh}}\end{tabular}}}}%
     \put(0.23637413,0.39940096){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{gpg}}\end{tabular}}}}%
     \put(0.49963866,0.56902879){\color[rgb]{0.10980392,0.44313725,0.84705882}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{fido2}}\end{tabular}}}}}%
-    \put(0.33061443,0.41901174){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivC\end{tabular}}}}%
+    \put(0.33239614,0.41901174){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivC\end{tabular}}}}%
     \put(0.36824318,0.41901174){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPublC\end{tabular}}}}%
-    \put(0.33061443,0.40011948){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivA\end{tabular}}}}%
+    \put(0.33239614,0.40011948){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivA\end{tabular}}}}%
     \put(0.36824318,0.40095465){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPublA\end{tabular}}}}%
-    \put(0.33061443,0.38236337){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivS\end{tabular}}}}%
+    \put(0.33239614,0.38236337){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivS\end{tabular}}}}%
     \put(0.36824318,0.38319854){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPublS\end{tabular}}}}%
-    \put(0.33061443,0.36448916){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivE\end{tabular}}}}%
+    \put(0.33239614,0.36448916){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivE\end{tabular}}}}%
     \put(0.36824318,0.36532434){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPublE\end{tabular}}}}%
-    \put(0.65214753,0.41945717){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyPIVPrivC\end{tabular}}}}%
+    \put(0.65214753,0.41945717){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyPIVPrivA\end{tabular}}}}%
     \put(0.68727272,0.41945717){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyPIVPublA\end{tabular}}}}%
     \put(0.65214753,0.40162279){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyPIVPrivC\end{tabular}}}}%
     \put(0.68727272,0.40162279){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyPIVPublC\end{tabular}}}}%
