@@ -17,8 +17,8 @@ pdf-engine: xelatex
 #pdf-engine-opts: 
 
 
-table-of-contents: true
-toc-depth: 5
+#table-of-contents: true
+#toc-depth: 5
 
 #variables: # NOTE: these can't be accessed by pandoc filters :(
 # key:value
@@ -40,5 +40,4 @@ input-files:
   - text/ssl.md
   - text/fido.md
   - text/gpg.md
-  - text/cert.md
 

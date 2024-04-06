@@ -1,20 +1,11 @@
 # SSL {#ssl}
-\kant[5]
 
-## create {#create-ssl}
-\kant[6]
+## Create SSL keypair {#create-ssl}
 
-## inject PIV {#inject-ssl-piv}
-\kant[7]
+<!--## Create SSL CA root  {#create-ssl}-->
 
-## inject SSH {#inject-ssl-ssh}
-\kant[8]
-
-## sign PIV {#sign-ssl-piv}
-\kant[8]
-
-## sign SSL {#sign-ssl-ssl}
-\kant[8]
+## Sign SSL key {#sign-ssl-ssl}
 
 ## selfsign {#selfsign-ssl}
-\kant[8]
+
+\newpage

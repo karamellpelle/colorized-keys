@@ -1,4 +1,5 @@
 # SSH
+🔒🔑🔐❗✅
 
 ## create keypairs
 
@@ -132,14 +133,6 @@ Can be done with `yubico-piv-tool`
 
 ## SSH|PIV sign
 
-```sh
-ssh-keygen -s ca_key.pub -D libpkcs11.so -I key_id user_key.pub
-```
-
-## SSH|Piv inject
-
-## SSH|Yubico FIDO inject
-See https://man.freebsd.org/cgi/man.cgi?query=ssh-keygen&sektion=1&apropos=0&manpath=FreeBSD+14.0-RELEASE+and+Ports#FIDO_AUTHENTICATOR
 
 ## Yubico PIV create
 Generating keys on hardware makes it possible to set attentation with slot f9, after private key generated. YubiKeys comes preloaded with Yubico PIV CA ("template") in f9 available for use. This default certificate can be overwritten (but not recalled if so). Out format is PEM or DER
@@ -175,6 +168,16 @@ Make sure non-user accessable to work: https://wiki.archlinux.org/title/OpenSSH#
 * PIV Card: FP 800-73: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-73-4.pdf
 * Key specification FP 800-78: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-78-4.pdf
 
+<!--### Sign SSH key using PIV {#sign-piv-ssh}-->
+
+<!--TODO: -->
+<!--~~~colorized-sh-->
+<!--$ ssh-keygen -D $PKCS11_LIB | grep -i sign > piv_sign.pub-->
+<!--> ssh-keygen -s 🔒piv_sign.pub [-h] -D $PKCS11_LIB -I host.example.com 🔒id_key.pub -->
+<!--> # `-n user1,...,userN` can be added to restrict certificate to specified users -->
+<!--> # on host-->
+<!--~~~-->
+
 ## PEM format 
 https://stackoverflow.com/questions/5355046/where-is-the-pem-file-format-specified
 spec here: https://www.rfc-editor.org/rfc/rfc7468
@@ -188,3 +191,4 @@ https://www.rfc-editor.org/rfc/rfc7468#section-13: public key format (used by SS
 https://stackoverflow.com/questions/41904252/how-to-convert-x509-certificate-and-private-key-in-pem-format-to-gpg-format
 TODO: use openssl req config files! https://www.aapelivuorinen.com/blog/2018/09/01/x509-on-macos-with-yubikey/
 https://docs.yubico.com/hardware/yubihsm-2/hsm-2-user-guide/hsm2-openssl-yubihsm2.html
+

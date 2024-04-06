@@ -1,18 +1,16 @@
 # SSH {#ssh}
 
-<!--🔑 🔒 🔐 ❗ ✅-->
 * A keypair `id_key` consists of two files: `id_key` (private) and `id_key.pub` (public)
 * Key format is _SSH_[^fnote-ssh-key-format]
-* Common names are `id_<algorithm>` (user) and `ssh_host_<algorithm>_key` (host)
+* Common names are `id_<key type>` (user) and `ssh_host_<key type>_key` (host)
 
-To list a SSH key:
+To list a SSH key file:
 
 ~~~colorized-sh
-$ ssh-keygen -l -f ❗keyname 
+$ ssh-keygen -l -f ❗filename
 ~~~
 
-
-## Create SSH key {#create-ssh}
+## Create SSH keypair {#create-ssh}
 
 Creating a keypair `🔑id_key` and `🔒id_key.pub` using algorithm _Ed25519_.
 
@@ -21,16 +19,61 @@ $ KEY_IDENTIFIER="❗[email or hostname, typically]"
 $ ssh-keygen -t ed25519 -C $KEY_IDENTIFIER -f 🔐id_key
 ```
 
+### Create SSH keypair using FIDO2 {#inject-fido2-ssh}
+
+A type of SSH keypair that is controlled by a FIDO2 hardware key. Two variants:
+
+  - _Resident_/_Discoverable_: Proxy keypair is stored on the hardware key so it can be deployed at any host. Needs hardware key and PIN to verify.
+  * _Non-resident_/_Non-discoverable_: Proxy keypair is not stored on on the hardware key, so it's useless without this, even for someone who has access to both the hardware key and PIN. 
+
+Create a resident keypair using algorithm _Ed25519_:
+
+~~~colorized-sh
+$ KEY_SERVICE=❗[name of host service, typically] # for help, not functionality
+$ KEY_SERVICE_USER=❗[username for this service]  # for help, not functionality
+$ ssh-keygen -t ed25519-sk -O resident -O application="ssh:$KEY_SERVICE" -O user=$KEY_SERVICE_USER -O verify-required 
+~~~
+
+The proxy keypair can be deployed on a system using `ssh-keygen -K` [^fnote-ssh-fido2].
+
+
+### Create SSH keypair using PIV {#inject-piv-ssh}
+\label{inject-piv-yubikey-ssh}
+
+Find and define your PIV library, something like
+
+```colorized-sh
+$ PKCS11_LIB=/usr/lib/libykcs11.so      # Yubico
+$ PKCS11_LIB=/usr/lib/opensc-pkcs11.so  # OpenSC
+```
+
+Use PIV's authentication key (_9a_) for SSH authentication: 
+
+```colorized-sh
+$ ssh-keygen -D $PKCS11_LIB | grep -i auth > 🔒piv_auth.pub
+```
+
+Add `piv_auth.pub` to _authorized_keys_ on target host, for example through `ssh-copy_id`.
+
+To log into host
+
+```colorized-sh
+$ # ssh login
+$ ssh -I $PKCS11_LIB ❗host
+```
+
+
+### Create SSH keypair using SSL {#inject-ssl-ssh} 
+
 ## Sign SSH key {#sign-ssh-ssh}
 
 There are two types of certificates: user and host. The parameter `-I` specifies an identifier for the signer's key and is used for logging by the server whenever the certificate is used for authentication [^fnote-dmuth]. A serial number can be specified by the `-z` parameter [^fnote-ssh-serial].
 
-To list a SSH certificate:
+To list a SSH certificate file:
 
-~~~sh
-$ ssh-keygen -L -f ✅keyname-cert.pub
+~~~colorized-sh
+$ ssh-keygen -L -f key-cert.pub
 ~~~
-<!--TODO: fix colorize keyname-cert.pub-->
 
 
 ### SSH user certificate
@@ -58,6 +101,18 @@ $ CERTIFICATE_VALID=❗+53w
 $ ssh-keygen -h -s 🔑ca_key -I $CERTIFICATE_ID -z $CERTIFICATE_SERIAL -n $CERTIFICATE_HOSTS -V $CERTIFICATE_VALID 🔒hostkey.pub
 ```
 
+
+## Notes
+* Comment of key can be changed: `ssh-keygen -c -C ❗comment -f key`.
+* To generate a set of keypairs of each standard type, use `ssh-keygen -A`
+
+---
+
+~~~sh
+~~~
+
+[^fnote-ssh-fido2]: [Securing SSH with FIDO2](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)
+https://developers.yubico.com/PIV/Guides/Securing_SSH_with_OpenPGP_or_PIV.html
 [^fnote-ssh-key-format]: [`ssh-keygen -m`](https://man.archlinux.org/man/ssh-keygen.1#m) and  [RFC4716](https://www.rfc-editor.org/rfc/rfc4716)
 [^fnote-dmuth]: [SSH At Scale: CAs and Principals](https://www.dmuth.org/ssh-at-scale-cas-and-principals/)
 [^fnote-ssh-serial]: [Example of generating unique serial numbers](https://security.stackexchange.com/questions/246389/ssh-keygen-how-to-guarantee-the-uniqueness-of-serial-numbers)
