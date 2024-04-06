@@ -5,24 +5,6 @@
 changing comment for keypair `key`/`key.pub` from default user@host:
 `ssh-keygen -c -C <new comment> -f key`. Certificates does not have comments but a key identifier `-I <keyid>`
 
-## create user keypairs 
-
-```sh
-$ # generate keypair id_key and id_key.pub
-$ # OUT FORMAT: SSH
-# export KEY_COMMENT
-$ ssh-keygen -t ed25519 -C "<comment, i.e. identifier>" -f id_key
-```
-
-## create host keypairs
-
-```sh
-$ # create host keypairs here of common types (RSA; ECDSA, ED25519) 
-$ mkdir --parents ./etc/ssh/
-$ ssh-keygen -A -f .
-$ 
-```
-
 ## SSH|Piv inject
 
 ```sh
@@ -32,50 +14,11 @@ $ # use YubiKey PKCS#11 API library (TODO: create list for different libs)
 $ ssh-keygen -D "$PKCS11_LIB" | grep Auth > piv-auth.pub
 ```
 
-# SSH signing
-
-"-I key_id: In all cases, key_id is a "key identifier" that is logged by the	server when the	certificate is used for	authentication."
-
-
-```sh
-$ # show certificate 
-$ ssh-keygen -L -f <filename>
-$ 
-```
-
-## SSH|SSH sign user public key
-
-
-```sh
-$ # 
-$ CERTIFICATE_SERIAL=$(date -u "+%Y%m%d%H%M%S") 
-$ CERTIFICATE_ID=username@host.net
-$ CERTIFICATE_USERS=username0,..,usernameN
-$ CERTIFICATE_VALID=+52w
-$ CERTIFICATE_OPTIONS="-Ono-touch-required"
-$ ssh-keygen -s ca_key -I "$CERTIFICATE_ID" -z $CERTIFICATE_SERIAL -n $CERTIFICATE_USERS $CERTIFICATE_OPTIONS -V $CERTIFICATE_VALID userkey.pub
-```
-
-## SSH|SSH sign host public key
-
-```sh
-$ # 
-$ HOSTNAME=my.domain.net
-$ CERTIFICATE_ID=${HOSTNAME}:ssh_host_xxx_key-cert.pub
-$ CERTIFICATE_VALID=+52w
-$ CERTIFICATE_SERIAL=$(date -u "+%Y%m%d%H%M%S") 
-$ # ^ use 64 a bit unique number for this certificate, https://security.stackexchange.com/questions/246389/ssh-keygen-how-to-guarantee-the-uniqueness-of-serial-numbers, 64 bit
-$ # sign public ssh_host_xxx_key.pub using private SSH key ca_key, creating ssh_host_xxx_key-cert.pub for the host with (domain) name HOSTNAME
-$ ssh-keygen -h -s ca_key -I "$CERTIFICATE_ID" -n "$HOSTNAME" -V $CERTIFICATE_VALID -z $CERTIFICATE_SERIAL ssh_host_xxx_key.pub
-```
-
-
 ## SSH|PIV sign 
 ```sh
 $ # get SSH public key for PIV.9c: Signature
 $ ssh-keygen -D "$PKCS11_LIB" | grep Sign > piv-sign.pub
 $ 
-
 ```
 
 ## SSH|PIV sign user public key
@@ -150,8 +93,6 @@ $ ssh-keygen -t <keytype> -C "<comment>" -f id_<keytype>
 
 Create a keypair `<host_ca_key|user_ca_key>` and `<host_ca_key|uyseer>k.p_uba` cfo_r host or user signing
 
-* FIXME: what comment?
-
 ```sh
 $ ssh-keygen -t <keytype> -C "<comment>" -f <host_ca_key|user_ca_key>
 ```
@@ -161,7 +102,7 @@ $ ssh-keygen -t <keytype> -C "<comment>" -f <host_ca_key|user_ca_key>
 Certify a host's public key `ssh_host_<keytype>_key.pub` as `ssh_host_<keytype>_key-cert.pub` using private key `<host_ca_key>`:
 
   * Certificate Only valid for comma separated `<{hostnames}>`
-  * FIXME: What is `<key_id>`?
+  * FIXME: What is `<key_id>`? Answer: Just an identification for the signer
 
 ```sh
 $ ssh-keygen -h -s <host_ca_key> -I <keyid> -n <{hostnames}> <host_ca_key> 
