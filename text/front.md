@@ -17,6 +17,9 @@ fonts:
         name: MesloLGSDZNerdFontPropo
         ext: .ttf
 
+urlcolor: Blue
+urlstyle: tt
+
 colorized-keys:
     languages:
       colorized-sh:
