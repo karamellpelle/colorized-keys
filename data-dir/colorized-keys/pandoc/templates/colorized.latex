@@ -45,6 +45,9 @@
 \usepackage{scalefnt}
 \usepackage{calc}
 
+\usepackage{tocloft}
+\usepackage{etoc}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

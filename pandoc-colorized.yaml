@@ -16,6 +16,10 @@ resource-path:
 pdf-engine: xelatex
 #pdf-engine-opts: 
 
+
+table-of-contents: true
+toc-depth: 5
+
 #variables: # NOTE: these can't be accessed by pandoc filters :(
 # key:value
 
@@ -29,6 +33,7 @@ template:     colorized.latex
 input-files:
   - text/front.md
   - text/keys.md
+  - text/toc.md
   - text/ssh.md
   #- text/ssh0.md
   - text/piv.md
