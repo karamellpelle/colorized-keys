@@ -74,7 +74,6 @@
     \put(0.80920909,0.26711036){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{ssl}}\end{tabular}}}}%
     \put(0.23637413,0.39940096){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{gpg}}\end{tabular}}}}%
     \put(0.40637529,0.33206239){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{ssh}}\end{tabular}}}}%
-    \put(0.49963866,0.56902879){\color[rgb]{0.10980392,0.44313725,0.84705882}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{fido2}}\end{tabular}}}}}%
     \put(0.33239614,0.41901174){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivC\end{tabular}}}}%
     \put(0.36824318,0.41901174){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPublC\end{tabular}}}}%
     \put(0.33239614,0.40011948){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivA\end{tabular}}}}%
