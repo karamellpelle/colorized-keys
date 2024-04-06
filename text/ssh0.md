@@ -1,4 +1,3 @@
-TODO: REMOVE export, use shell variables
 # SSH
 
 ## create keypairs

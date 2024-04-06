@@ -29,11 +29,11 @@ template:     colorized.latex
 input-files:
   - text/front.md
   - text/keys.md
-  - text/gpg.md
   - text/ssh.md
-  - text/ssh0.md
+  #- text/ssh0.md
   - text/piv.md
   - text/ssl.md
   - text/fido.md
+  - text/gpg.md
   - text/cert.md
 

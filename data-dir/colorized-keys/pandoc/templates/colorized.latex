@@ -11,7 +11,7 @@
 \usepackage{enumitem}
 \usepackage{array}
 \usepackage{graphicx}
-\usepackage{ulem}
+%\usepackage{ulem}
 \usepackage{sidecap}
 %\usepackage{amssymb,amsmath,amsthm}
 \usepackage{color}
@@ -139,7 +139,8 @@ $endif$
     BoldItalicFont = *-BoldItalic
 ]
 
-\setmonofont{$fonts.mono.name$}[
+\setmonofont[Scale=MatchLowercase]{$fonts.mono.name$}[
+%\setmonofont[Scale=0.7]{$fonts.mono.name$}[
     Path           = $fonts.data-dir$,
     Extension      = $fonts.mono.ext$,
     UprightFont    = *-Regular,

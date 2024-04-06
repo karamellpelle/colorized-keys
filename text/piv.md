@@ -1,28 +1,24 @@
 # PIV {#piv} 
-\kant[10]
-
-#### Yubico PIV {#yubico-piv}
-FIXME: link to above
-\kant[23]
+\label{yubico-piv}
 
 ## Create PIV {#create-piv}
 FIXME: create PIV using OpenSC or similar
 
-## Yubikey create PIV {#create-piv-yubikey}
+## Create PIV (Yubikey) {#create-piv-yubikey}
 
 <!--Generating key `❗9X`{.colorized-sh}: FIXME: colorize inline-->
 Generate an ED25519 key `9X` and export public key as a [SSL certificate](#cert-ssl):
 
 ~~~colorized-sh
-> ykman piv keys generate --algorithm ED25519 🔒public.pem
-> # 
-> # more options (`ykman piv keys generate -h`): 
-> #   - touch policy: [DEFAULT|NEVER|ALWAYS|CACHED] 
-> #   - PIN policy:   [DEFAULT|NEVER|ONCE|ALWAYS]
-> #   - algorithms:   [RSA1024|RSA2048|RSA3072|RSA4096|
-> #                    ECCP256|ECCP384|ED25519|X25519]
+> ykman piv keys generate --algorithm ED25519 ❗9X 🔒public.pem
 ~~~
 
+#### more options 
+(See `ykman piv keys generate -h`)
+
+  - touch policy: _[DEFAULT|NEVER|ALWAYS|CACHED]_
+  - PIN policy:   _[DEFAULT|NEVER|ONCE|ALWAYS]_
+  - algorithms:   _[RSA1024|RSA2048|RSA3072|RSA4096|ECCP256|ECCP384|ED25519|X25519]_
 
 ## Insert PIV -> SSH {#inject-piv-ssh}
 
