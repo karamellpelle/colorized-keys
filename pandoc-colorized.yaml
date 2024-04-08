@@ -40,4 +40,5 @@ input-files:
   - text/ssl.md
   - text/fido.md
   - text/gpg.md
+  - text/notes.md
 

@@ -6,8 +6,8 @@
 \titleformat*{\subsubsection}{\large \bfseries \titlefont}
 
 \titlespacing*{\section}{0mm}{16mm}{4mm}
-\titlespacing*{\subsection}{0mm}{16mm}{4mm}
-\titlespacing*{\subsubsection}{0mm}{4mm}{2mm}
+\titlespacing*{\subsection}{0mm}{8mm}{4mm}
+\titlespacing*{\subsubsection}{0mm}{8mm}{2mm}
 
 \defaultfontfeatures{Ligatures=TeX}
 
@@ -17,5 +17,6 @@
 
 
 % codeblock font size
-\fvset{fontsize=\fontsize{7pt}{8pt}\selectfont} % font size in fancyvrb environments
+\fvset{fontsize=\fontsize{9pt}{9pt}\selectfont} % font size in fancyvrb environments
+
 

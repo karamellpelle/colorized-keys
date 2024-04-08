@@ -44,6 +44,8 @@
 \usepackage{nameref}
 \usepackage{scalefnt}
 \usepackage{calc}
+\usepackage{endnotes}
+\usepackage{fancyvrb}
 
 \usepackage{tocloft}
 \usepackage{etoc}
@@ -83,13 +85,7 @@ $endif$
   pdfcreator={LaTeX via pandoc}}
 
 
-% add LaTeX macro for custom highlighting (Skylighting)
-$if(highlighting-macros)$
-$highlighting-macros$
-
-$endif$
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % needed by pandoc
 \providecommand{\tightlist}{%
@@ -159,6 +155,7 @@ $endif$
     ItalicFont     = *-Italic,
     BoldItalicFont = *-BoldItalic
 ]
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

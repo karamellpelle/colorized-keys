@@ -19,6 +19,7 @@ contents={\includegraphics[height=\paperheight]{#1}}
 
 }
 
+\let\footnote=\endnote
 %\newcommand{\includepdftex}[2]
 %{
 %  {
@@ -39,3 +40,37 @@ contents={\includegraphics[height=\paperheight]{#1}}
 %  }
 %}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+
+\definecolor{codeColorBG}{gray}{0.94}
+\definecolor{codeColorLine}{RGB}{156, 39, 176}
+
+\mdfdefinestyle{codeblock}
+{
+	skipabove=\baselineskip,
+	skipbelow=\baselineskip,
+	innertopmargin=4mm,
+	innerbottommargin=\baselineskip,
+	innerleftmargin=4mm,
+	innerrightmargin=4mm,
+	leftmargin=0mm,
+	rightmargin=0mm,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=1mm,
+	backgroundcolor=codeColorBG,
+	linecolor=codeColorLine,
+	frametitlebelowskip=0mm,
+	frametitleaboveskip=4mm,
+}
+\newmdenv[
+	style=codeblock,
+]{codeblock}
+
+\newenvironment{Shaded}{\begin{codeblock}[]}{\end{codeblock}}
