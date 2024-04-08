@@ -1,6 +1,8 @@
 # SSH {#ssh}
 
-A keypair `id_key` consists of two files: `id_key` (private) and `id_key.pub` (public). The key format is [SSH](https://coolaj86.com/articles/the-openssh-private-key-format/). To list a SSH key file:
+A keypair `id_key` consists of two files: `id_key` (private) and `id_key.pub` (public). 
+The key format is [SSH](https://coolaj86.com/articles/the-openssh-private-key-format/). 
+To list a SSH key file:
 
 ~~~colorized-sh
 $ ssh-keygen -l -f ❗filename
@@ -8,7 +10,7 @@ $ ssh-keygen -l -f ❗filename
 
 ## Create SSH keypair {#create-ssh}
 
-Creating a keypair `🔑id_key` and `🔒id_key.pub` using algorithm _Ed25519_:
+Creating a SSH keypair consisting of `🔑id_key` and `🔒id_key.pub` using algorithm _Ed25519_:
 
 ```colorized-sh
 $ KEY_IDENTIFIER="❗[email or hostname, typically]"
@@ -19,18 +21,21 @@ $ ssh-keygen -t ed25519 -C $KEY_IDENTIFIER -f 🔐id_key
 
 A type of SSH keypair that is controlled by a FIDO2 hardware key. Two variants:
 
-  - _Resident_/_Discoverable_: Proxy keypair is stored on the hardware key so it can be deployed at any host. Needs hardware key and PIN to verify.
-  * _Non-resident_/_Non-discoverable_: Proxy keypair is not stored on on the hardware key, so it's useless without this, even for someone who has access to both the hardware key and PIN. 
+  * _Resident_/_Discoverable_: Proxy keypair is stored on the hardware key so it can 
+    be deployed at any host. Needs hardware key and PIN to verify.
+  * _Non-resident_/_Non-discoverable_: Proxy keypair is not stored on on the hardware 
+    key, so it's useless without this, even for someone who has access to both the 
+    hardware key and PIN. 
 
-Create a resident keypair using algorithm _Ed25519_:
+Creating a resident keypair using algorithm _Ed25519_:
 
 ~~~colorized-sh
 $ KEY_SERVICE=❗[name of host service, typically] # only for information
 $ KEY_SERVICE_USER=❗[username for this service]  # only for information
-$ ssh-keygen -t ed25519-sk -O resident                     \
-                         -O application="ssh:$KEY_SERVICE" \
-                         -O user=$KEY_SERVICE_USER         \
-                         -O verify-required
+$ ssh-keygen -t ed25519-sk -O resident                       \
+                           -O application="ssh:$KEY_SERVICE" \
+                           -O user=$KEY_SERVICE_USER         \
+                           -O verify-required
 ~~~
 
 The proxy keypair can be deployed on a system using `ssh-keygen -K`.
