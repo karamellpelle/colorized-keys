@@ -12,10 +12,10 @@ $ ssh-keygen -l -f ❗filename
 
 Creating a SSH keypair consisting of `🔑id_key` and `🔒id_key.pub` using algorithm _Ed25519_:
 
-```colorized-sh
+~~~colorized-sh
 $ KEY_IDENTIFIER="❗[email or hostname, typically]"
 $ ssh-keygen -t ed25519 -C $KEY_IDENTIFIER -f 🔐id_key
-```
+~~~
 
 ### Create SSH keypair using FIDO2 {#inject-fido2-ssh}
 
@@ -46,25 +46,24 @@ The proxy keypair can be deployed on a system using `ssh-keygen -K`.
 
 Find and define your PIV library on your system, something like
 
-```colorized-sh
+~~~colorized-sh
 $ PKCS11_LIB=/usr/lib/libykcs11.so      # Yubico
 $ PKCS11_LIB=/usr/lib/opensc-pkcs11.so  # OpenSC
-```
+~~~
 
 Use PIV's authentication key (_9a_) for SSH authentication: 
 
-```colorized-sh
+~~~colorized-sh
 $ ssh-keygen -D $PKCS11_LIB | grep -i auth > 🔒piv_auth.pub
-```
+~~~
 
 Add `piv_auth.pub` to _authorized_keys_ on target host, for example through `ssh-copy_id`.
 
 To log into a host using PIV:
 
-```colorized-sh
-$ # ssh login
+~~~colorized-sh
 $ ssh -I $PKCS11_LIB ❗example.com
-```
+~~~
 
 
 ### Create SSH keypair using SSL {#inject-ssl-ssh} 
@@ -84,7 +83,7 @@ $ ssh-keygen -L -f key-cert.pub
 
 Sign `userkey.pub` using `ca_key`, creating `userkey-cert.pub`, also specifying expiration date and principals the certificate covers. Handling of principals is defined by the server, see [man sshd_config](https://man.archlinux.org/man/sshd_config.5#AuthorizedPrincipalsFile).
 
-```colorized-sh
+~~~colorized-sh
 $ CERTIFICATE_ID="❗[identifier for ca_key]"
 $ CERTIFICATE_SERIAL=❗0 # or generate unique: $(date -u "+%Y%m%d%H%M%S") 
 $ CERTIFICATE_PRINCIPALS=❗principal0,..,principalN
@@ -94,14 +93,14 @@ $ ssh-keygen -s 🔑ca_key -I $CERTIFICATE_ID       \
                        -n $CERTIFICATE_PRINCIPALS \
                        -V $CERTIFICATE_VALID      \
                        🔒userkey.pub
-```
+~~~
 
 
 ### SSH host certificate
 
 Sign `hostkey.pub` using `ca_key`, creating `hostkey-cert.pub`, also specifying which hostnames the certificate covers. 
 
-```colorized-sh
+~~~colorized-sh
 $ CERTIFICATE_ID="❗[identifier for ca_key]"
 $ CERTIFICATE_SERIAL=❗0 # or generate unique: $(date -u "+%Y%m%d%H%M%S")
 $ CERTIFICATE_HOSTS=❗hostname0,..,hostnameN
@@ -111,7 +110,7 @@ $ ssh-keygen -h -s 🔑ca_key -I $CERTIFICATE_ID   \
                           -n $CERTIFICATE_HOSTS  \
                           -V $CERTIFICATE_VALID  \
                           🔒hostkey.pub
-```
+~~~
 
 
 ## Notes

@@ -83,6 +83,6 @@
 \newcommand{\ColorizeKeyPrivate}[1]{\textcolor[rgb]{1.0,0.12,0.12}{{#1}}}
 \newcommand{\ColorizeKeyPublic}[1]{\textcolor[rgb]{0.196,0.804,0.196}{{#1}}}
 \newcommand{\ColorizeKeyPair}[1]{\textcolor[rgb]{1.0,0.694,0.12}{{#1}}}
-\newcommand{\ColorizeIdentifier}[1]{\textcolor[rgb]{0.69,0.12,1.00}{{#1}}}
+\newcommand{\ColorizeIdentifier}[1]{\textit{\textcolor[rgb]{0.69,0.12,1.00}{{#1}}}}
 
 

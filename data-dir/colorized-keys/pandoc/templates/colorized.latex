@@ -138,18 +138,20 @@ $endif$
     BoldItalicFont = *-BoldItalic
 ]
 
-\setmonofont[Scale=MatchLowercase]{$fonts.mono.name$}[
-%\setmonofont[Scale=0.7]{$fonts.mono.name$}[
-    Path           = $fonts.data-dir$,
-    Extension      = $fonts.mono.ext$,
-    UprightFont    = *-Regular,
-    BoldFont       = *-Bold
-]
-
 \newfontfamily{\titlefont}{$fonts.title.name$}[
     Path           = $fonts.data-dir$,
     Extension      = $fonts.title.ext$,
     Numbers        = OldStyle,
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+\setmonofont[Scale=MatchLowercase]{$fonts.mono.name$}[
+%\setmonofont[Scale=0.7]{$fonts.mono.name$}[
+    Path           = $fonts.data-dir$,
+    Extension      = $fonts.mono.ext$,
     UprightFont    = *-Regular,
     BoldFont       = *-Bold,
     ItalicFont     = *-Italic,
