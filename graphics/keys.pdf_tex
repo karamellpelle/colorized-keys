@@ -106,6 +106,7 @@
     \put(0.59722039,0.40163641){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\type{Sign}\end{tabular}}}}%
     \put(0.59639604,0.38385581){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\type{Encr}\end{tabular}}}}%
     \put(0.47241915,0.30000713){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{ssh}{ssh}\end{tabular}}}}%
+    \put(0.59348467,0.3320217){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{piv}{ssh}\end{tabular}}}}%
     \put(0.47450882,0.1603283){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{ssh}{ssh}\end{tabular}}}}%
     \put(0.72708255,0.09330646){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\selfsign{ssl}\end{tabular}}}}%
     \put(0.34646407,0.42349501){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{gpg}{gpg}\end{tabular}}}}%

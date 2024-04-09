@@ -3,7 +3,7 @@
 * use Haskell's `turtle` instead of bash
 * force $if(highlighting-macros)$ also if we only have colorized CodeBlock's
 * write custom highlight code during parsing and replace (Parsec StateT)
-* New arrow: sign SSH certificate using PIV.9C 
+* Remove arrow: inject Yubico PIV -> SSH
 * New arrow: create SSH key from GPG?
 * How to sign with a PIV card?
 * Increase TOC levels
