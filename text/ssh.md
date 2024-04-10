@@ -1,8 +1,6 @@
 # SSH {#ssh}
 
-A keypair `id_key` consists of two files: `id_key` (private) and `id_key.pub` (public). 
-The key format is [SSH](https://coolaj86.com/articles/the-openssh-private-key-format/). 
-To list a SSH key file:
+A keypair `id_key` consists of two files: `id_key` (private) and `id_key.pub` (public). The key format is [SSH](https://coolaj86.com/articles/the-openssh-private-key-format/). To list the content of a SSH key file:
 
 ~~~colorized-sh
 $ ssh-keygen -l -f ❗filename
@@ -21,11 +19,8 @@ $ ssh-keygen -t ed25519 -C $KEY_IDENTIFIER -f 🔐id_key
 
 A type of SSH keypair that is controlled by a FIDO2 hardware key. Two variants:
 
-  * _Resident_/_Discoverable_: Proxy keypair is stored on the hardware key so it can 
-    be deployed at any host. Needs hardware key and PIN to verify.
-  * _Non-resident_/_Non-discoverable_: Proxy keypair is not stored on on the hardware 
-    key, so it's useless without this, even for someone who has access to both the 
-    hardware key and PIN. 
+  * _Resident_/_Discoverable_: Proxy keypair is stored on the hardware key so it can be deployed at any host. Needs hardware key and PIN to verify.
+  * _Non-resident_/_Non-discoverable_: Proxy keypair is not stored on on the hardware key, so it's useless without this, even for someone who has access to both the hardware key and PIN. 
 
 Creating a resident keypair using algorithm _Ed25519_:
 
@@ -98,23 +93,38 @@ $ ssh-keygen -s 🔑ca_key -I $CERTIFICATE_ID       \
 
 ### SSH host certificate
 
-Sign `hostkey.pub` using `ca_key`, creating `hostkey-cert.pub`, also specifying which hostnames the certificate covers. 
+Sign `hostkey.pub` using `ca_key`, creating `hostkey-cert.pub`, also specifying which hostnames the certificate covers (note the `-h` switch for host certificates):
 
 ~~~colorized-sh
 $ CERTIFICATE_ID="❗[identifier for ca_key]"
 $ CERTIFICATE_SERIAL=❗0 # or generate unique: $(date -u "+%Y%m%d%H%M%S")
 $ CERTIFICATE_HOSTS=❗hostname0,..,hostnameN
 $ CERTIFICATE_VALID=❗+53w
-$ ssh-keygen -h -s 🔑ca_key -I $CERTIFICATE_ID   \
-                          -z $CERTIFICATE_SERIAL \
-                          -n $CERTIFICATE_HOSTS  \
-                          -V $CERTIFICATE_VALID  \
-                          🔒hostkey.pub
+$ ssh-keygen -s 🔑ca_key -I $CERTIFICATE_ID   \
+                       -z $CERTIFICATE_SERIAL \
+                       -n $CERTIFICATE_HOSTS  \
+                       -V $CERTIFICATE_VALID  \
+                       -h 🔒hostkey.pub
+~~~
+
+### Sign SSH key using PIV {#sign-piv-ssh}
+
+Find and define your `$PKCS11_LIB` as [above](#inject-piv-ssh). Retrive the _public_ part of the PIV sign keypair (9c):
+
+~~~colorized-sh
+$ ssh-keygen -D $PKCS11_LIB | grep -i sign > 🔒piv_sign.pub
+~~~
+
+Sign `key.pub`, creating `key-cert.pub`, using the private hardware key on PIV pointed to by `piv_sign.pub`. Remember the `-h` switch if this is a host certificate:
+
+~~~colorized-sh
+$ ssh-keygen -s 🔒piv_sign.pub -D $PKCS11_LIB [-I ❗... -z ❗... -n ❗... -V ❗... ] \
+                                            [-h] 🔒key.pub
 ~~~
 
 
 ## Notes
-* The identifier (comment) of key can be changed: `ssh-keygen -c -C ❗[new identifier] -f key`.
+* The identifier (comment) of a key can be changed: `ssh-keygen -c -C ❗[new identifier] -f key`.
 
 
 [^fnote-ssh-fido2]: [Securing SSH with FIDO2](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)

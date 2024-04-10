@@ -13,7 +13,7 @@
 \usepackage{graphicx}
 %\usepackage{ulem}
 \usepackage{sidecap}
-%\usepackage{amssymb,amsmath,amsthm}
+\usepackage{amssymb,amsmath}
 \usepackage{color}
 \usepackage{fancyhdr}
 \usepackage{setspace}
