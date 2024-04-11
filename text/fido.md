@@ -1,2 +1,4 @@
-# FIDO2 {#yubico-fido2}
+# FIDO {#yubico-fido}
+
+## FIDO2 {#yubico-fido2}
 \newpage

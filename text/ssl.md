@@ -48,7 +48,7 @@ $ openssl req -utf8 -x509 -addext 'basicConstraints = CA:TRUE' -key 🔑private.
 
 
 
-# Notes
+## Notes
 * To list the content of a x509 certificate: `openssl x509 -noout -text -in ✅certificate.cert`
 * To verify a chain $\text{CA}_0 (\rightarrow \text{CA}_1 \rightarrow \cdots \rightarrow \text{CA}_n); \rightarrow\; \text{C}$: `openssl verify -show_chain -CAfile ✅ca_0.cert [-untrusted ✅ca_i.cert] -- ✅c.cert` [^3].
 
