@@ -7,9 +7,6 @@
 * how to copy x509 certificate content?
 
 ## SVG
-* Remove arrow: inject Yubico PIV -> SSH
-* solid sign arrows onto SSH, not dashed
-* sign SSL -> PIV from _private_ key of SSL
 
 
 ## Style

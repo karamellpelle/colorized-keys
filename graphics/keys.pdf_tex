@@ -66,14 +66,13 @@
     \put(0.61498547,0.55256455){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\headYubicoPIV\end{tabular}}}}%
     \put(0.67246707,0.31524896){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\inject{ssl}{piv}}\end{tabular}}}}}%
     \put(0.49918666,0.40611384){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\inject{fido2}{ssh}}\end{tabular}}}}}%
-    \put(0.55624367,0.40718088){\color[rgb]{0,0,0}\rotatebox{65.177536}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\inject{piv-yubikey}{ssh}}\end{tabular}}}}}%
     \put(0.60872314,0.30473283){\color[rgb]{0,0,0}\rotatebox{-18.402864}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\inject{ssl}{ssh}}\end{tabular}}}}}%
     \put(0.56976266,0.35479819){\color[rgb]{0,0,0}\rotatebox{41.597136}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\inject{piv}{ssh}}\end{tabular}}}}}%
-    \put(0.69965581,0.52524377){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{piv-yubikey}}\end{tabular}}}}%
-    \put(0.7473494,0.40575182){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{piv}}\end{tabular}}}}%
-    \put(0.80920909,0.26711036){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{ssl}}\end{tabular}}}}%
-    \put(0.23637413,0.39940096){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{gpg}}\end{tabular}}}}%
-    \put(0.40637529,0.33206239){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{ssh}}\end{tabular}}}}%
+    \put(0.69553154,0.52524377){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{piv-yubikey}}\end{tabular}}}}%
+    \put(0.80386397,0.26711033){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{ssl}}\end{tabular}}}}%
+    \put(0.24171925,0.39940096){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{gpg}}\end{tabular}}}}%
+    \put(0.41172041,0.33206239){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{ssh}}\end{tabular}}}}%
+    \put(0.56084533,0.40543983){\color[rgb]{0.10980392,0.44313725,0.84705882}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\textit{\create{piv}}\end{tabular}}}}%
     \put(0.33239614,0.41901174){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivC\end{tabular}}}}%
     \put(0.36824318,0.41901174){\color[rgb]{0.14901961,0.63529412,0.41176471}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPublC\end{tabular}}}}%
     \put(0.33239614,0.40011948){\color[rgb]{0.87843137,0.10588235,0.14117647}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\keyGPGPrivA\end{tabular}}}}%
@@ -111,7 +110,7 @@
     \put(0.72708255,0.09330646){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\selfsign{ssl}\end{tabular}}}}%
     \put(0.34646407,0.42349501){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{gpg}{gpg}\end{tabular}}}}%
     \put(0.70702585,0.16025724){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{ssl}{ssl}\end{tabular}}}}%
-    \put(0.7312874,0.33457259){\color[rgb]{1,0.63921569,0.28235294}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{ssl}{piv}\end{tabular}}}}}%
+    \put(0.72594228,0.33457259){\color[rgb]{1,0.63921569,0.28235294}\rotatebox{90}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\sign{ssl}{piv}\end{tabular}}}}}%
     \put(0.66212015,0.4059797){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\selfsign{piv}\end{tabular}}}}%
     \put(0.69185487,0.42795319){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\certSSL\end{tabular}}}}%
     \put(0.69185487,0.41013613){\color[rgb]{1,0.63921569,0.28235294}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\certSSL\end{tabular}}}}%
