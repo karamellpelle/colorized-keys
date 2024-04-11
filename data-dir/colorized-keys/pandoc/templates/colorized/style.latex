@@ -19,4 +19,5 @@
 % codeblock font size
 \fvset{fontsize=\fontsize{9pt}{9pt}\selectfont} % font size in fancyvrb environments
 
-
+% depth for table of contents
+\setcounter{tocdepth}{4}

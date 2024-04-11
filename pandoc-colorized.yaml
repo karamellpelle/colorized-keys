@@ -16,12 +16,10 @@ resource-path:
 pdf-engine: xelatex
 #pdf-engine-opts: 
 
-
-#table-of-contents: true
-#toc-depth: 5
-
-#variables: # NOTE: these can't be accessed by pandoc filters :(
-# key:value
+# NOTE: variables can't be accessed by pandoc filters :(
+#       however, the meta values are available to filters.
+#variables:
+#   key:value
 
 
 ################################################################################
