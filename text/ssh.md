@@ -63,6 +63,28 @@ $ ssh -I $PKCS11_LIB ❗example.com
 
 ### Create SSH keypair using SSL {#inject-ssl-ssh} 
 
+TODO: Use [sshpk](https://security.stackexchange.com/a/267767/303936) instead?
+NOTE: For algorithm _Ed25519_ there is a [bug](https://security.stackexchange.com/a/267767/303936) for _ssh_ version < [9.6](https://www.openssh.com/txt/release-9.6), but it should work for algorithm _RSA_.
+
+The generated keypair from SSL should already be in _PKCS8_ format.
+<!--Convert SSL keypair to PKCS8 format (should unessessary because PKCS8 should be default output from `openssl genpkey`):-->
+<!---->
+<!--~~~colorized-sh-->
+<!--<!--$ openssl pkcs8 -topk8 -in 🔑key-priv.pem -->-->
+<!--$ openssl pkey -in key-priv.pem -out key-priv.pkcs8-->
+<!--$ openssl pkey -in 🔑key-priv.pem -pubout -out key-pub.pkcs8 -->
+<!--$ openssl pkey -in 🔑key-priv.pem -out key-priv.pkcs8 -->
+<!--~~~-->
+
+Import public SSL key `🔒key-pub.pkcs8`:
+
+~~~colorized-sh
+$ ssh-keygen -i -m pkcs8 -f 🔒key-pub.pkcs8  > 🔒id_key.pub 
+~~~
+
+TODO: Import private SSL key into SSH private key (should work as public key above according to `man ssh-keygen`).
+
+
 ## Sign SSH key {#sign-ssh-ssh}
 
 There are two types of certificates: _user_ and _host_ (`-h`). The parameter `-I` specifies an identifier for the signer's key and is used for logging by the server whenever the certificate is used for authentication [^fnote-dmuth]. A serial number can be specified by the `-z` parameter.
@@ -125,7 +147,7 @@ $ ssh-keygen -s 🔒piv_sign.pub -D $PKCS11_LIB [-I ❗... -z ❗... -n ❗... -
 
 ## Notes
 * The identifier (comment) of a key can be changed: `ssh-keygen -c -C ❗[new identifier] -f key`.
-
+* To convert private SSH key `id_key` to public key: `ssh-keygen -y -f id_key > id_key.pub`
 
 [^fnote-ssh-fido2]: [Securing SSH with FIDO2](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)
 https://developers.yubico.com/PIV/Guides/Securing_SSH_with_OpenPGP_or_PIV.html
