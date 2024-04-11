@@ -6,9 +6,11 @@
 * Increase TOC levels
 * how to copy x509 certificate content?
 * insert SSH -> SSL: https://superuser.com/questions/1679344/for-valid-pem-i-get-unable-to-load-private-key-by-openssh
+* don't use yellow frame around certificates since it disrupt the SVG diagram
 
 ## SVG
 * insert SSH -> SSL
+* self signed not from just _Sign_ 
 
 
 ## Style

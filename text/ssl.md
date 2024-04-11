@@ -36,7 +36,7 @@ Now sign the certificate request using a CA certificate `ca.cert` and its privat
 $ openssl x509 -req -CA ✅ca.cert -CAkey 🔑ca-private.pem -copy_extensions copyall -in ❗request.csr -out ✅certificate.cert
 ~~~
 
-Note that the certificate `ca.cert` above needs the extension `basicConstraints = CA:TRUE` in order to create a valid chain to `certificate.cert` [^1] [^2].
+Note that the certificate `ca.cert` above needs the extension `basicConstraints = CA:TRUE` in order to create a valid chain to `certificate.cert` [^fnote-catrue-0] [^fnote-catrue-1].
 
 ## SSL root certificate {#selfsign-ssl}
 
@@ -50,11 +50,11 @@ $ openssl req -utf8 -x509 -addext 'basicConstraints = CA:TRUE' -key 🔑private.
 
 ## Notes
 * To list the content of a x509 certificate: `openssl x509 -noout -text -in ✅certificate.cert`
-* To verify a chain $\text{CA}_0 (\rightarrow \text{CA}_1 \rightarrow \cdots \rightarrow \text{CA}_n); \rightarrow\; \text{C}$: `openssl verify -show_chain -CAfile ✅ca_0.cert [-untrusted ✅ca_i.cert] -- ✅c.cert` [^3].
+* To verify a chain $\text{CA}_0 (\rightarrow \text{CA}_1 \rightarrow \cdots \rightarrow \text{CA}_n); \rightarrow\; \text{C}$: `openssl verify -show_chain -CAfile ✅ca_0.cert [-untrusted ✅ca_i.cert] -- ✅c.cert` [^fnote-verify-ca].
 
 
-[^1]: [https://stackoverflow.com/a/53951346/753850](https://stackoverflow.com/a/53951346/753850)
-[^2]: [https://www.openssl.org/docs/manmaster/man5/x509v3_config.html]( https://www.openssl.org/docs/manmaster/man5/x509v3_config.html)
-[^3]: [https://superuser.com/a/986177](https://superuser.com/a/986177)
+[^fnote-catrue-0]: [https://stackoverflow.com/a/53951346/753850](https://stackoverflow.com/a/53951346/753850)
+[^fnote-catrue-1]: [https://www.openssl.org/docs/manmaster/man5/x509v3_config.html]( https://www.openssl.org/docs/manmaster/man5/x509v3_config.html)
+[^fnote-verify-ca]: [https://superuser.com/a/986177](https://superuser.com/a/986177)
 
 \newpage
