@@ -6,7 +6,8 @@
 * Increase TOC levels
 * how to copy x509 certificate content?
 * insert SSH -> SSL: https://superuser.com/questions/1679344/for-valid-pem-i-get-unable-to-load-private-key-by-openssh
-* don't use yellow frame around certificates since it disrupt the SVG diagram
+* don't use yellow frame around certificates in text since it disrupt the SVG diagram
+* add arrow text: inject Yubico.PIV <-> PIV?
 
 ## SVG
 * insert SSH -> SSL

@@ -2,12 +2,12 @@
 
 ### General
 #### List devices
-~~~colorized-sh
+~~~color
 > ykman list
 ~~~
 
 #### Show info
-~~~colorized-sh
+~~~color
 > ykman [--device ❗[<serial>] info
 ~~~
 

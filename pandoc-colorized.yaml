@@ -6,7 +6,7 @@
 data-dir: ${.}/data-dir/colorized-keys/pandoc/
 
 # default highlight style. TODO: use setting from colorized-keys.languages.<lang>.style 
-highlight-style: ./data-dir/colorized-keys/pandoc/themes/colorized-sh.theme
+highlight-style: ./data-dir/colorized-keys/pandoc/themes/color.theme
 
 # places where pandoc finds stuff. https://pandoc.org/MANUAL.html#option--resource-path
 resource-path:

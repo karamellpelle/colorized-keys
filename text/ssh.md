@@ -2,7 +2,7 @@
 
 A keypair `id_key` consists of two files: `id_key` (private) and `id_key.pub` (public). The key format is [SSH](https://coolaj86.com/articles/the-openssh-private-key-format/). To list the content of a SSH key file:
 
-~~~colorized-sh
+~~~color
 $ ssh-keygen -l -f ❗filename
 ~~~
 
@@ -10,7 +10,7 @@ $ ssh-keygen -l -f ❗filename
 
 Creating a SSH keypair consisting of `🔑id_key` and `🔒id_key.pub` using algorithm _Ed25519_:
 
-~~~colorized-sh
+~~~color
 $ KEY_IDENTIFIER="❗[email or hostname, typically]"
 $ ssh-keygen -t ed25519 -C $KEY_IDENTIFIER -f 🔐id_key
 ~~~
@@ -24,7 +24,7 @@ A type of SSH keypair that is controlled by a FIDO2 hardware key. Two variants:
 
 Creating a resident keypair using algorithm _Ed25519_:
 
-~~~colorized-sh
+~~~color
 $ KEY_SERVICE=❗[name of host service, typically] # only for information
 $ KEY_SERVICE_USER=❗[username for this service]  # only for information
 $ ssh-keygen -t ed25519-sk -O resident                       \
@@ -41,14 +41,14 @@ The proxy keypair can be deployed on a system using `ssh-keygen -K`.
 
 Find and define your PIV library on your system, something like
 
-~~~colorized-sh
+~~~color
 $ PKCS11_LIB=/usr/lib/libykcs11.so      # Yubico
 $ PKCS11_LIB=/usr/lib/opensc-pkcs11.so  # OpenSC
 ~~~
 
 Use PIV's authentication key (_9a_) for SSH authentication: 
 
-~~~colorized-sh
+~~~color
 $ ssh-keygen -D $PKCS11_LIB | grep -i auth > 🔒piv_auth.pub
 ~~~
 
@@ -56,7 +56,7 @@ Add `piv_auth.pub` to _authorized_keys_ on target host, for example through `ssh
 
 To log into a host using PIV:
 
-~~~colorized-sh
+~~~color
 $ ssh -I $PKCS11_LIB ❗example.com
 ~~~
 
@@ -69,7 +69,7 @@ NOTE: For algorithm _Ed25519_ there is a [bug](https://security.stackexchange.co
 The generated keypair from SSL should already be in _PKCS8_ format.
 <!--Convert SSL keypair to PKCS8 format (should unessessary because PKCS8 should be default output from `openssl genpkey`):-->
 <!---->
-<!--~~~colorized-sh-->
+<!--~~~color-->
 <!--<!--$ openssl pkcs8 -topk8 -in 🔑key-priv.pem -->-->
 <!--$ openssl pkey -in key-priv.pem -out key-priv.pkcs8-->
 <!--$ openssl pkey -in 🔑key-priv.pem -pubout -out key-pub.pkcs8 -->
@@ -78,7 +78,7 @@ The generated keypair from SSL should already be in _PKCS8_ format.
 
 Import public SSL key `🔒key-pub.pkcs8`:
 
-~~~colorized-sh
+~~~color
 $ ssh-keygen -i -m pkcs8 -f 🔒key-pub.pkcs8  > 🔒id_key.pub 
 ~~~
 
@@ -91,7 +91,7 @@ There are two types of certificates: _user_ and _host_ (`-h`). The parameter `-I
 
 To list a SSH certificate file:
 
-~~~colorized-sh
+~~~color
 $ ssh-keygen -L -f key-cert.pub
 ~~~
 
@@ -100,7 +100,7 @@ $ ssh-keygen -L -f key-cert.pub
 
 Sign `userkey.pub` using `ca_key`, creating `userkey-cert.pub`, also specifying expiration date and principals the certificate covers. Handling of principals is defined by the server, see [man sshd_config](https://man.archlinux.org/man/sshd_config.5#AuthorizedPrincipalsFile).
 
-~~~colorized-sh
+~~~color
 $ CERTIFICATE_ID="❗[identifier for ca_key]"
 $ CERTIFICATE_SERIAL=❗0 # or generate unique: $(date -u "+%Y%m%d%H%M%S") 
 $ CERTIFICATE_PRINCIPALS=❗principal0,..,principalN
@@ -117,7 +117,7 @@ $ ssh-keygen -s 🔑ca_key -I $CERTIFICATE_ID       \
 
 Sign `hostkey.pub` using `ca_key`, creating `hostkey-cert.pub`, also specifying which hostnames the certificate covers (note the `-h` switch for host certificates):
 
-~~~colorized-sh
+~~~color
 $ CERTIFICATE_ID="❗[identifier for ca_key]"
 $ CERTIFICATE_SERIAL=❗0 # or generate unique: $(date -u "+%Y%m%d%H%M%S")
 $ CERTIFICATE_HOSTS=❗hostname0,..,hostnameN
@@ -133,13 +133,13 @@ $ ssh-keygen -s 🔑ca_key -I $CERTIFICATE_ID   \
 
 Find and define your `$PKCS11_LIB` as [above](#inject-piv-ssh). Retrive the _public_ part of the PIV sign keypair (9c):
 
-~~~colorized-sh
+~~~color
 $ ssh-keygen -D $PKCS11_LIB | grep -i sign > 🔒piv_sign.pub
 ~~~
 
 Sign `key.pub`, creating `key-cert.pub`, using the private hardware key on PIV pointed to by `piv_sign.pub`. Remember the `-h` switch if this is a host certificate:
 
-~~~colorized-sh
+~~~color
 $ ssh-keygen -s 🔒piv_sign.pub -D $PKCS11_LIB [-I ❗... -z ❗... -n ❗... -V ❗... ] \
                                             [-h] 🔒key.pub
 ~~~

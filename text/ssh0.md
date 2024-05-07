@@ -171,7 +171,7 @@ Make sure non-user accessable to work: https://wiki.archlinux.org/title/OpenSSH#
 <!--### Sign SSH key using PIV {#sign-piv-ssh}-->
 
 <!--TODO: -->
-<!--~~~colorized-sh-->
+<!--~~~color-->
 <!--$ ssh-keygen -D $PKCS11_LIB | grep -i sign > piv_sign.pub-->
 <!--> ssh-keygen -s 🔒piv_sign.pub [-h] -D $PKCS11_LIB -I host.example.com 🔒id_key.pub -->
 <!--> # `-n user1,...,userN` can be added to restrict certificate to specified users -->

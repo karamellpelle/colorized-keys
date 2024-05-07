@@ -19,7 +19,7 @@
 ]>
 
 <language name="colorized" section="Scripts" 
-  extensions="*.colorized,*.colorized-sh" 
+  extensions="*.color,*.colorized,*.colorized-sh" 
   casesensitive="1"
   mimetype="" version="0" kateversion="5.0" 
   author="karamellpelle@hotmail.com" 

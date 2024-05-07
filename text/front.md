@@ -22,11 +22,11 @@ urlstyle: tt
 
 colorized-keys:
     languages:
-      colorized-sh:
-        syntax: colorized-sh
-        style:  colorized-sh-doesnotworkyet
+      color:
+        syntax: color
+        style:  color-doesnotworkyet
         # ^ FIXME: this can be added as appedix/prefix to tokens, after creating macros using styleToLaTeX/HTML.
-        #          for example: KeywordTok -> KeywordTok#colorized-sh
+        #          for example: KeywordTok -> KeywordTok#color
         #          currently set in pandoc-defaults.yaml
         map:
             🔑: "ColorizeKeyPrivate"

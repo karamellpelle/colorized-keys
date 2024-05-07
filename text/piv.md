@@ -8,7 +8,7 @@ TODO: use OpenSC ([pkcs11-tool](https://htmlpreview.github.io/?https://github.co
 
 Generate private Ed25519[^1] keypairs for authorization, signing and encryption with default touch and PIN policies. The private parts are (obviously) stored in the YubiKey, and the public parts are written to files.
 
-~~~colorized-sh
+~~~color
 $ ykman piv keys generate --algorithm ED25519 ❗9A 🔒piv-auth.pem # auth
 $ ykman piv keys generate --algorithm ED25519 ❗9C 🔒piv-sign.pem # sign
 $ ykman piv keys generate --algorithm X25519  ❗9D 🔒piv-encr.pem # encryption
@@ -16,7 +16,7 @@ $ ykman piv keys generate --algorithm X25519  ❗9D 🔒piv-encr.pem # encryptio
 
 Create self signed certificates for each slot:\label{selfsign-piv}
 
-~~~colorized-sh
+~~~color
 $ YUBIKEY_CN=YubiKey5-$(ykman list --serials | head -n1) # use serial number for common name,
 $                                                        # assuming only only 1 connected YubiKey
 $ YUBIKEY_SUBJECT="$YUBIKEY_CN" # +=",O=org,L=city,etc" <- add more parts to distinguished name
@@ -34,7 +34,7 @@ To show PIV certicate for keypair at slot `9X`: `ykman piv certificates export 9
 
 Hardware generated keypairs can be [attested](https://developers.yubico.com/PIV/Introduction/PIV_attestation.html), that is, the generated certificate will be signed by the template X509 certificate at slot `9F`. An attested certificate means that the keypair has only been generated on the hardware. YubiKey's comes with a preinstalled, official attestation certificate template at `9F`, _Yubico PIV CA_, but this template certificate can be changed to a custom template certificate by uploading a X509 certificate together with its private key at slot `9F`. However, uploading a new template certificate will delete _Yubico PIV CA_ on the YubiKey forever, and it can't be reuploaded, even by a device reset.
 
-~~~colorized-sh
+~~~color
 $ yubico-piv-tool --action=attest --slot=9a > ✅piv-auth.cert 
 $ yubico-piv-tool --action=attest --slot=9c > ✅piv-sign.cert 
 $ yubico-piv-tool --action=attest --slot=9d > ✅piv-encr.cert 
