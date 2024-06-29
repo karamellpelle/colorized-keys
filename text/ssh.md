@@ -26,14 +26,12 @@ Creating a resident keypair using algorithm _Ed25519_:
 
 ~~~color
 $ KEY_SERVICE=❗[name of host service, typically] # only for information
-$ KEY_SERVICE_USER=❗[username for this service]  # only for information
 $ ssh-keygen -t ed25519-sk -O resident                       \
                            -O application="ssh:$KEY_SERVICE" \
-                           -O user=$KEY_SERVICE_USER         \
                            -O verify-required
 ~~~
 
-The proxy keypair can be deployed on a system using `ssh-keygen -K`.
+The proxy keypair can be deployed on a system using `cd ~/.ssh && ssh-keygen -K`.
 
 
 ### Create SSH keypair using PIV {#inject-piv-ssh}
