@@ -25,9 +25,13 @@ A type of SSH keypair that is controlled by a FIDO2 hardware key. Two variants:
 Creating a resident keypair using algorithm _Ed25519_:
 
 ~~~color
-$ KEY_SERVICE=❗[name of host service, typically] # only for information
+$ # these values are only used for key meta information (?):
+$ KEY_SERVICE=❗[name of host service] 
+$ KEY_USER=❗[username of host service to differate between] 
+$ # generate resident FIDO2 key :
 $ ssh-keygen -t ed25519-sk -O resident                       \
                            -O application="ssh:$KEY_SERVICE" \
+                           -O user="$KEY_USER" \
                            -O verify-required
 ~~~
 
